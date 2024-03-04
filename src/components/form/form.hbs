@@ -1,13 +1,15 @@
 <div class="form{{#if className}} {{className}}{{/if}}">
         <div class="form__title">
-            {{ formTitle }}
+            {{ formTitle }} {{ fields.[0].fieldName }}
         </div>
         <div class="form__fields">
-            {{> FormInputField fieldName="Логин" inputPlaceholder="Логин" inputType="text" errorText="Неверный логин" value="ivanivanov"}}
-            {{> FormInputField fieldName="Пароль" inputPlaceholder="Пароль" inputType="password" errorText="Неверный пароль" value="ivanivanov"}}
+            {{#each (form-fields helperParam) }}
+                {{> FormInputField }}
+            {{/each}}
         </div>
         <div class="form__buttons">
-            {{> FormButton buttonText="Войти" page="main" className="form-button_main" }}
-            {{> FormButton buttonText="Нет аккаунта?" page="register" }}
+            {{#each (form-button helperParam) }}
+                {{> FormButton }}
+            {{/each}}
         </div>
     </div>
