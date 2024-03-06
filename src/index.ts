@@ -3,11 +3,12 @@ import Handlebars from 'handlebars';
 import * as Components from './components';
 import * as Pages from './pages';
 
-const pages: Record<string, any[]> = {
+const pages: Record<string, Record<string, any>[]> = {
   'login': [ Pages.LoginPage ],
   'register': [ Pages.RegisterPage ],
   '404': [ Pages.NotFoundPage ],
   'error': [ Pages.ErrorPage ],
+  'main': [ Pages.MainPage ],
 };
 
 Object.entries(Components).forEach(([ name, component ]) => {

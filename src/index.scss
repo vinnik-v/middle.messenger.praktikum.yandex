@@ -7,6 +7,15 @@
     font-family: 'Inter-Medium';
     src: url('../static/assets/fonts/Inter/Inter-Medium.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Inter-Bold';
+    src: url('../static/assets/fonts/Inter/Inter-Bold.ttf') format('truetype');
+}
+:root {
+    --item-background: #EFEFEF;
+    --item-border: #EAEAEA;
+}
   
 body {
     font-family: 'Inter-Regular', sans-serif;
@@ -20,6 +29,8 @@ html, body {
 }
 button {
     border: none;
+    padding: 0;
+    background: none;
     &:focus {
         outline: none;
     }
@@ -30,7 +41,5 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.login-page {
     background: #DDE6F6;
 }
