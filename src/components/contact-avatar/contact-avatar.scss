@@ -1,0 +1,14 @@
+.contact__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 47px;
+    height: 47px;
+    background: var(--item-background);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.contact__avatar-icon {
+    display: flex;
+    align-items: center;
+}

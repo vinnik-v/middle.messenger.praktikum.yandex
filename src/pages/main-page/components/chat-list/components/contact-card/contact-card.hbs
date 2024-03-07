@@ -1,21 +1,27 @@
 <div class="contact-card">
-    <div class="contact-card__avatar">
-        <div class="contact-card__avatar-icon">{{#avatarIcon}}{{avatarIcon}}{{/avatarIcon}}</div>
-    </div>
+    {{> ContactAvatar }}
     <div class="contact-card__content">
-        <div class="contact-card__contact-name">
-            Андрей
+        <div class="contact-card__content-header">
+            <div class="contact-card__contact-name">
+                {{ UserName }}
+            </div>
+            <div class="last-message-date">
+                {{ lastMessageTime }}
+            </div>
         </div>
-        <div class="contact-card__last-message">
-            Друзья, у меня для вас особенный выпуск новостей!...
-        </div>
-    </div>
-    <div class="contact-card__meta-info">
-        <div class="last-message-date">
-            12:00
-        </div>
-        <div class="unread-messages-count">
-            2
+        <div class="contact-card__content-body">
+            <div class="contact-card__last-message">
+                {{#if lastMessageFromMe}}
+                    <span class="message-from-me">Вы: </span>
+                {{/if}}{{ lastMessage }}
+            </div>
+            {{#if unreadMessagesCount}}
+                <div class="unread-messages-count">
+                    <div class="counter-wrapper">
+                        {{ unreadMessagesCount }}
+                    </div>
+                </div>
+            {{/if}}
         </div>
     </div>
 </div>

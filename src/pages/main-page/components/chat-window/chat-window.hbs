@@ -1,3 +1,23 @@
 <div class="chat-window">
-окно чатов
+    {{#if chatSelected}}
+        <div class="chat-window__no-data-text">Выберите чат чтобы отправить сообщение</div>
+    {{else}}
+        <div class="chat-window__header">
+            <div class="chat-window__contact-info">
+                {{> ContactAvatar }}
+                <div class="chat-window__contact-name">
+                    Вадим
+                </div>
+            </div>
+            <div class="chat-window__control">
+                <button>{{#headerButton}}{{headerButton}}{{/headerButton}}</button>
+            </div>
+        </div>
+        <div class="chat-window__body">
+
+        </div>
+        <div class="chat-window__footer">
+
+        </div>
+    {{/if}}
 </div>

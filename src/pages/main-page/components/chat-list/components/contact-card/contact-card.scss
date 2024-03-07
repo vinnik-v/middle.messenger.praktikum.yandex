@@ -5,26 +5,53 @@
     gap: 10px;
     box-sizing: border-box;
     overflow: hidden;
-    &__avatar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 47px;
-        height: 47px;
-        background: var(--item-background);
-        border-radius: 50%;
-        flex-shrink: 0;
+    justify-content: space-between;
+    cursor: pointer;
+    &:hover {
+        background-color: #DDE6F6;
     }
-    &__avatar-icon {
-        display: flex;
-        align-items: center;
-    }
+    
     &__content {
         display: flex;
         flex-direction: column;
         height: 100%;
         overflow: hidden;
         justify-content: space-between;
+        flex-grow: 1;
+        gap: 0.2rem;
+    }
+    &__content-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.3rem;
+        .last-message-date {
+            font-size: 9px;
+            color: #999999;
+            font-family: 'Inter-Medium', sans-serif;
+        }
+    }
+    &__content-body {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+        .unread-messages-count {
+            height: 100%;
+            display: flex;
+        }
+        .counter-wrapper {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 11px;
+            font-family: 'Inter-Medium', sans-serif;
+            color: white;
+            background-color: #06A128;
+            padding-top: 1px;
+        }
     }
     &__contact-name {
         font-family: 'Inter-Bold', sans-serif;
@@ -41,31 +68,9 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-    &__meta-info {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        justify-content: space-between;
-        align-items: flex-end;
-        .last-message-date {
-            font-size: 9px;
-            color: #999999;
-            font-family: 'Inter-Medium', sans-serif;
-        }
-        .unread-messages-count {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 11px;
-            font-family: 'Inter-Medium', sans-serif;
-            color: white;
-            background-color: #06A128;
-            padding-top: 1px;
+        .message-from-me {
+            font-family: 'Inter-Bold', sans-serif;
+            color: #1E1E1E;
         }
     }
 }
