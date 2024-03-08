@@ -40,6 +40,7 @@ document.addEventListener('click', (e: Record<string, any>) => {
 
   dropdownClickListener(e, '#attach-file-button', 'choose-file-dropdown');
   dropdownClickListener(e, '#chat-window-header-button', 'chat-window-header-dropdown');
-
+  dropdownClickListener(e, '#add-user-button', 'add-user-modal');
+  dropdownClickListener(e, '#delete-user-button', 'delete-user-modal');
 });
 

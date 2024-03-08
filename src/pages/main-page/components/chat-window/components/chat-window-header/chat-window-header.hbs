@@ -10,8 +10,14 @@
     </button>
     {{#> Dropdown style="top: 120%; right: 10px;" id="chat-window-header-dropdown" }}
         <ul class="list-items">
-            <li class="list-item"><span class="list-item__icon">{{#addButtonIcon}}{{addButtonIcon}}{{/addButtonIcon}}</span><span class="list-item__text">Добавить пользователя</span></li>
-            <li class="list-item"><span class="list-item__icon">{{#deleteButtonIcon}}{{deleteButtonIcon}}{{/deleteButtonIcon}}</span><span class="list-item__text">Удалить пользователя</span></li>
+            <li class="list-item" id="add-user-button"><span class="list-item__icon">{{#addButtonIcon}}{{addButtonIcon}}{{/addButtonIcon}}</span><span class="list-item__text">Добавить пользователя</span></li>
+            <li class="list-item" id="delete-user-button"><span class="list-item__icon">{{#deleteButtonIcon}}{{deleteButtonIcon}}{{/deleteButtonIcon}}</span><span class="list-item__text">Удалить пользователя</span></li>
         </ul>
     {{/ Dropdown }}
 </div>
+{{#> Modal id="add-user-modal" }}
+    {{> Form className="modal__form" formTitle="Добавить пользователя" helperParam="addUser"}}
+{{/ Modal }}
+{{#> Modal id="delete-user-modal" }}
+    {{> Form className="modal__form" formTitle="Удалить пользователя" helperParam="deleteUser"}}
+{{/ Modal }}

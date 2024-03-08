@@ -19,7 +19,13 @@ Handlebars.registerHelper('form-fields', (param) => {
             { fieldName: 'Телефон', placeholder: '+7 (000) 000-00-00', inputType: 'tel', value: '+7 (909) 967 30 30' },
             { fieldName: 'Пароль', placeholder: 'Пароль', inputType: 'password', value: 'ivanivanov' },
             { fieldName: 'Пароль еще раз', placeholder: 'Пароль', inputType: 'password', errorText: 'Пароли не совпадают', value: 'ivanivanov' },
-        ]
+        ],
+        addUser: [
+            { fieldName: 'Логин', placeholder: 'Логин', inputType: 'text', value: 'ivanivanov' }
+        ],
+        deleteUser: [
+            { fieldName: 'Логин', placeholder: 'Логин', inputType: 'text', value: 'ivanivanov' }
+        ],
     }
     return fieldSets[param];
 });
@@ -33,7 +39,13 @@ Handlebars.registerHelper('form-button', (param) => {
         register: [
             { buttonText: 'Зарегистрироваться', redirectPage: 'main', buttonClassName: 'form-button_main'},
             { buttonText: 'Войти', redirectPage: 'login' }
-        ]
+        ],
+        addUser: [
+            { buttonText: 'Добавить', redirectPage: 'main', buttonClassName: 'form-button_main'}
+        ],
+        deleteUser: [
+            { buttonText: 'Удалить', redirectPage: 'main', buttonClassName: 'form-button_main'}
+        ],
     }
     return buttons[param];
 });
