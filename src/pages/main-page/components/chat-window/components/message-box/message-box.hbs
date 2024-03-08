@@ -1,0 +1,8 @@
+<div class="message-box">
+    <div class="date-container">
+        <div class="message-date">29.02.2024</div>
+    </div>
+    {{#each (messages 'messagesData') }}
+        {{> Message }}
+    {{/each}}
+</div>

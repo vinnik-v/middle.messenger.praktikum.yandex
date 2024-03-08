@@ -9,8 +9,8 @@ Handlebars.registerHelper('chat-content', (param) => {
     return data[param];
 });
 
-import headerButton from './assets/icons/header-button-icon.svg?raw'
+import * as Components from './components';
 
-Handlebars.registerHelper('headerButton', () => {
-    return headerButton;
+Object.entries(Components).forEach(([ name, component ]) => {
+  Handlebars.registerPartial(name, component);
 });

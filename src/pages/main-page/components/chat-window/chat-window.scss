@@ -3,31 +3,11 @@
     height: 100%;
     box-sizing: border-box;
     background-color: rgb(221 230 246 / 37%);
-    &__header {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-        background-color: white;
-        border-bottom: 1px solid var(--item-border);
-        padding: 10px;
-    }
-    &__contact-info {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-    }
-    &__contact-name {
-        font-family: 'Inter-Bold', sans-serif;
-        font-size: 13px;
-        color: #1E1E1E;
-    }
-    &__control {
-        cursor: pointer;
-        width: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    display: flex;
+    flex-direction: column;
+    &__body {
+        flex-grow: 1;
+        padding: 0 20px;
     }
 }
 .chat-window__no-data-text {

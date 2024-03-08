@@ -1,0 +1,17 @@
+<div class="chat-window__header">
+    <div class="chat-window__contact-info">
+        {{> ContactAvatar }}
+        <div class="chat-window__contact-name">
+            Вадим
+        </div>
+    </div>
+    <button class="chat-window__control" id="chat-window-header-button">
+        <div>{{#headerButton}}{{headerButton}}{{/headerButton}}</div>
+    </button>
+    {{#> Dropdown style="top: 120%; right: 10px;" id="chat-window-header-dropdown" }}
+        <ul class="list-items">
+            <li class="list-item"><span class="list-item__icon">{{#addButtonIcon}}{{addButtonIcon}}{{/addButtonIcon}}</span><span class="list-item__text">Добавить пользователя</span></li>
+            <li class="list-item"><span class="list-item__icon">{{#deleteButtonIcon}}{{deleteButtonIcon}}{{/deleteButtonIcon}}</span><span class="list-item__text">Удалить пользователя</span></li>
+        </ul>
+    {{/ Dropdown }}
+</div>

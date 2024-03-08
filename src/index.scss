@@ -43,3 +43,22 @@ button {
     justify-content: center;
     background: #DDE6F6;
 }
+.list-items {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    .list-item {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        &__icon {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+

@@ -7,6 +7,7 @@
     overflow: hidden;
     justify-content: space-between;
     cursor: pointer;
+    
     &:hover {
         background-color: #DDE6F6;
     }
@@ -37,6 +38,7 @@
         .unread-messages-count {
             height: 100%;
             display: flex;
+            align-items: flex-end;
         }
         .counter-wrapper {
             width: 20px;
