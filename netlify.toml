@@ -1,10 +1,10 @@
-[functions]
-  external_node_modules = ["express"]
-  node_bundler = "esbuild"
+[build]
+  command = "npm run build"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/server/:splat"
 
-[build.environment]
-    NETLIFY_LAMBDA_JS_FUNCTION = "server"
+[functions]
+  directory = "server"
