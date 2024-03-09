@@ -13,7 +13,6 @@ export function createApp() {
     res.sendFile(path.join(dirname, 'dist', 'index.html'));
   });
   app.use(router);
-  app.use("/api/", router);
 
   return app;
 }
