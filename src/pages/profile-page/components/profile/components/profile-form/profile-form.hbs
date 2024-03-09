@@ -1,0 +1,8 @@
+<form class="profile-form" {{#if id }} id="{{id}}"{{/if}}>
+    {{> ProfileFormField inputType="text" fieldName="Почта" placeholder="Почта" fieldValue="pochta@yandex.ru" fieldDisabled="true" }}
+    {{> ProfileFormField inputType="text" fieldName="Логин" placeholder="Логин" fieldValue="ivanivanov" fieldDisabled="true" }}
+    {{> ProfileFormField inputType="text" fieldName="Имя" placeholder="Имя" fieldValue="Иван" fieldDisabled="true" }}
+    {{> ProfileFormField inputType="text" fieldName="Фамилия" placeholder="Фамилия" fieldValue="Иванов" fieldDisabled="true" }}
+    {{> ProfileFormField inputType="text" fieldName="Имя в чате" placeholder="Имя в чате" fieldValue="Иван" fieldDisabled="true" }}
+    {{> ProfileFormField inputType="tel" fieldName="Телефон" placeholder="Телефон" fieldValue="+7 (909) 967 30 30" fieldDisabled="true" }}
+</form>

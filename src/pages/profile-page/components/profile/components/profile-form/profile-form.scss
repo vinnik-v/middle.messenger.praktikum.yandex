@@ -1,0 +1,9 @@
+.profile-form, .profile-form__field {
+    display: flex;
+    align-items: center;
+}
+.profile-form {
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+}

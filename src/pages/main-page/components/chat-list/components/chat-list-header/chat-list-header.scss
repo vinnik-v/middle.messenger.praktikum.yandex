@@ -10,6 +10,9 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    svg {
+        pointer-events: none;
+    }
 }
 .search-field {
     padding-left: 3px;
