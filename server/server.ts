@@ -13,6 +13,7 @@ export function createApp() {
     res.sendFile(path.join(dirname, 'dist', 'index.html'));
   });
   app.use(router);
+  app.use("/server/", router);
 
   return app;
 }
