@@ -1,5 +1,5 @@
-<div class="form-input-field">
-    <div class="form-input-field__name">{{ fieldName }}</div>
-    <input class="form-input-field__input" type="{{ inputType }}" placeholder="{{ placeholder }}" value="{{#if value}}{{value}}{{/if}}">
-    <div class="form-input-field__error-text">{{ errorText }}</div>
-</div>
+<li class="form-input-field">
+    <label for="{{ inputId }}" class="form-input-field__name">{{ fieldName }}</label>
+    <input id="{{ inputId }}" name="{{ inputName }}" class="form-input-field__input" type="{{ inputType }}" placeholder="{{ placeholder }}" value="{{#if value}}{{value}}{{/if}}" />
+    <p class="form-input-field__error-text">{{ errorText }}</p>
+</li>

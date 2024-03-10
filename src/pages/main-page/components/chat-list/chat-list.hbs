@@ -1,8 +1,8 @@
-<div class="chat-list">
+<nav class="chat-list">
     {{> ChatListHeader }}
-    <div class="chat-list__contacts">
+    <ul class="chat-list__contacts">
         {{#each (chat-list-data 'chatListData') }}
             {{> ContactCard }}
         {{/each}}
-    </div>
-</div>
+    </ul>
+</nav>

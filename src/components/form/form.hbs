@@ -1,12 +1,12 @@
 <form class="form{{#if className}} {{className}}{{/if}}">
-    <div class="form__title">
+    <h2 class="form__title">
         {{ formTitle }} {{ fields.[0].fieldName }}
-    </div>
-    <div class="form__fields">
+    </h2>
+    <ul class="form__fields">
         {{#each (form-fields helperParam) }}
             {{> FormInputField }}
         {{/each}}
-    </div>
+    </ul>
     <div class="form__buttons">
         {{#each (form-button helperParam) }}
             {{> FormButton }}

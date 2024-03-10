@@ -1,4 +1,4 @@
-<div class="profile-form__field">
-    <span class="profile-form__field-name">{{ fieldName }}</span>
-    <input type="{{ inputType }}" placeholder="{{ placeholder }}" class="profile-form__input" value="{{ fieldValue }}" disabled="{{ fieldDisabled }}"></input>
-</div>
+<li class="profile-form__field">
+    <label for="{{ inputId }}" class="profile-form__field-name">{{ fieldName }}</label>
+    <input id="{{ inputId }}" name="{{ inputName }}" type="{{ inputType }}" placeholder="{{ placeholder }}" class="profile-form__input" value="{{ fieldValue }}" disabled="{{ fieldDisabled }}" />
+</li>

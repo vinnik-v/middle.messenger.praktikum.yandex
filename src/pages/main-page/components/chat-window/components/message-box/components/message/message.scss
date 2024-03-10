@@ -11,36 +11,31 @@
     font-size: 12px;
     line-height: 125%;
     color: #1e1e1e;
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        float: right;
+        margin-left: 5px;
+    }
+    &__status {
+        display: flex;
+        align-items: center;
+    }
+    &__date {
+        color: #999999;
+        font-size: 9px;
+        &--dark {
+            background: rgba(82, 82, 82, 0.5);
+            color: white;
+            border-radius: 30px;
+            padding: 2px 7px 1px;
+            line-height: 100%;
+        }
+    }
 }
 .message--from-me {
     align-self: self-end;
     border-radius: 12px 12px 0;
     background-color: #D3FFCC;
-}
-.message__meta {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    float: right;
-    margin-left: 5px;
-}
-.message__status {
-    display: flex;
-    align-items: center;
-}
-.message__date {
-    color: #999999;
-    font-size: 9px;
-    &--dark {
-        background: rgba(82, 82, 82, 0.5);
-        color: white;
-        border-radius: 30px;
-        padding: 2px 7px 1px;
-        line-height: 100%;
-    }
-}
-
-.message__photo {
-    width: 100%;
-    height: auto;
 }

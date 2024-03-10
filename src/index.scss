@@ -16,7 +16,17 @@
     --item-background: #EFEFEF;
     --item-border: #EAEAEA;
 }
-  
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+h1, h2, p {
+    margin: 0;
+}
 body {
     font-family: 'Inter-Regular', sans-serif;
 }

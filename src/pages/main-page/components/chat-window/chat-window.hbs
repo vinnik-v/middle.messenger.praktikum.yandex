@@ -1,6 +1,6 @@
-<div class="chat-window">
+<section class="chat-window">
     {{#if chatSelected}}
-        <div class="chat-window__no-data-text">Выберите чат чтобы отправить сообщение</div>
+        <p class="chat-window__no-data-text">Выберите чат чтобы отправить сообщение</p>
     {{else}}
         {{> ChatWindowHeader }}
         <div class="chat-window__body">
@@ -8,4 +8,4 @@
         </div>
         {{> ChatWindowFooter }}
     {{/if}}
-</div>
+</section>
