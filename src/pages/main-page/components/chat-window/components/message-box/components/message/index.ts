@@ -21,5 +21,3 @@ Handlebars.registerHelper('messageTimeClass', (param) => {
 Handlebars.registerHelper('messagePhoto', () => {
     return messagePhoto;
 });
-
-

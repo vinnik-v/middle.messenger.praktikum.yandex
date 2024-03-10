@@ -44,3 +44,4 @@ export function navigate(page: string) {
     const handlebarsFunct = Handlebars.compile(source);
     document.body.innerHTML = handlebarsFunct(args);
   }
+  

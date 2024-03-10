@@ -40,4 +40,3 @@ document.addEventListener('click', (e: Record<string, any>) => {
   dropdownClickListener(e, '#delete-user-button', 'delete-user-modal');
   dropdownClickListener(e, '#profile-photo', 'change-profile-photo-modal');
 });
-
