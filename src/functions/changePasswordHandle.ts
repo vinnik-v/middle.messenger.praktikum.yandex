@@ -4,16 +4,16 @@ export default function changePasswordHandle(e: Record<string, any>) {
         if (form) {
           form.innerHTML = '';
           const newHTML = `<div class="profile-form__field">
-                              <span class="profile-form__field-name">Старый пароль</span>
-                              <input type="password" placeholder="Старый пароль" class="profile-form__input" value="some password">
+                              <label for="oldPassword" class="profile-form__field-name">Старый пароль</label>
+                              <input id="oldPassword" name="oldPassword" type="password" placeholder="Старый пароль" class="profile-form__input" value="some password">
                           </div>
                           <div class="profile-form__field">
-                              <span class="profile-form__field-name">Новый пароль</span>
-                              <input type="password" placeholder="Новый пароль" class="profile-form__input" value="some password">
+                              <label for="newPassword" class="profile-form__field-name">Новый пароль</label>
+                              <input id="newPassword" name="newPassword" type="password" placeholder="Новый пароль" class="profile-form__input" value="some password">
                           </div>
                           <div class="profile-form__field">
-                              <span class="profile-form__field-name">Повторите новый пароль</span>
-                              <input type="password" placeholder="Повторите новый пароль" class="profile-form__input" value="some password">
+                              <label for="newPassword" class="profile-form__field-name">Повторите новый пароль</label>
+                              <input id="newPassword" name="newPassword" type="password" placeholder="Повторите новый пароль" class="profile-form__input" value="some password">
                           </div>`
           form.innerHTML = newHTML;
         

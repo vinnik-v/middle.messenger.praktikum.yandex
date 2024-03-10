@@ -1,5 +1,5 @@
 export default function fileInputHandle(e: Record<string, any>) {
-    if (e.target.id === 'file-input') {
+    if (e.target.id === 'avatar') {
         const fileInput = e.target;
         const fileLabel = document.getElementById('file-label');
     

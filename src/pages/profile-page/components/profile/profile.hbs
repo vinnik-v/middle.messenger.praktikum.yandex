@@ -8,8 +8,8 @@
                 Иван
             </h1>
             {{#> Modal id="change-profile-photo-modal" modalTitle="Загрузите файл" contentClassName="modal__content change-profile-photo-modal" }}
-                <label for="file-input" id="file-label">Выберите файл на компьютере</label>
-                <input type="file" id="file-input" style="display:none">
+                <label for="avatar" id="file-label">Выберите файл на компьютере</label>
+                <input type="file" id="avatar" name="avatar" style="display:none" />
                 {{> FormButton buttonClassName="form-button_main" buttonText="Поменять" redirectPage="profile" id="file-accept-button"}}
             {{/ Modal }}
         </header>
