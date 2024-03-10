@@ -1,21 +1,20 @@
 .error-page__content {
-    display: flex;
-    flex-direction: column;
- }
+   display: flex;
+   flex-direction: column;
+}
 
- .error-page__title {
-    font-family: 'Inter-Medium', sans-serif;
-    font-size: 40px;
-    text-align: center;
- }
+.error-page__title {
+   font-family: 'Inter-Medium', sans-serif;
+   font-size: 40px;
+   text-align: center;
+}
 
- .error-page__text {
-    font-family: 'Inter-Medium', sans-serif;
-    font-size: 20px;
-    margin: 0;
- }
+.error-page__text {
+   font-family: 'Inter-Medium', sans-serif;
+   font-size: 20px;
+   margin: 0;
+}
 
- .error-page__footer {
-    margin-top: 60px;
- }
- 
+.error-page__footer {
+   margin-top: 60px;
+}
