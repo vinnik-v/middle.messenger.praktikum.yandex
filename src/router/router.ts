@@ -43,5 +43,5 @@ export function navigate(page: string) {
     const [ source, args ] = pages[page];
     const handlebarsFunct = Handlebars.compile(source);
     document.body.innerHTML = handlebarsFunct(args);
-  }
-  
+}
+
