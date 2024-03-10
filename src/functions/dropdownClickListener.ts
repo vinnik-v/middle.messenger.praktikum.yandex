@@ -7,5 +7,4 @@ export default function dropdownClickListener(e: Record<string, any>, buttonId: 
         else dropdown.classList.add('display-none');
       }
     }
-  }
-  
+}
