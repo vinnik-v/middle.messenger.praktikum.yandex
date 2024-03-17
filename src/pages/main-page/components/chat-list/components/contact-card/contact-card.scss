@@ -21,25 +21,30 @@
         flex-grow: 1;
         gap: 0.2rem;
     }
+
     &__content-header {
         display: flex;
         justify-content: space-between;
         gap: 0.3rem;
+
         .last-message-date {
             font-size: 9px;
-            color: #999999;
-            font-family: 'Inter-Medium', sans-serif;
+            color: #999;
+            font-family: Inter-Medium, sans-serif;
         }
     }
+
     &__content-body {
         display: flex;
         justify-content: space-between;
         flex-grow: 1;
+
         .unread-messages-count {
             height: 100%;
             display: flex;
             align-items: flex-end;
         }
+
         .counter-wrapper {
             width: 20px;
             height: 20px;
@@ -49,29 +54,32 @@
             justify-content: center;
             flex-shrink: 0;
             font-size: 11px;
-            font-family: 'Inter-Medium', sans-serif;
+            font-family: Inter-Medium, sans-serif;
             color: white;
             background-color: #06A128;
             padding-top: 1px;
         }
     }
+
     &__contact-name {
-        font-family: 'Inter-Bold', sans-serif;
+        font-family: Inter-Bold, sans-serif;
         font-size: 13px;
         line-height: 100%;
     }
+
     &__last-message {
         width: 100%;
-        font-family: 'Inter-Medium', sans-serif;
-        color: #999999;
+        font-family: Inter-Medium, sans-serif;
+        color: #999;
         font-size: 12px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+
         .message-from-me {
-            font-family: 'Inter-Bold', sans-serif;
+            font-family: Inter-Bold, sans-serif;
             color: #1E1E1E;
         }
     }

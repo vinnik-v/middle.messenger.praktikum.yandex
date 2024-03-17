@@ -2,13 +2,14 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--modal-background);
     left: 0;
     top: 0;
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
+
     &__content {
         display: flex;
         flex-direction: column;
@@ -17,16 +18,17 @@
         width: 340px;
         border-radius: 12px;
         padding: 30px;
-        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.14);
-        background: #fff;
+        box-shadow: var(--modal-box-shadow);
+        background: var(--background-color);
     }
 }
+
 .modal__title {
     text-align: center;
-    color: #1E1E1E;
+    color: var(--title-text-color);
     font-size: 20px;
     font-weight: 500;
-    font-family: "Inter-Medium", sans-serif;
+    font-family: Inter-Medium, sans-serif;
     padding-top: 20px;
 }
 

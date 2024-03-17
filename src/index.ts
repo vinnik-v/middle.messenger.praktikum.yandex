@@ -16,12 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
   router();
 });
 
-document.addEventListener('click', (e: Record<string, any>) => {
+document.addEventListener('click', (e: Event) => {
 
   fileInputHandle(e);
   if (fileAcceptHandle(e) === null) return;
 
-  const page = e.target.getAttribute('page');
+  const page = (<HTMLElement>e.target).getAttribute('page');
   
   if (page) {
 

@@ -30,7 +30,7 @@ export default function router() {
         window.location.pathname = '/404'
     }
 }
-const pages: Record<string, any[]> = {
+const pages: Record<string, string[]> = {
     'login': [ Pages.LoginPage ],
     'register': [ Pages.RegisterPage ],
     '404': [ Pages.NotFoundPage ],

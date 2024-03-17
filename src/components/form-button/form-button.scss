@@ -2,17 +2,18 @@
     width: 100%;
     height: 37px;
     cursor: pointer;
-    color: #3369f3;
+    color: var(--form-button-color);
     background: none;
-    font-family: 'Inter-Medium', sans-serif;
+    font-family: Inter-Medium, sans-serif;
     font-size: 11px;
 }
 
 .form-button_main {
     border-radius: 8px;
-    background: #3369f3;
-    color: white;
+    background: var(--form-button-color);
+    color: var(--form-button-text-color);
+
     &:hover {
-        background: rgba(51, 105, 243, 0.70);;
+        background: var(--form-button-color--hover);
     }
 }

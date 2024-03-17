@@ -6,7 +6,7 @@ import { messagesData } from './messagesData';
 import Handlebars from 'handlebars';
 
 Handlebars.registerHelper('messages', (param) => {
-    const data: Record<string, any> = {
+    const data: Record<string, unknown> = {
         messagesData: messagesData
     }
     return data[param];

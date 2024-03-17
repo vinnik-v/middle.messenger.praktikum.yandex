@@ -6,6 +6,7 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
 .date-container {
     width: 100%;
     display: flex;
@@ -13,11 +14,12 @@
     justify-content: center;
     padding: 20px 0;
 }
+
 .message-date {
     padding: 6px 9px;
     background-color: #DDE6F6;
-    color: #999999;
-    font-family: "Inter-Medium", sans-serif;
+    color: #999;
+    font-family: Inter-Medium, sans-serif;
     font-size: 12px;
     border-radius: 8px;
 }

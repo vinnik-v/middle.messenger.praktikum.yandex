@@ -8,7 +8,7 @@ Object.entries(Components).forEach(([ name, component ]) => {
 });
 
 Handlebars.registerHelper('chat-list-data', (param) => {
-  const data: Record<string, any> = {
+  const data: Record<string, unknown> = {
       chatListData: chatListData
   }
   return data[param];

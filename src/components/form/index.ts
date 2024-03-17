@@ -6,7 +6,7 @@ Object.entries(Components).forEach(([ name, component ]) => {
 });
 
 Handlebars.registerHelper('form-fields', (param) => {
-    const fieldSets: Record<string, any> = {
+    const fieldSets: Record<string, unknown> = {
         login: [
             { fieldName: 'login', fieldLabel: 'Логин', placeholder: 'Логин', inputType: 'text', errorText: 'Неверный логин', value: 'ivanivanov' },
             { fieldName: 'password', fieldLabel: 'Пароль', placeholder: 'Пароль', inputType: 'password', errorText: 'Неверный пароль', value: 'ivanivanov' }
@@ -31,7 +31,7 @@ Handlebars.registerHelper('form-fields', (param) => {
 });
 
 Handlebars.registerHelper('form-button', (param) => {
-    const buttons: Record<string, any> = {
+    const buttons: Record<string, unknown> = {
         login: [
             { buttonText: 'Войти', redirectPage: 'main', buttonClassName: 'form-button_main'},
             { buttonText: 'Нет аккаунта?', redirectPage: 'register' }
