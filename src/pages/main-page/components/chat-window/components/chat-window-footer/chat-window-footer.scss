@@ -1,0 +1,22 @@
+.chat-window__footer {
+    padding: 10px 20px;
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    position: relative;
+}
+
+.message-input {
+    flex-grow: 1;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    background-color: var(--item-background);
+    &:focus {
+        outline: none;
+    }
+}
+
+.attach-file-button, .send-message-button {
+    cursor: pointer;
+}

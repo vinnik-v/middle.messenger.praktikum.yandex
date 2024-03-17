@@ -1,0 +1,8 @@
+<nav class="chat-list">
+    {{> ChatListHeader }}
+    <ul class="chat-list__contacts">
+        {{#each (chat-list-data 'chatListData') }}
+            {{> ContactCard }}
+        {{/each}}
+    </ul>
+</nav>

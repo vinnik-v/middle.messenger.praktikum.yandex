@@ -1,0 +1,19 @@
+<div class="message{{#if messageClassName}} {{messageClassName}}{{/if}}">
+    {{ messageText }}
+    {{#if messageImg}}
+    <img class="message__photo" src="{{#messagePhoto}}{{messagePhoto}}{{/messagePhoto}}" alt="picture">
+    {{/if}}
+    <div class="message__meta">
+        {{#if messageFromMe}}
+            <div class="message__status">
+                {{#if messageRead}}
+                    {{#messageReadIcon}}{{messageReadIcon}}{{/messageReadIcon}}
+                    {{else}}
+                    {{#messageUnreadIcon}}{{messageUnreadIcon}}{{/messageUnreadIcon}}
+                {{/if}}
+            </div>
+        {{/if}}
+        
+        <time class="message__date {{#messageTimeClass messageImg}}{{messageTimeClass}}{{/messageTimeClass}}">12:00</time>
+    </div>
+</div>

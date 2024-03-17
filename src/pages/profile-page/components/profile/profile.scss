@@ -1,0 +1,109 @@
+.profile, .profile__photo, .profile__content, .profile__header {
+    display: flex;
+}
+.profile, .profile__photo, .profile__header {
+    align-items: center;
+}
+.profile {
+    flex-grow: 1;
+    justify-content: center;
+    padding: 60px 0;
+    
+    &__content {
+        width: 100%;
+        height: 100%;
+        max-width: 510px;
+        flex-direction: column;
+        gap: 60px;
+    }
+    &__header {
+        flex-direction: column;
+        gap: 21px;
+    }
+    &__photo{
+        justify-content: center;
+        border-radius: 50%;
+        width: 130px;
+        height: 130px;
+        background-color: var(--item-background);
+        position: relative;
+        cursor: pointer;
+        &:hover:after {
+            position: absolute;
+            content: "Поменять аватар";
+            white-space: pre-line;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: "Inter-Medium", sans-serif;
+            font-size: 13px;
+            background: rgb(0, 0, 0, 0.5);
+            box-sizing: border-box;
+          }
+    }
+    &__user-name {
+        font-family: "Inter-Bold", sans-serif;
+        font-size: 16px;
+    }
+    &__footer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    &__footer-row {
+        width: 100%;
+        &:not(:last-child) {
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--item-border);
+        }
+        &:not(:first-child) {
+            margin-top: 10px;
+        }
+    }
+    &__buttom {
+        cursor: pointer;
+        color: #3369F3;
+        font-family: "Inter-Medium", sans-serif;
+    }
+    &__buttom--red {
+        color: #FF0000;
+    }
+}
+
+#file-label {
+    display: inline-block;
+    font-family: "Inter-Medium", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 133%;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-align: center;
+    color: #3369f3;
+    width: 120px;
+    align-self: center;
+    cursor: pointer;
+    padding: 45px 0;
+}
+
+#file-input {
+    display: none;
+}
+.change-profile-photo-modal {
+    gap: 0;
+}
+
+.error-text {
+    text-align: center;
+    color: #FF2F2F;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 11px;
+    padding-top: 14px;
+}

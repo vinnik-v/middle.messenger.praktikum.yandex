@@ -1,0 +1,27 @@
+<li class="contact-card">
+    {{> ContactAvatar }}
+    <div class="contact-card__content">
+        <div class="contact-card__content-header">
+            <h2 class="contact-card__contact-name">
+                {{ UserName }}
+            </h2>
+            <time class="last-message-date">
+                {{ lastMessageTime }}
+            </time>
+        </div>
+        <div class="contact-card__content-body">
+            <p class="contact-card__last-message">
+                {{#if lastMessageFromMe}}
+                    <span class="message-from-me">Вы: </span>
+                {{/if}}{{ lastMessage }}
+            </p>
+            {{#if unreadMessagesCount}}
+                <div class="unread-messages-count">
+                    <div class="counter-wrapper">
+                        {{ unreadMessagesCount }}
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</li>

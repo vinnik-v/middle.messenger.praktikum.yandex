@@ -1,0 +1,37 @@
+
+.chat-list__header {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.chat-list__header-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    svg {
+        pointer-events: none;
+    }
+}
+.search-field {
+    padding-left: 3px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background: var(--item-background);
+    border-radius: 20px;
+    height: 25px;
+    .search-field__icon {
+        display: flex;
+        align-items: center;
+    }
+    .search-field__input {
+        border: none;
+        &:focus {
+            outline: none;
+        }
+        background: none;
+        flex-grow: 1;
+    }
+}

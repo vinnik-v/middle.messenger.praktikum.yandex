@@ -1,0 +1,15 @@
+<form class="form{{#if className}} {{className}}{{/if}}">
+    <h2 class="form__title">
+        {{ formTitle }} {{ fields.[0].fieldName }}
+    </h2>
+    <ul class="form__fields">
+        {{#each (form-fields helperParam) }}
+            {{> FormInputField }}
+        {{/each}}
+    </ul>
+    <div class="form__buttons">
+        {{#each (form-button helperParam) }}
+            {{> FormButton }}
+        {{/each}}
+    </div>
+</form>
