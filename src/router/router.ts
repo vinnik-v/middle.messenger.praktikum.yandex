@@ -1,7 +1,6 @@
 import * as Pages from '../pages';
-import Handlebars from 'handlebars';
 import Block from '../classes/Block';
-import { FormButton } from '../components';
+import LoginPage from '../pages/login-page/index';
 
 export default function router() {
     // Проверяем не оканчивается ли роут на "/", удаляем лишний символ если это так
@@ -32,90 +31,85 @@ export default function router() {
             window.location.pathname = '/404'
     }
 }
-const pages: Record<string, string[]> = {
-    'login': [Pages.LoginPage],
-    'register': [Pages.RegisterPage],
-    '404': [Pages.NotFoundPage],
-    'error': [Pages.ErrorPage],
-    'main': [Pages.MainPage],
-    'profile': [Pages.ProfilePage],
+const pages: Record<string, Function> = {
+    'login': () => new LoginPage({ settings: { withInternalID: true } }),
+    'register': ()=> new LoginPage({ settings: { withInternalID: true } }),
+    '404': ()=> new LoginPage({ settings: { withInternalID: true } }),
+    'error': ()=> new LoginPage({ settings: { withInternalID: true } }),
+    'main': ()=> new LoginPage({ settings: { withInternalID: true } }),
+    'profile': ()=> new LoginPage({ settings: { withInternalID: true } }),
 };
 
 export function navigate(page: string) {
-    const [source, args] = pages[page];
-    
-    const handlebarsFunct = Handlebars.compile(source);
-    const root = document.querySelector('.app');
-    (<HTMLElement>root).innerHTML = handlebarsFunct(args);
-
-    class Button extends Block {
-        constructor(props: Record<string, string | Block | Record<string, Function | boolean>>) {
-            // Создаём враппер дом-элемент button
-            const template = `<button class="form-button{{#if buttonClassName }} {{ buttonClassName }}{{/if}}" {{#if redirectPage }} page="{{redirectPage}}"{{/if}} {{#if id }} id="{{id}}"{{/if}} >
-                                {{ buttonText }}
-                            </button>`//FormButton;
-           
-            super(template, props);
-        }
-    }
-    class Div extends Block {
+    const pageComponent = pages[page]();
+    // class Button extends Block {
+    //     constructor(props: Record<string, string | string[] | Block | Record<string, | Function | boolean> | { name: string, value: string}[]>) {
+    //         // Создаём враппер дом-элемент button
+    //         const template = `{{ buttonText }}`//FormButton;
+    //         const tagName = {
+    //             tagName: 'button'
+    //         };
+    //         super(template, { ...tagName as Record<string, string>, ...props});
+    //     }
+    // }
+    // class Div extends Block {
         
-        constructor(props: Record<string, string | Block | Record<string, Function | boolean>>) {
-            // Создаём враппер дом-элемент button
-            const template = `<div class="some-div" >
-                                <div>Здесь написано что-то умное</div>
-                                <h3>{{ title }}</h3>
-                                {{{ button }}}
-                              </div>`//FormButton;
+    //     constructor(props: Record<string, string | Block | Record<string, Function | boolean>>) {
+    //         // Создаём враппер дом-элемент button
+    //         const template = `<div>Здесь написано что-то умное</div>
+    //                         <h3>{{ title }}</h3>
+    //                         {{{ button }}}`//FormButton;
            
-            super(template, props);
-        }
-        // componentDidUpdate(oldProps, newProps) {
-        //     if (oldProps.buttonText !== newProps.buttonText) {
-        //         this.children.button.setProps({ text: newProps.buttonText });
-        //     }
-    
-        //     return true;
-        // }
-    }
+    //         super(template, props);
+    //     }
+    // }
 
     function render(query: string, block: Block) {
         const root = document.querySelector(query);
-        // console.log('sdfsdfsdf', block.getContent());
+        (<HTMLElement>root).innerHTML = '';
         (<HTMLElement>root).appendChild(block.getContent());
         return root;
     }
 
-    const div = new Div({
-        title: 'Вот такой распрекрасный div',
-        events: {
-            // Названия события точно такие же, как и у первого аргумента addEventListener: 
-            mouseenter: (event: Event) => {
-              console.log(event);
-            },
-        },
-        settings: { withInternalID: true },
-        button: new Button({ buttonText: 'Войти', redirectPage: 'main', buttonClassName: 'form-button_main',settings: { withInternalID: true }, events: {
-            // Названия события точно такие же, как и у первого аргумента addEventListener: 
-            mouseenter: (event: Event) => {
-                console.log('asdasdasdasd');
-            },
-        },})
+    
+
+    // const div = new Div({
+    //     tagName: 'div',
+    //     title: 'Вот такой распрекрасный div',
+    //     className: 'some-div',
+    //     events: {
+    //         // Названия события точно такие же, как и у первого аргумента addEventListener: 
+    //         mouseenter: (event: Event) => {
+    //           console.log(event);
+    //         },
+    //     },
+    //     settings: { withInternalID: true },
+    //     button: new Button(
+    //         { 
+    //             classList: ['form-button', 'form-button_main'], 
+    //             buttonText: 'Войти', 
+    //             elemProps: [{ name: 'page', value: 'main' }, { name: 'id', value: 'ываываываыва' }], 
+    //             settings: { withInternalID: true }, events: {
+    //                 // Названия события точно такие же, как и у первого аргумента addEventListener: 
+    //                 mouseenter: (event: Event) => {
+    //                     console.log('asdasdasdasd');
+    //             },
+    //         },})
         
-    });
+    // });
 
     // app — это class дива в корне DOM
-    render(".app", div);
+    render(".app", pageComponent);
 
     // Через секунду контент изменится сам, достаточно обновить пропсы
     setTimeout(() => {
-        console.log(div.props);
-        div.setProps({
-            title: 'ggggfhfgfgfg'
-        });
-        div.children.button.setProps({
-            buttonText: 'Выйти'
-        });
+        // console.log(div.props);
+        // div.setProps({
+        //     title: 'ggggfhfgfgfg'
+        // });
+        // div.children.button.setProps({
+        //     buttonText: 'Выйти'
+        // });
     }, 1000);
 }
 
