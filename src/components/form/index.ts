@@ -6,7 +6,7 @@ import Block from '../../classes/Block.ts';
 import { fieldSets, buttonsSet } from './elementsProps.ts';
 export default class Form extends Block {
     constructor(
-            props: Record<string, string | string[] | Record<string, | Function | boolean | Record<string, Block>[]> | { name: string, value: string}[]>, 
+            props: Record<string, string | string[] | Record<string, | ((event: Event)=>unknown) | boolean | Record<string, Block>[]> | { name: string, value: string}[]>, 
             fieldSetName: string, 
             buttonsSetName: string
             ) 
@@ -35,8 +35,7 @@ export default class Form extends Block {
             const value = new FormButton({
                 className: item.buttonClassName, 
                 buttonText: item.buttonText, 
-                elemProps: [{ name: 'page', value: item.redirectPage }, 
-                { name: 'id', value: buttonName }], 
+                elemProps: [{ name: 'page', value: item.redirectPage }, { name: 'id', value: buttonName }], 
                 settings: { withInternalID: true }, 
                 events: {
                     // Названия события точно такие же, как и у первого аргумента addEventListener: 

@@ -2,8 +2,10 @@ import EventBus from './EventBus';
 import Handlebars from 'handlebars';
 import uuidv4 from '../functions/uuidv4';
 
+type TFunc = (event: Event) => void;
+
 type TProps = Record<string, string | string[] |
-    Record<string, Function> |
+    Record<string, TFunc> |
     Record<string, boolean> |
     Record<string, Record<string, Block>[]> |
     { name: string, value: string }[]>;
@@ -21,7 +23,7 @@ export default class Block {
     _template: string;
     props: TProps;
     children: Record<string, Block | Record<string, Block>[]>;
-    eventBus: Function;
+    eventBus: () => EventBus;
     _id: string | undefined;
     _classList: string[];
 
@@ -106,7 +108,7 @@ export default class Block {
                 }
 
                 const value = target[prop];
-                return typeof value === "function" ? (<Function>value).bind(target) : value;
+                return typeof value === "function" ? (<TFunc>value).bind(target) : value;
             },
             set(target: TProps, prop: string, value) {
                 target[prop] = value;
@@ -162,7 +164,7 @@ export default class Block {
 
         if (componentDidUpdate) {
             this._componentDidUpdate();
-        };
+        }
     }
 
     _addEvents() {
@@ -186,7 +188,7 @@ export default class Block {
     compile(template: string, props: TProps) {
 
         const childEntries: TProps = { ...props };
-
+        
         Object.entries(this.children).forEach(([key, child]) => {
             if (Array.isArray(child)) {
                 const childs = child.map(item => {
@@ -232,7 +234,6 @@ export default class Block {
 
     // Может переопределять пользователь, необязательно трогать
     render(): string {
-        // return this.compile(this._template, { text: this.props.text, header: 'хуй пизда джигурда' });
         return '';
     }
 

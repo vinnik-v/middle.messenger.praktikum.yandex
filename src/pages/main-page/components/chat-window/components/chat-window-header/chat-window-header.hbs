@@ -1,23 +1,19 @@
-<header class="chat-window__header">
-    <div class="chat-window__contact-info">
-        {{> ContactAvatar }}
+<div class="chat-window__contact-info">
+        {{{ contactAvatar }}}
         <h1 class="chat-window__contact-name">
             Вадим
         </h1>
     </div>
     <button class="chat-window__control" id="chat-window-header-button">
-        <div>{{#headerButton}}{{headerButton}}{{/headerButton}}</div>
+        <div>{{{ headerButton }}}</div>
     </button>
-    {{#> Dropdown style="top: 120%; right: 10px;" id="chat-window-header-dropdown" }}
-        <ul class="list-items">
-            <li class="list-item" id="add-user-button"><button class="list-item__icon">{{#addButtonIcon}}{{addButtonIcon}}{{/addButtonIcon}}</button><span class="list-item__text">Добавить пользователя</span></li>
-            <li class="list-item" id="delete-user-button"><button class="list-item__icon">{{#deleteButtonIcon}}{{deleteButtonIcon}}{{/deleteButtonIcon}}</button><span class="list-item__text">Удалить пользователя</span></li>
-        </ul>
-    {{/ Dropdown }}
-</header>
-{{#> Modal id="add-user-modal" }}
+    {{{ dropdown }}}
+    {{!-- {{#> Dropdown style="top: 120%; right: 10px;" id="chat-window-header-dropdown" }} --}}
+        
+    {{!-- {{/ Dropdown }} --}}
+{{!-- {{#> Modal id="add-user-modal" }}
     {{> Form className="modal__form" formTitle="Добавить пользователя" helperParam="addUser"}}
 {{/ Modal }}
 {{#> Modal id="delete-user-modal" }}
     {{> Form className="modal__form" formTitle="Удалить пользователя" helperParam="deleteUser"}}
-{{/ Modal }}
+{{/ Modal }} --}}

@@ -1,4 +1,7 @@
 .chat-window {
+    width: 100%;
+}
+.chat-window__content {
     flex-grow: 1;
     height: 100%;
     box-sizing: border-box;
@@ -10,6 +13,9 @@
         flex-grow: 1;
         padding: 0 20px;
     }
+}
+.chat-window__body {
+    flex-grow: 1;
 }
 
 .chat-window__no-data-text {

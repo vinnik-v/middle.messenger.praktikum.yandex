@@ -1,16 +1,10 @@
 import './index.scss';
-import Handlebars from 'handlebars';
-import * as Components from './components';
 import dropdownClickListener from './functions/dropdownClickListener';
 import fileInputHandle from './functions/fileInputHandle';
 import fileAcceptHandle from './functions/fileAcceptHandle';
 import changeProfileDataHandle from './functions/changeProfileDataHandle';
 import changePasswordHandle from './functions/changePasswordHandle';
 import router, { navigate } from './router/router';
-
-Object.entries(Components).forEach(([ name, component ]) => {
-  Handlebars.registerPartial(name, component);
-});
 
 document.addEventListener('DOMContentLoaded', () => {
   router();

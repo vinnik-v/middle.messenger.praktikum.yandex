@@ -6,7 +6,7 @@ import Form from '../../components/form';
 
 export default class LoginPage extends Block {
     
-    constructor(props: Record<string, string | string[] | Record<string, Function | boolean> | { name: string, value: string}[]>) {
+    constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
         const template = LoginPageTemplate as string;
         const classList = {
             classList: ['main-container', 'login-page']
@@ -28,6 +28,4 @@ export default class LoginPage extends Block {
         
     }
 }
-
-// {{> Form className="login-page__form" formTitle="Вход" helperParam="login"}}
 

@@ -1,5 +1,1 @@
-export { RegisterPage } from './register-page';
-export { NotFoundPage } from './not-found-page';
-export { ErrorPage } from './error-page';
-export { MainPage } from './main-page';
 export { ProfilePage } from './profile-page';

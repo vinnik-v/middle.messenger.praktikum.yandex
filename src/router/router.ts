@@ -1,6 +1,10 @@
-import * as Pages from '../pages';
+// import * as Pages from '../pages';
 import Block from '../classes/Block';
 import LoginPage from '../pages/login-page/index';
+import RegisterPage from '../pages/register-page';
+import MainPage from '../pages/main-page';
+import ErrorPage from '../pages/error-page';
+import NotFoundPage from '../pages/not-found-page';
 
 export default function router() {
     // Проверяем не оканчивается ли роут на "/", удаляем лишний символ если это так
@@ -31,12 +35,12 @@ export default function router() {
             window.location.pathname = '/404'
     }
 }
-const pages: Record<string, Function> = {
+const pages: Record<string, (()=> Block)> = {
     'login': () => new LoginPage({ settings: { withInternalID: true } }),
-    'register': ()=> new LoginPage({ settings: { withInternalID: true } }),
-    '404': ()=> new LoginPage({ settings: { withInternalID: true } }),
-    'error': ()=> new LoginPage({ settings: { withInternalID: true } }),
-    'main': ()=> new LoginPage({ settings: { withInternalID: true } }),
+    'register': ()=> new RegisterPage({ settings: { withInternalID: true } }),
+    '404': ()=> new NotFoundPage({ settings: { withInternalID: true } }),
+    'error': ()=> new ErrorPage({ settings: { withInternalID: true } }),
+    'main': ()=> new MainPage({ settings: { withInternalID: true } }),
     'profile': ()=> new LoginPage({ settings: { withInternalID: true } }),
 };
 

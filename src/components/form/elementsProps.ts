@@ -10,7 +10,7 @@ export const fieldSets: Record<string, Record<string, string>[]> = {
         { fieldName: 'second_name', fieldLabel: 'Фамилия', placeholder: 'Фамилия', inputType: 'text', value: 'Иванов' },
         { fieldName: 'phone', fieldLabel: 'Телефон', placeholder: '+7 (000) 000-00-00', inputType: 'tel', value: '+7 (909) 967 30 30' },
         { fieldName: 'password', fieldLabel: 'Пароль', placeholder: 'Пароль', inputType: 'password', value: 'ivanivanov' },
-        { fieldName: 'password', fieldLabel: 'Пароль еще раз', placeholder: 'Пароль', inputType: 'password', errorText: 'Пароли не совпадают', value: 'ivanivanov' },
+        { fieldName: 'password-again', fieldLabel: 'Пароль еще раз', placeholder: 'Пароль', inputType: 'password', errorText: 'Пароли не совпадают', value: 'ivanivanov' },
     ],
     addUser: [
         { fieldName: 'login', fieldLabel: 'Логин', placeholder: 'Логин', inputType: 'text', value: 'ivanivanov' }

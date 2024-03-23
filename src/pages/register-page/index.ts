@@ -1,2 +1,31 @@
 import './register-page.scss';
-export { default as RegisterPage } from './register-page.hbs?raw';
+import RegisterPageTemplate from './register-page.hbs?raw';
+import Block from '../../classes/Block';
+import Form from '../../components/form';
+
+
+export default class RegisterPage extends Block {
+    
+    constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
+        const template = RegisterPageTemplate as string;
+        const classList = {
+            classList: ['main-container', 'registration-page']
+        }
+        const children = {
+            form: new Form({
+                classList: ['registration-page__form'],
+                formTitle: 'Регистрация',
+                settings: { withInternalID: true }
+            }, 
+            'register', 
+            'register'
+            )
+        } as Record<string, Block>
+        const tagName = {
+            tagName: 'main'
+        }
+        super(template, {...tagName, ...classList, ...children, ...props});
+        
+    }
+}
+

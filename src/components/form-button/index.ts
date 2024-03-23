@@ -4,7 +4,7 @@ import Block from '../../classes/Block';
 
 export default class FormButton extends Block {
     constructor(
-            props: Record<string, string | string[] | Record<string, | Function | boolean> | { name: string, value: string}[]>
+            props: Record<string, string | string[] | Record<string, | ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>
         ) {
         const template = FormButtonTemplate as string;
         const tagName = {
