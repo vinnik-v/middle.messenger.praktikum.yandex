@@ -84,12 +84,13 @@ button {
     gap: 20px;
 
     .list-item {
-        cursor: pointer;
         list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
+        &__button {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         &__icon {
             display: flex;
             align-items: center;

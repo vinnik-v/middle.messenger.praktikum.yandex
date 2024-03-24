@@ -88,35 +88,3 @@
         color: #F00;
     }
 }
-
-#file-label {
-    display: inline-block;
-    font-family: Inter-Medium, sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 133%;
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
-    text-align: center;
-    color: #3369f3;
-    width: 120px;
-    align-self: center;
-    cursor: pointer;
-    padding: 45px 0;
-}
-
-#file-input {
-    display: none;
-}
-
-.change-profile-photo-modal {
-    gap: 0;
-}
-
-.error-text {
-    text-align: center;
-    color: #FF2F2F;
-    font-family: Inter-Medium, sans-serif;
-    font-size: 11px;
-    padding-top: 14px;
-}

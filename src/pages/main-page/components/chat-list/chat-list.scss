@@ -1,10 +1,14 @@
 .chat-list {
     width: 310px;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid var(--item-border);
-    box-sizing: border-box;
+    &__content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--item-border);
+        box-sizing: border-box;
+    }
 }
 
 .chat-list__contacts {

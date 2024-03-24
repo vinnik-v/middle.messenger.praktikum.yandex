@@ -16,12 +16,7 @@ export default class Form extends Block {
         const fields = fieldsProps.map((item, index) => {
             const fieldName: string = 'field_'+(index+1);
             const value = new FormInputField({
-                fieldName: item.fieldName,
-                fieldLabel: item.fieldLabel,
-                inputType: item.inputType,
-                placeholder: item.placeholder,
-                value: item.value,
-                errorText: item.errorText,                
+                ...item,               
                 settings: { withInternalID: true },
             }) as Block;
             return { [fieldName]: value };
@@ -29,7 +24,6 @@ export default class Form extends Block {
 
         const buttonsProps = buttonsSet[buttonsSetName] as Record<string, string>[];
 
-        // const buttons: Record<string, FormButton> = {};
         const buttons = buttonsProps.map((item, index) => {
             const buttonName: string = 'form-button_'+(index+1);
             const value = new FormButton({

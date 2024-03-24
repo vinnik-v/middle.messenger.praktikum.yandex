@@ -3,7 +3,7 @@ import ChatWindowHeaderTemplate from './chat-window-header.hbs?raw';
 import Block from '../../../../../../classes/Block';
 import ContactAvatar from '../../../../../../components/contact-avatar';
 import Dropdown from '../../../../../../components/dropdown';
-import DropDownContent from '../../../../../../components/dropdown/dropdown-content';
+import DropDownContent from '../../../../../../components/dropdown/components/dropdown-content';
 
 import DropDownContentTemplate from './components/dropdown-content/dropdown-content.hbs?raw';
 
@@ -27,13 +27,14 @@ export default class ChatWindowHeader extends Block {
       contactAvatar: new ContactAvatar({ settings: { withInternalID: true } }),
       dropdown: new Dropdown({
         settings: { withInternalID: true },
-        elemProps: [{ name: 'style', value: 'top: 120%; right: 10px;' }, { name: 'id', value: 'chat-window-header-dropdown' }], 
+        elemProps: [{ name: 'style', value: 'top: 120%; right: 10px;' }, { name: 'id', value: 'chat-window-header-dropdown' }],
         dropdownContent: new DropDownContent(DropDownContentTemplate, {
-            settings: { withInternalID: true },
-            addButtonIcon,
-            deleteButtonIcon
+          settings: { withInternalID: true },
+          addButtonIcon,
+          deleteButtonIcon
         }) as Block
-      })
+      }),
+      
     } as Record<string, Block>
 
     super(template, { ...tagName, ...children, ...icons, ...className, ...props });

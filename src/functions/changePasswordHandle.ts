@@ -1,6 +1,7 @@
 export default function changePasswordHandle(e: Event) {
     if ((<HTMLElement>e.target).id === 'change-password-button') {
-        const form = document.getElementById('proflle-form');
+        const form = document.getElementById('profile-form');
+        console.log(form);
         if (form) {
           form.innerHTML = '';
           const newHTML = `<div class="profile-form__field">

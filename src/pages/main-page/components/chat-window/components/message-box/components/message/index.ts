@@ -1,23 +1,27 @@
 import './message.scss';
-export { default as Message } from './message.hbs?raw';
-import Handlebars from 'handlebars';
+import MessageTemplate from './message.hbs?raw';
+import Block from '../../../../../../../../classes/Block';
+
 import messagePhoto from './assets/img/message-photo.png';
 
 import messageReadIcon from './assets/icons/message-read-icon.svg?raw';
 import messageUnreadIcon from './assets/icons/message-unred-icon.svg?raw';
 
-Handlebars.registerHelper('messageReadIcon', () => {
-    return messageReadIcon;
-});
-
-Handlebars.registerHelper('messageUnreadIcon', () => {
-    return messageUnreadIcon;
-});
-
-Handlebars.registerHelper('messageTimeClass', (param) => {
-    return param ? 'message__date--dark' : '';
-});
-
-Handlebars.registerHelper('messagePhoto', () => {
-    return messagePhoto;
-});
+export default class Message extends Block {
+    constructor(props: Record<string, string | File | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
+      const template = MessageTemplate as string;
+      const className = {
+        className: 'message-container'
+      }
+      const tagName = {
+        tagName: 'div'
+      }
+      const icons = {
+        messageReadIcon,
+        messageUnreadIcon,
+      }
+  
+      super(template, {...icons, ...{ messageTimeClass: 'message__date--dark' }, ...{ messagePhoto: messagePhoto }, ...tagName, ...className, ...props });
+    }
+  }
+  

@@ -4,7 +4,7 @@ import uuidv4 from '../functions/uuidv4';
 
 type TFunc = (event: Event) => void;
 
-type TProps = Record<string, string | string[] |
+type TProps = Record<string, string | string[] | File |
     Record<string, TFunc> |
     Record<string, boolean> |
     Record<string, Record<string, Block>[]> |

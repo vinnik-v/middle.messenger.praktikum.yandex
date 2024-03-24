@@ -5,6 +5,7 @@ import RegisterPage from '../pages/register-page';
 import MainPage from '../pages/main-page';
 import ErrorPage from '../pages/error-page';
 import NotFoundPage from '../pages/not-found-page';
+import ProfilePage from '../pages/profile-page';
 
 export default function router() {
     // Проверяем не оканчивается ли роут на "/", удаляем лишний символ если это так
@@ -41,7 +42,7 @@ const pages: Record<string, (()=> Block)> = {
     '404': ()=> new NotFoundPage({ settings: { withInternalID: true } }),
     'error': ()=> new ErrorPage({ settings: { withInternalID: true } }),
     'main': ()=> new MainPage({ settings: { withInternalID: true } }),
-    'profile': ()=> new LoginPage({ settings: { withInternalID: true } }),
+    'profile': ()=> new ProfilePage({ settings: { withInternalID: true } }),
 };
 
 export function navigate(page: string) {

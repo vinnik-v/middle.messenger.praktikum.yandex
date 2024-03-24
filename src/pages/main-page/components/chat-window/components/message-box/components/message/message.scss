@@ -1,4 +1,4 @@
-.message {
+.message-container {
     padding: 11px;
     background-color: white;
     max-width: 400px;
@@ -6,6 +6,10 @@
     border-radius: 0 12px 12px;
     align-self: flex-start;
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 25%);
+}
+
+.message {
+    
     font-family: Inter-Medium, sans-serif;
     font-weight: 500;
     font-size: 12px;

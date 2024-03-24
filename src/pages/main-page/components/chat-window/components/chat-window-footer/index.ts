@@ -10,7 +10,7 @@ import DropDownContentTemplate from './components/dropdown-content/dropdown-cont
 
 import Block from '../../../../../../classes/Block';
 import Dropdown from '../../../../../../components/dropdown';
-import DropDownContent from '../../../../../../components/dropdown/dropdown-content';
+import DropDownContent from '../../../../../../components/dropdown/components/dropdown-content';
 
 //{{#> Dropdown style="bottom: 120%" id="choose-file-dropdown" }}
 // {{/ Dropdown }}
@@ -32,7 +32,7 @@ export default class ChatWindowFooter extends Block {
     const children = {
         dropdown: new Dropdown({
             settings: { withInternalID: true },
-            elemProps: [{ name: 'style', value: 'top: 120%; right: 10px;' }, { name: 'id', value: 'chat-window-footer-dropdown' }], 
+            elemProps: [{ name: 'style', value: 'bottom: 120%; left: 10px;' }, { name: 'id', value: 'choose-file-dropdown' }], 
             dropdownContent: new DropDownContent(DropDownContentTemplate, {
                 settings: { withInternalID: true },
                 fileIcon,
