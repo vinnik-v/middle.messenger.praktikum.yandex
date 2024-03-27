@@ -4,9 +4,10 @@ import uuidv4 from '../functions/uuidv4';
 
 type TFunc = (event: Event) => void;
 
-type TProps = Record<string, string | string[] | File |
+type TProps = Record<string, string | string[] | File | boolean | null |
     Record<string, TFunc> |
     Record<string, boolean> |
+    Record<string, Block>[] |
     Record<string, Record<string, Block>[]> |
     { name: string, value: string }[]>;
 
@@ -241,11 +242,7 @@ export default class Block {
         return this._element;
     }
 
-    show() {
-        this.getContent().style.display = "block";
-    }
+    validate(): boolean | void {
 
-    hide() {
-        this.getContent().style.display = "none";
     }
 }

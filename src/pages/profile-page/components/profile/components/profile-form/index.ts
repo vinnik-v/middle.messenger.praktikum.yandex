@@ -1,29 +1,62 @@
-import './profile-form.scss';
-import ProfileFormTempalte from './profile-form.hbs?raw';
-import Block from '../../../../../../classes/Block';
-import ProfileFormField from './components/profile-form-field';
-import { fieldsData } from './fieldsData';
+import Form from "../../../../../../components/form";
+import Block from "../../../../../../classes/Block";
+import prepareFields from "../../../../../../components/form/functions/prepareFields";
+import { fieldSets, buttonsSets } from '../../../../../../components/form/elementsProps';
+import prepareButtons from '../../../../../../components/form/functions/prepareButtons';
 
-export default class ProfileForm extends Block {
-  constructor(props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
-    const template = ProfileFormTempalte as string;
-    const classList = {
-      classList: ['profile-form']
+export default class ProfileForm extends Form {
+    constructor(props: typeof Block.prototype.props) {
+        const fields = prepareFields(fieldSets.profileForm, true);
+        fields.forEach(item => {
+            const key = Object.keys(item)[0];
+            const field = item[key] as Block;
+            const input = (<Record<string, Block>>field.children).input._element as HTMLInputElement;
+            input.disabled = true;
+        })
+
+        const buttonsProps = buttonsSets.profileForm;
+        const buttons = prepareButtons(buttonsProps);
+
+        const changeDataButton = Object.values(buttons[1])[0];
+        changeDataButton.setProps({
+            events: {
+                click: (event: Event) => {
+                    event.preventDefault();
+                    const fields = this.children.fields as Record<string, Block>[];        
+                    fields.forEach(item => {
+                        const key = Object.keys(item)[0];
+                        const field = item[key] as Block;
+                        const input = (<Record<string, Block>>field.children).input._element as HTMLInputElement;
+                        input.disabled = false;
+                    });
+                    this.children.buttons = buttons.filter(item => item['form-button_1']);
+                    this.setProps({
+                        buttonsChanged: true
+                    })
+                }
+            }
+        })
+        
+        const changePasswordButton = Object.values(buttons[2])[0];
+        changePasswordButton.setProps({
+            events: {
+                click: (event: Event) => {
+                    event.preventDefault();
+                    const fields = prepareFields(fieldSets.changePassword, true) as Record<string, Block>[];        
+                    this.children.fields = fields;
+                    this.children.buttons = buttons.filter(item => item['form-button_1']);
+                    this.setProps({
+                        buttonsChanged: true
+                    })
+                }
+            }
+        })
+
+        const children = {
+            fields,
+            buttons: buttons.slice(1)
+        }
+                
+        super({...children, ...props });
     }
-    const tagName = {
-      tagName: 'form'
-    }
-
-    const fields = fieldsData.map((item, index) => {
-      const fieldName: string = 'profile-form-field_' + (index + 1);
-      const value = new ProfileFormField({
-        ...item,
-        settings: { withInternalID: true },
-      }) as Block;
-      return { [fieldName]: value };
-    }) as Record<string, Block>[];
-
-    super(template, { ...tagName, ...{ fields: fields } as Record<string, Record<string, Block>[]>, ...classList, ...props });
-
-  }
 }

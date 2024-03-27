@@ -6,6 +6,7 @@ import ChatWindow from './components/chat-window';
 import Modal from '../../components/modal';
 import ModalContent from '../../components/modal/components/modal-content';
 import Form from '../../components/form';
+import { fieldSets, buttonsSets } from '../../components/form/elementsProps';
 export default class MainPage extends Block {
     constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
         const template = MainPageTemplate as string;
@@ -28,8 +29,8 @@ export default class MainPage extends Block {
                     formTitle: 'Добавить пользователя',
                     settings: { withInternalID: true }
                   },
-                    'addUser',
-                    'addUser'
+                  fieldSets.addUser,
+                  buttonsSets.addUser
                   ) 
                 }) as Block
               }),
@@ -43,8 +44,8 @@ export default class MainPage extends Block {
                     formTitle: 'Удалить пользователя',
                     settings: { withInternalID: true }
                   },
-                    'deleteUser',
-                    'deleteUser'
+                  fieldSets.deleteUser,
+                  buttonsSets.deleteUser
                   ) 
                 }) as Block
               })

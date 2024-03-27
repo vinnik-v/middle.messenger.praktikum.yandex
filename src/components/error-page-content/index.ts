@@ -1,6 +1,6 @@
 import './error-page-content.scss';
 import ErrorPageContentTemplate from './error-page-content.hbs?raw';
-import FormButton from '../form-button';
+import Button from '../button';
 
 const pageProps: Record<string, Record<string, string>> = {
     404: { header: '404', text: 'Страница не найдена' },
@@ -20,17 +20,12 @@ export default class ErrorPageContent extends Block {
         }
         const pageProp = pageProps[pageType];
 
-        const button = new FormButton({
-            buttonText: 'Назад к чатам', 
-            elemProps: [{ name: 'page', value: 'main' }, 
-            { name: 'id', value: 'err-page-button' }], 
-            settings: { withInternalID: true }, 
-            events: {
-                // Названия события точно такие же, как и у первого аргумента addEventListener: 
-                mouseenter: (event: Event) => {
-                    console.log(event);
-                }
-            }
+        const button = new Button('{{buttonText}}',{
+            buttonText: 'Назад к чатам',
+            className: 'navigate-button',
+            redirectPage: 'main',
+            elemProps: [{ name: 'id', value: 'err-page-button' }], 
+            settings: { withInternalID: true },
         }) as Block;
 
         super(template, {...tagName, ...{ button: button } as Record<string, Block>, ...className, ...pageProp});

@@ -13,25 +13,6 @@
         color: var(--form-input-text-color);
     }
 
-    .form-input-field__input {
-        font-family: Inter-Medium, sans-serif;
-        width: 100%;
-        border: none;
-        padding: 0;
-        font-size: 14px;
-        border-bottom: 1px solid var(--form-input-border-color);
-        padding-bottom: 7px;
-
-        &:focus {
-            outline: none;
-        }
-
-        &::placeholder {
-            font-size: 14px;
-            color: var(--form-input-placeholder-color);
-        }
-    }
-
     .form-input-field__error-text {
         font-size: 10px;
         color: var(--form-input-text-color--error);

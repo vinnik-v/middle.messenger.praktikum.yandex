@@ -6,6 +6,93 @@
     align-items: center;
 }
 
+.profile-form {
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+    padding: 0;
+    gap: 60px;
+
+    &__fields {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .form-input-field {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        flex-direction: row;
+        &:not(:last-child) {
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--item-border);
+        }
+    
+        &:not(:first-child) {
+            margin-top: 5px;
+        }
+    }
+    
+    .form-input-field__input {
+        padding: 0;
+        text-align: end;
+        width: 100%;
+        color: var(--profile-form-input-text-color);
+        font-family: Inter-Medium, sans-serif;
+        font-size: 13px;
+        border: none;
+        flex-basis: 60%;
+    
+        &:focus {
+            outline: none;
+        }
+    
+        &:disabled {
+            background: none;
+        }
+    }
+    
+    .form-input-field__name {
+        white-space: nowrap;
+        font-size: 13px;
+        color: var(---profile-form-field-name-text-color);
+        font-family: Inter-Medium, sans-serif;
+        flex-basis: 30%;
+    }
+
+    .form-input-field__error-text {
+        flex-basis: 100%;
+        text-align: center;
+    }
+
+    .form__buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .form-button {
+        text-align: start;
+        width: fit-content;
+        font-family: Inter-Medium, sans-serif;
+        font-size: 13px;
+    }
+    .form-button_main {
+        align-self: center;
+        width: 280px;
+        text-align: center;
+    }
+
+   .form-button--red {
+        color: #F00;
+    }
+}
+
 .profile {
     flex-grow: 1;
     justify-content: center;
@@ -56,35 +143,5 @@
     &__user-name {
         font-family: Inter-Bold, sans-serif;
         font-size: 16px;
-    }
-
-    &__footer {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    &__footer-row {
-        width: 100%;
-
-        &:not(:last-child) {
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--item-border);
-        }
-
-        &:not(:first-child) {
-            margin-top: 10px;
-        }
-    }
-
-    &__buttom {
-        cursor: pointer;
-        color: var(--form-button-color);
-        font-family: Inter-Medium, sans-serif;
-    }
-
-    &__buttom--red {
-        color: #F00;
     }
 }

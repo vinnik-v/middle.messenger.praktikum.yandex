@@ -85,12 +85,14 @@ button {
 
     .list-item {
         list-style: none;
+
         &__button {
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         &__icon {
             display: flex;
             align-items: center;

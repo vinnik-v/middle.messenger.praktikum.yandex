@@ -6,6 +6,7 @@
     background: none;
     font-family: Inter-Medium, sans-serif;
     font-size: 11px;
+    border: none;
 }
 
 .form-button_main {
@@ -15,5 +16,8 @@
 
     &:hover {
         background: var(--form-button-color--hover);
+    }
+    &:focus {
+        outline: none;
     }
 }

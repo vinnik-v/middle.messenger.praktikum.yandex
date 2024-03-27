@@ -1,16 +1,11 @@
 import './form-button.scss';
 import FormButtonTemplate from './form-button.hbs?raw';
-import Block from '../../classes/Block';
+import Button from '../button';
 
-export default class FormButton extends Block {
-    constructor(
-            props: Record<string, string | string[] | Record<string, | ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>
-        ) {
+export default class FormButton extends Button {
+    constructor(props: typeof Button.prototype.props) {
         const template = FormButtonTemplate as string;
-        const tagName = {
-            tagName: 'button'
-        }
         props.classList ? (<string[]>props.classList).push('form-button') : props.classList = ['form-button'];
-        super(template, {...tagName, ...props});
+        super(template, props);
     }
 }

@@ -19,12 +19,6 @@ export default class ChatList extends Block {
       const value = new ContactCard({
         ...item as Record<string, string | Date | boolean | number>,
         settings: { withInternalID: true },
-        events: {
-          // Названия события точно такие же, как и у первого аргумента addEventListener: 
-          mouseenter: (event: Event) => {
-            console.log(event);
-          }
-        }
       }) as Block;
       return { [contactCardName]: value };
     }) as Record<string, Block>[];

@@ -23,12 +23,6 @@ export default class MessageBox extends Block {
         ...item as Record<string, string | Date | boolean | null>,
         classList,
         settings: { withInternalID: true }, 
-          events: {
-              // Названия события точно такие же, как и у первого аргумента addEventListener: 
-              mouseenter: (event: Event) => {
-                  console.log(event);
-              }
-          }
       }) as Block;
       return { [messageName]: value };
   }) as Record<string, Block>[];

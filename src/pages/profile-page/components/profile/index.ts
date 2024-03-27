@@ -5,7 +5,7 @@ import ProfileForm from './components/profile-form';
 
 import profileNoPhotoIcon from './assets/icons/no-photo-icon.svg?raw';
 export default class Profile extends Block {
-  constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
+  constructor(props: typeof Block.prototype.props) {
       const template = ProfileTemplate as string;
       const classList = {
           classList: ['profile']
@@ -17,8 +17,12 @@ export default class Profile extends Block {
       const icons = {
         profileNoPhotoIcon
       }
+
       const children = {
-          profileForm: new ProfileForm({ settings: { withInternalID: true } })
+          form: new ProfileForm({
+              classList: ['profile-form'],
+              settings: { withInternalID: true },
+            }) as Block
       } as Record<string, Block>
 
       super(template, {...tagName, ...children, ...icons, ...classList, ...props});

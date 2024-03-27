@@ -7,7 +7,8 @@ import Modal from '../../components/modal';
 import ModalContent from '../../components/modal/components/modal-content';
 import FormButton from '../../components/form-button';
 
-import buttonBack from './assets/icons/button-back.svg?raw';
+import buttonBackIcon from './assets/icons/button-back.svg?raw';
+import Button from '../../components/button';
 
 export default class ProfilePage extends Block {
   constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
@@ -19,9 +20,6 @@ export default class ProfilePage extends Block {
           tagName: 'main'
       }
 
-      const icons = {
-        buttonBack
-      }
       const children = {
         profile: new Profile({ settings: { withInternalID: true } }),
         profileModal: new Modal({
@@ -35,14 +33,19 @@ export default class ProfilePage extends Block {
               classList: ['form-button_main'],
               buttonText: 'Поменять',
               redirectPage: 'profile',
-              elemProps: [{ name: 'id', value: 'file-accept-button'}, { name: 'page', value: 'profile' }],
+              elemProps: [{ name: 'id', value: 'file-accept-button'}],
               settings: { withInternalID: true }
-            }) 
+            }),
           }) as Block
         }),
+        buttonToMain: new Button('{{{buttonBackIcon}}}', {
+          className: 'profile-page__button-back',
+          redirectPage: 'main',
+          buttonBackIcon: buttonBackIcon
+        })
       } as Record<string, Block>
 
-      super(template, {...tagName, ...children, ...icons, ...classList, ...props});
+      super(template, {...tagName, ...children, ...classList, ...props});
       
   }
 }
