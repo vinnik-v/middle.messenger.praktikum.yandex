@@ -27,8 +27,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        flex-wrap: wrap;
-        flex-direction: row;
+        flex-flow: row wrap;
+
         &:not(:last-child) {
             padding-bottom: 5px;
             border-bottom: 1px solid var(--item-border);
@@ -76,12 +76,14 @@
         flex-direction: column;
         width: 100%;
     }
+
     .form-button {
         text-align: start;
         width: fit-content;
         font-family: Inter-Medium, sans-serif;
         font-size: 13px;
     }
+
     .form-button_main {
         align-self: center;
         width: 280px;
