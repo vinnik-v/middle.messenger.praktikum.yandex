@@ -7,7 +7,7 @@
     "dev": "eslint . && tsc --noEmit && vite",
     "build": "eslint . && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "start": "eslint . && tsc --noEmit && node --loader ts-node/esm local-server.ts",
+    "start": "eslint . && tsc --noEmit && vite build && node --loader ts-node/esm local-server.ts",
     "lint": "eslint . && stylelint --fix **/*.scss",
     "lint:css": "stylelint --fix **/*.scss"
   },
