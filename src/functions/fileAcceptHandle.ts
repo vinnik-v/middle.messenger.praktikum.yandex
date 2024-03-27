@@ -1,5 +1,5 @@
-export default function fileAcceptHandle(e: Record<string, any>) {
-    if (e.target.id === 'file-accept-button') {
+export default function fileAcceptHandle(e: Event) {
+    if ((<HTMLElement>e.target).id === 'file-accept-button') {
         const fileInput = (<HTMLInputElement>document.getElementById('avatar'));
         if (!fileInput.files || fileInput.files.length === 0) {
           const modal = document.getElementById('change-profile-photo-modal');

@@ -8,14 +8,17 @@
     border: 1px solid #B1B1B1;
     box-sizing: border-box;
 }
+
 .profile-page__button-back {
     cursor: pointer;
     width: 64px;
     background-color: #fbfbfb;
     border: 1px solid var(--item-border);
+
     svg {
         pointer-events: none;
     }
+
     &:hover {
         background-color: #f3f3f3;
     }

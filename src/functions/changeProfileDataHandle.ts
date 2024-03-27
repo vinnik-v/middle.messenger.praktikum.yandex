@@ -1,6 +1,7 @@
-export default function changeProfileDataHandle(e: Record<string, any>) {
-    if (e.target.id === 'change-data-button') {
-        const form = document.getElementById('proflle-form');
+export default function changeProfileDataHandle(e: Event) {
+    if ((<HTMLElement>e.target).id === 'change-data-button') {
+        const form = document.getElementById('profile-form');
+        
         if (form) {
           const formFields = Array.from(form.children).map(item => Array.from(item.children).filter(elem => elem.className === 'profile-form__input')[0]);
           formFields.forEach(item => {

@@ -4,31 +4,17 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 7px;
+
     .form-input-field__name {
-        font-family: 'Inter-Medium', sans-serif;
+        font-family: Inter-Medium, sans-serif;
         font-weight: 500;
         font-size: 12px;
         line-height: 100%;
-        color: #999;
+        color: var(--form-input-text-color);
     }
-    .form-input-field__input {
-        font-family: 'Inter-Medium', sans-serif;
-        width: 100%;
-        border: none;
-        padding: 0;
-        font-size: 14px;
-        border-bottom: 1px solid #3369F3;
-        padding-bottom: 7px;
-        &:focus {
-            outline: none;
-        }
-        &::placeholder {
-            font-size: 14px;
-            color: #999;
-        }
-    }
+
     .form-input-field__error-text {
         font-size: 10px;
-        color: #FF2F2F;
+        color: var(--form-input-text-color--error);
     }
 }

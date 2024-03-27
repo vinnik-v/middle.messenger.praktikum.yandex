@@ -4,14 +4,15 @@
     display: flex;
     overflow: hidden;
     position: relative;
+
     &__content{
         max-width: 1280px;
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: center;
-        background: white;
-        border: 1px solid #B1B1B1;
+        background: var(--background-color);
+        border: var(--content-border);
         box-sizing: border-box;
     }
 }

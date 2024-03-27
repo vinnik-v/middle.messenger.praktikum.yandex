@@ -8,16 +8,19 @@
     padding: 10px;
     position: relative;
 }
+
 .chat-window__contact-info {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
+
 .chat-window__contact-name {
-    font-family: 'Inter-Bold', sans-serif;
+    font-family: Inter-Bold, sans-serif;
     font-size: 13px;
     color: #1E1E1E;
 }
+
 .chat-window__control {
     cursor: pointer;
     width: 20px;

@@ -9,8 +9,8 @@ export function createApp() {
 
   app.use(express.static(path.join(dirname, 'dist')));
 
-  router.get('*', (_: Request, res: Response) => {
-    res.sendFile(path.join(dirname, 'src', 'index.html'));
+  router.get('/', (_: Request, res: Response) => {
+    res.sendFile(path.join(dirname, 'dist', 'index.html'));
   });
   app.use(router);
 

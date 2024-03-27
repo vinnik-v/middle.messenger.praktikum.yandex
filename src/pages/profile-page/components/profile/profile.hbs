@@ -1,25 +1,13 @@
-<div class="profile">
-    <div class="profile__content">
-        <header class="profile__header">
-            <div class="profile__photo" id="profile-photo">
-                <div class="no-photo-icon">{{#profileNoPhotoIcon}}{{profileNoPhotoIcon}}{{/profileNoPhotoIcon}}</div>
-            </div>
-            <h1 class="profile__user-name">
-                Иван
-            </h1>
-            {{#> Modal id="change-profile-photo-modal" modalTitle="Загрузите файл" contentClassName="modal__content change-profile-photo-modal" }}
-                <label for="avatar" id="file-label">Выберите файл на компьютере</label>
-                <input type="file" id="avatar" name="avatar" style="display:none" />
-                {{> FormButton buttonClassName="form-button_main" buttonText="Поменять" redirectPage="profile" id="file-accept-button"}}
-            {{/ Modal }}
-        </header>
-        <section class="profile__body">
-            {{> ProfileForm id="proflle-form" }}
-        </section>
-        <ul class="profile__footer" id="profile-footer">
-            <li class="profile__footer-row"><button class="profile__buttom" id="change-data-button">Изменить данные</button></li>
-            <li class="profile__footer-row"><button class="profile__buttom" id="change-password-button">Изменить пароль</button></li>
-            <li class="profile__footer-row"><button class="profile__buttom profile__buttom--red" id="exit-button" page="login">Выйти</button></li>
-        </ul>
-    </div>
+<div class="profile__content">
+    <header class="profile__header">
+        <div class="profile__photo" id="profile-photo">
+            <div class="no-photo-icon">{{{ profileNoPhotoIcon }}}</div>
+        </div>
+        <h1 class="profile__user-name">
+            Иван
+        </h1>
+    </header>
+    <section class="profile__body">
+        {{{ form }}}
+    </section>
 </div>

@@ -1,11 +1,12 @@
 .dropdown {
     position: absolute;
     border-radius: 12px;
-    box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.14);
+    box-shadow: var(--item-box-shadow);
     background: #fff;
     padding: 17px;
     display: flex;
 }
+
 .display-none {
     display: none !important;
 }
