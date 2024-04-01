@@ -1,9 +1,100 @@
 .profile, .profile__photo, .profile__content, .profile__header {
     display: flex;
 }
+
 .profile, .profile__photo, .profile__header {
     align-items: center;
 }
+
+.profile-form {
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+    padding: 0;
+    gap: 60px;
+
+    &__fields {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .form-input-field {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-flow: row wrap;
+
+        &:not(:last-child) {
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--item-border);
+        }
+    
+        &:not(:first-child) {
+            margin-top: 5px;
+        }
+    }
+    
+    .form-input-field__input {
+        padding: 0;
+        text-align: end;
+        width: 100%;
+        color: var(--profile-form-input-text-color);
+        font-family: Inter-Medium, sans-serif;
+        font-size: 13px;
+        border: none;
+        flex-basis: 60%;
+    
+        &:focus {
+            outline: none;
+        }
+    
+        &:disabled {
+            background: none;
+        }
+    }
+    
+    .form-input-field__name {
+        white-space: nowrap;
+        font-size: 13px;
+        color: var(---profile-form-field-name-text-color);
+        font-family: Inter-Medium, sans-serif;
+        flex-basis: 30%;
+    }
+
+    .form-input-field__error-text {
+        flex-basis: 100%;
+        text-align: center;
+    }
+
+    .form__buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .form-button {
+        text-align: start;
+        width: fit-content;
+        font-family: Inter-Medium, sans-serif;
+        font-size: 13px;
+    }
+
+    .form-button_main {
+        align-self: center;
+        width: 280px;
+        text-align: center;
+    }
+
+   .form-button--red {
+        color: #F00;
+    }
+}
+
 .profile {
     flex-grow: 1;
     justify-content: center;
@@ -16,10 +107,12 @@
         flex-direction: column;
         gap: 60px;
     }
+
     &__header {
         flex-direction: column;
         gap: 21px;
     }
+
     &__photo{
         justify-content: center;
         border-radius: 50%;
@@ -28,7 +121,8 @@
         background-color: var(--item-background);
         position: relative;
         cursor: pointer;
-        &:hover:after {
+
+        &:hover::after {
             position: absolute;
             content: "Поменять аватар";
             white-space: pre-line;
@@ -41,69 +135,15 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-family: "Inter-Medium", sans-serif;
+            font-family: Inter-Medium, sans-serif;
             font-size: 13px;
-            background: rgb(0, 0, 0, 0.5);
+            background: rgb(0 0 0 / 50%);
             box-sizing: border-box;
           }
     }
+
     &__user-name {
-        font-family: "Inter-Bold", sans-serif;
+        font-family: Inter-Bold, sans-serif;
         font-size: 16px;
     }
-    &__footer {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-    }
-    &__footer-row {
-        width: 100%;
-        &:not(:last-child) {
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--item-border);
-        }
-        &:not(:first-child) {
-            margin-top: 10px;
-        }
-    }
-    &__buttom {
-        cursor: pointer;
-        color: #3369F3;
-        font-family: "Inter-Medium", sans-serif;
-    }
-    &__buttom--red {
-        color: #FF0000;
-    }
-}
-
-#file-label {
-    display: inline-block;
-    font-family: "Inter-Medium", sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 133%;
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
-    text-align: center;
-    color: #3369f3;
-    width: 120px;
-    align-self: center;
-    cursor: pointer;
-    padding: 45px 0;
-}
-
-#file-input {
-    display: none;
-}
-.change-profile-photo-modal {
-    gap: 0;
-}
-
-.error-text {
-    text-align: center;
-    color: #FF2F2F;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 11px;
-    padding-top: 14px;
 }

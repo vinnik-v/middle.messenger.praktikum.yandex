@@ -1,10 +1,22 @@
 import './contact-avatar.scss';
-export { default as ContactAvatar } from './contact-avatar.hbs?raw';
-
-import Handlebars from 'handlebars';
-
+import ContactAvatarTemplate from './contact-avatar.hbs?raw';
+import Block from '../../classes/Block';
 import avatarIcon from './assets/icons/avatar-icon.svg?raw';
+export default class ContactAvatar extends Block {
+  constructor(props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
+    const template = ContactAvatarTemplate as string;
+    const className = {
+      className: 'contact__avatar'
+    }
+    const tagName = {
+      tagName: 'div'
+    }
 
-Handlebars.registerHelper('avatarIcon', () => {
-    return avatarIcon;
-});
+    const icons = {
+        avatarIcon
+      }
+
+    super(template, { ...tagName, ...icons, ...className, ...props });
+
+  }
+}

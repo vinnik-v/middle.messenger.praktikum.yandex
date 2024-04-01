@@ -1,5 +1,5 @@
-export default function dropdownClickListener(e: Record<string, any>, buttonId: string, dropdownId: string) {
-    const button = e.target.closest(buttonId);
+export default function dropdownClickListener(e: Event, buttonId: string, dropdownId: string) {
+    const button = (<HTMLElement>e.target).closest(buttonId);
     if (button) {
       const dropdown = document.getElementById(dropdownId);
       if (dropdown) {
