@@ -3,6 +3,8 @@ import Block from "../../../../../../classes/Block";
 import prepareFields from "../../../../../../components/form/functions/prepareFields";
 import { fieldSets, buttonsSets } from '../../../../../../components/form/elementsProps';
 import prepareButtons from '../../../../../../components/form/functions/prepareButtons';
+import LogoutRequest from "./profile-form-api/LogoutRequest";
+import Router from "../../../../../../classes/Router";
 
 export default class ProfileForm extends Form {
     constructor(props: typeof Block.prototype.props) {
@@ -48,6 +50,25 @@ export default class ProfileForm extends Form {
                     this.setProps({
                         buttonsChanged: true
                     })
+                }
+            }
+        })
+
+        const logoutButton = Object.values(buttons[3])[0];
+        logoutButton.setProps({
+            events: {
+                click: async (event: Event) => {
+                    event.preventDefault();
+                    const logoutRequest = new LogoutRequest();
+
+                    try {
+                        await logoutRequest.request();
+                        const router = new Router();
+                        router.go("/");
+
+                    } catch (err) {
+                        alert(err);
+                    }
                 }
             }
         })

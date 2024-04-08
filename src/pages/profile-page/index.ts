@@ -32,7 +32,7 @@ export default class ProfilePage extends Block {
             button: new FormButton({
               classList: ['form-button_main'],
               buttonText: 'Поменять',
-              redirectPage: 'profile',
+              redirectPage: '/settings',
               elemProps: [{ name: 'id', value: 'file-accept-button'}],
               settings: { withInternalID: true }
             }),
@@ -40,7 +40,7 @@ export default class ProfilePage extends Block {
         }),
         buttonToMain: new Button('{{{buttonBackIcon}}}', {
           className: 'profile-page__button-back',
-          redirectPage: 'main',
+          redirectPage: '/messenger',
           buttonBackIcon: buttonBackIcon
         })
       } as Record<string, Block>

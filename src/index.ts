@@ -4,10 +4,10 @@ import fileInputHandle from './functions/fileInputHandle';
 import fileAcceptHandle from './functions/fileAcceptHandle';
 import changeProfileDataHandle from './functions/changeProfileDataHandle';
 import changePasswordHandle from './functions/changePasswordHandle';
-import router from './router/router';
+import { routerInit } from './classes/Router';
 
 document.addEventListener('DOMContentLoaded', () => {
-  router();
+  routerInit();
 });
 
 document.addEventListener('click', (e: Event) => {

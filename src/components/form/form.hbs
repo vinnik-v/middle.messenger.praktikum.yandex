@@ -6,6 +6,9 @@
 <ul class="form__fields" id="form-fields">
     {{{ fields }}}
 </ul>
+{{#if errorText}}
+<p class="form-error-text">{{errorText}}</p>
+{{/if}}
 <div class="form__buttons" id="form-buttons">
     {{{ buttons }}}
 </div>

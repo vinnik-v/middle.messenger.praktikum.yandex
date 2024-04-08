@@ -25,3 +25,9 @@
     flex-grow: 1;
     gap: 16px;
 }
+
+.form-error-text {
+    font-size: 12px;
+    text-align: center;
+    color: var(--form-input-text-color--error, #FF2F2F);
+}

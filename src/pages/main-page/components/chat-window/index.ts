@@ -24,19 +24,3 @@ export default class ChatWindow extends Block {
 
   }
 }
-
-// import Handlebars from 'handlebars';
-
-// Handlebars.registerHelper('chat-content', (param) => {
-//     const data: Record<string, string> = {
-//         noData: `<div class="chat-window__no-data-text">Выберите чат чтобы отправить сообщение</div>`
-//                  <p class="chat-window__no-data-text">Выберите чат чтобы отправить сообщение</p>
-//     }
-//     return data[param];
-// });
-
-// import * as Components from './components';
-
-// Object.entries(Components).forEach(([ name, component ]) => {
-//   Handlebars.registerPartial(name, component);
-// });

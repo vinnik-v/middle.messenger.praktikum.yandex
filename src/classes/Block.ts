@@ -4,7 +4,7 @@ import uuidv4 from '../functions/uuidv4';
 
 type TFunc = (event: Event) => void;
 
-type TProps = Record<string, string | string[] | File | boolean | null |
+type TProps = { [key: string]: Block } | Record<string, string | string[] | File | boolean | null |
     Record<string, TFunc> |
     Record<string, boolean> |
     Record<string, Block>[] |
@@ -97,7 +97,14 @@ export default class Block {
 
         const oldProps = { ...this.props };
         const inpPropsEntries = Object.entries(nextProps);
-        inpPropsEntries.forEach(item => this.props[item[0]] = item[1]);
+        inpPropsEntries.forEach(item => {
+            this.props[item[0]] = item[1];
+        });
+
+        const { children } = this._getChildren(this.props);
+
+        this.children = children;
+
         this.componentDidUpdate(oldProps, nextProps);
     };
 
@@ -133,7 +140,7 @@ export default class Block {
 
     // Инициализация
     init() {
-        this.eventBus().emit(Block.EVENTS.FLOW_CDM); //FLOW_RENDER
+        this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
     _componentDidMount() {
@@ -170,7 +177,7 @@ export default class Block {
 
     _addEvents() {
         const { events = {} as Record<string, EventListenerOrEventListenerObject> } = this.props as Record<string, Record<string, EventListenerOrEventListenerObject>>;
-
+        
         if (events) Object.keys(events).forEach(eventName => {
             this._element.addEventListener(eventName, events[eventName]);
         });
@@ -244,5 +251,15 @@ export default class Block {
 
     validate(): boolean | void {
 
+    }
+
+    show() {
+        this._render();
+    }
+    hide() {
+        //
+    }
+    apiRequest(data?: Record<string, string>) {
+        data
     }
 }

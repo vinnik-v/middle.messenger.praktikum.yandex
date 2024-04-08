@@ -44,23 +44,23 @@ export const fieldSets: Record<string, Record<string, string>[]> = {
 
 export const buttonsSets: Record<string, Record<string, string>[]> = {
     login: [
-        { buttonType: 'submit', buttonText: 'Войти', redirectPage: 'main', buttonClassName: 'form-button_main'},
-        { buttonType: 'button', buttonText: 'Нет аккаунта?', redirectPage: 'register' }
+        { buttonType: 'submit', buttonText: 'Войти', redirectPage: '/messenger', buttonClassName: 'form-button_main'},
+        { buttonType: 'button', buttonText: 'Нет аккаунта?', redirectPage: '/sign-up' }
     ],
     register: [
-        { buttonType: 'submit', buttonText: 'Зарегистрироваться', redirectPage: 'main', buttonClassName: 'form-button_main'},
-        { buttonType: 'button', buttonText: 'Войти', redirectPage: 'login' }
+        { buttonType: 'submit', buttonText: 'Зарегистрироваться', redirectPage: '/messenger', buttonClassName: 'form-button_main'},
+        { buttonType: 'button', buttonText: 'Войти', redirectPage: '/' }
     ],
     addUser: [
-        { buttonType: 'submit', buttonText: 'Добавить', redirectPage: 'main', buttonClassName: 'form-button_main'}
+        { buttonType: 'submit', buttonText: 'Добавить', redirectPage: '/messenger', buttonClassName: 'form-button_main'}
     ],
     deleteUser: [
-        { buttonType: 'submit', buttonText: 'Удалить', redirectPage: 'main', buttonClassName: 'form-button_main'}
+        { buttonType: 'submit', buttonText: 'Удалить', redirectPage: '/messenger', buttonClassName: 'form-button_main'}
     ],
     profileForm: [
-        { buttonType: 'submit', buttonText: 'Сохранить', redirectPage: 'profile', buttonClassName: 'form-button_main'},
+        { buttonType: 'submit', buttonText: 'Сохранить', redirectPage: '/settings', buttonClassName: 'form-button_main'},
         { buttonType: 'button', buttonText: 'Изменить данные' },
         { buttonType: 'button', buttonText: 'Изменить пароль' },
-        { buttonType: 'button', buttonText: 'Выйти', redirectPage: 'login', buttonClassName: 'form-button--red' }
+        { buttonType: 'button', buttonText: 'Выйти', redirectPage: '/', buttonClassName: 'form-button--red' }
     ]
 }

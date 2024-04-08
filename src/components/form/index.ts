@@ -2,17 +2,21 @@ import './form.scss';
 import FormTemplate from './form.hbs?raw';
 import Block from '../../classes/Block.ts';
 import fieldValidation from '../../functions/fieldValidation.ts';
-import { navigate } from '../../router/router.ts';
+import Router from '../../classes/Router.ts';
 import prepareFields from './functions/prepareFields.ts';
 import prepareButtons from './functions/prepareButtons.ts';
+import { fieldSets, buttonsSets } from '../../components/form/elementsProps'; 
+
 export default class Form extends Block {
     constructor(
             props: typeof Block.prototype.props, 
-            fieldsProps?: Record<string, string>[], 
-            buttonsProps?: Record<string, string>[]
+            formType?: string
             ) 
         {
-        
+
+        const fieldsProps = formType? fieldSets[formType] : undefined;
+        const buttonsProps = formType? buttonsSets[formType] : undefined;
+
         fieldsProps ? props.fields = prepareFields(fieldsProps) : undefined;
         buttonsProps ? props.buttons = prepareButtons(buttonsProps) : undefined;
         
@@ -21,7 +25,7 @@ export default class Form extends Block {
             tagName: 'form'
         }
         const events = {
-            submit: (event: Event)=> {
+            submit: async (event: Event)=> {
                 event.preventDefault();
                 const formIsValid = this.validate();
                 if (formIsValid) {
@@ -33,19 +37,29 @@ export default class Form extends Block {
                         const inputElem = imputFieldInput._element as HTMLInputElement;
                         resultFormObj[inputElem.name] = inputElem.value;
                     });
-                    console.log(resultFormObj);
-                    const submitButton = (<Record<string, Block>[]>this.children.buttons).find(item => {
-                        const key = Object.keys(item)[0];
-                        const elem = item[key] as Block;
-                        return elem.props.buttonType && elem.props.buttonType === 'submit';
-                    })
-                    if (submitButton) {
-                        const key = Object.keys(submitButton)[0];
-                        const elem = submitButton[key] as Block;
-                        const redirectPage = elem.props.redirectPage as string;
-                        if (redirectPage) {
-                            navigate(redirectPage);
+                    try {
+                        await this.apiRequest(resultFormObj);
+                        
+                        const submitButton = (<Record<string, Block>[]>this.children.buttons).find(item => {
+                            const key = Object.keys(item)[0];
+                            const elem = item[key] as Block;
+                            return elem.props.buttonType && elem.props.buttonType === 'submit';
+                        })
+
+                        if (submitButton) {
+                            const key = Object.keys(submitButton)[0];
+                            const elem = submitButton[key] as Block;
+                            const redirectPage = elem.props.redirectPage as string;
+                            if (redirectPage) {
+                                const router = new Router();
+                                router.go(redirectPage);
+                            }
                         }
+                        
+                    } catch(err) {
+                        this.setProps({
+                            errorText: (<Error>err).message
+                        })
                     }
                 }
                 return false;
