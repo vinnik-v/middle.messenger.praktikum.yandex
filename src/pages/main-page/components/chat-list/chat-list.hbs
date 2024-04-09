@@ -1,6 +1,10 @@
 <div class="chat-list__content">
     {{{ chatListHeader }}}
     <ul class="chat-list__contacts">
-        {{{ contacts }}}
+        {{#if chats}}
+            {{{ chats }}}
+        {{else}}
+        <p class="empty-chats-text">У вас пока нет чатов</p>
+        {{/if}}
     </ul>
 </div>

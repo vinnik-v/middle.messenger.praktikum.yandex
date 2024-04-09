@@ -103,7 +103,7 @@ export default class Block {
 
         const { children } = this._getChildren(this.props);
 
-        this.children = children;
+        this.children = {...this.children, ...children};
 
         this.componentDidUpdate(oldProps, nextProps);
     };

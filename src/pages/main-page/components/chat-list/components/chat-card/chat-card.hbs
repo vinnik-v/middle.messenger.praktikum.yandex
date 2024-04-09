@@ -1,0 +1,36 @@
+<div class="avatar">
+    {{#if avatar}}
+    <div>avatar</div>
+    {{else}}
+    {{{ ChatAvatar }}}
+    {{/if}}
+</div>
+<div class="chat-card__content">
+    <div class="chat-card__content-header">
+        <h2 class="chat-card__contact-name">
+            {{ title }}
+        </h2>
+        <time class="last-message-date">
+            {{ lastMessageTime }}
+        </time>
+    </div>
+    <div class="chat-card__content-body">
+        <p class="chat-card__last-message">
+            {{#if lastMessageFromMe}}
+            <span class="message-from-me">Вы: </span>
+            {{/if}}
+            {{#if last_message}}
+            {{ last_message }}
+            {{else}}
+            Сообщений пока нет...
+            {{/if}}
+        </p>
+        {{#if unread_count}}
+        <div class="unread-messages-count">
+            <div class="counter-wrapper">
+                {{ unread_count }}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

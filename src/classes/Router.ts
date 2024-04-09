@@ -6,6 +6,7 @@ import ErrorPage from '../pages/error-page';
 import NotFoundPage from '../pages/not-found-page';
 import ProfilePage from '../pages/profile-page';
 import checkUserLogged from "../functions/checkUserLogged";
+import store, { StoreEvents } from "./Store";
 
 type TBlock = typeof LoginPage | typeof RegisterPage | typeof MainPage | typeof ErrorPage | typeof NotFoundPage | typeof ProfilePage
 
@@ -146,7 +147,14 @@ export async function routerInit() {
         .start();
     
     try {
-        await checkUserLogged();
+        
+        const userResp = await checkUserLogged();
+        
+        try {
+            const currentUser = JSON.parse(userResp.response);
+            store.set('currentUser', currentUser, StoreEvents.UserLogged);
+        } catch {}
+
         if (["/", "/sign-up"].includes(pathname)) {
             pathname = "/messenger";
         }

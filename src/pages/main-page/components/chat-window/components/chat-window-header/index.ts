@@ -1,7 +1,7 @@
 import './chat-window-header.scss';
 import ChatWindowHeaderTemplate from './chat-window-header.hbs?raw';
 import Block from '../../../../../../classes/Block';
-import ContactAvatar from '../../../../../../components/contact-avatar';
+import ChatAvatar from '../../../../../../components/contact-avatar';
 import Dropdown from '../../../../../../components/dropdown';
 import DropDownContent from '../../../../../../components/dropdown/components/dropdown-content';
 
@@ -24,7 +24,7 @@ export default class ChatWindowHeader extends Block {
       headerButton
     }
     const children = {
-      contactAvatar: new ContactAvatar({ settings: { withInternalID: true } }),
+      chatAvatar: new ChatAvatar({ settings: { withInternalID: true } }),
       dropdown: new Dropdown({
         settings: { withInternalID: true },
         elemProps: [{ name: 'style', value: 'top: 120%; right: 10px;' }, { name: 'id', value: 'chat-window-header-dropdown' }],
