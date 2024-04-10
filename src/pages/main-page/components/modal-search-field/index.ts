@@ -8,7 +8,7 @@ export default class ModalSearchField extends FormInputField {
     constructor(props: typeof FormInputField.prototype.props) {
         const propTemplate = Template as string;
         const tagName = {
-            tagName: 'div'
+            tagName: 'li'
         }
         const className = {
             className: 'form-input-field'
@@ -18,6 +18,7 @@ export default class ModalSearchField extends FormInputField {
             { name: 'id', value: 'login' }, 
             { name: 'name', value: 'login' },
             { name: 'type', value: 'text' },
+            { name: 'placeholder', value: 'Логин' },
         ]
 
         const input = new InputElem({

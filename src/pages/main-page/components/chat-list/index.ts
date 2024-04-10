@@ -5,6 +5,8 @@ import ChatListHeader from './components/chat-list-header';
 import ChatCard from './components/chat-card';
 import store, { StoreEvents } from '../../../../classes/Store';
 import { IChatItem } from '../../../../types/types';
+import Button from '../../../../components/button';
+import dropdownClickListener from '../../../../functions/dropdownClickListener';
 
 export default class ChatList extends Block {
   constructor(props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
@@ -20,6 +22,22 @@ export default class ChatList extends Block {
 
     const children = {
       chatListHeader: new ChatListHeader({ settings: { withInternalID: true } }),
+      button: new Button('{{ buttonText }}',{ 
+        elemProps: [{ name: 'id', value: 'add-chat-button' }],
+        classList: ['form-button', 'form-button_main'],
+        buttonText: 'Создать чат',
+        settings: { withInternalID: true },
+        events: {
+          click: (e) => {
+            e.preventDefault();
+            const dropdown = document.getElementById('add-chat-modal');
+            if (dropdown) {
+              if (dropdown.classList.contains('display-none')) dropdown.classList.remove('display-none');
+              else dropdown.classList.add('display-none');
+            }
+          }
+        } 
+      })
     } as Record<string, Block>
 
 

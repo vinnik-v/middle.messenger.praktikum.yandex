@@ -9,6 +9,8 @@ import Form from '../../components/form';
 import GetChats from './main-page-api/GetChats';
 import store, { StoreEvents } from '../../classes/Store';
 import ModalSearchField from './components/modal-search-field';
+import AddChatForm from './components/add-chat-form';
+import AddUserForm from './components/add-user-form';
 
 export default class MainPage extends Block {
   constructor(props: typeof Block.prototype.props) {
@@ -23,7 +25,7 @@ export default class MainPage extends Block {
     super(template, { ...tagName, ...classList, ...props });
 
     this.apiRequest = async () => {
-      console.log('asd');
+      
       const chatsRequest = new GetChats();
       try {
         const result = await chatsRequest.request();
@@ -37,8 +39,8 @@ export default class MainPage extends Block {
 
         const chats = data && Array.isArray(data) ? data : [];
         store.set('chats', chats, StoreEvents.ChatsUpdated);
-      } catch (err) {
-        console.log(err);
+      } catch {
+        //
       }
     }
 
@@ -49,18 +51,15 @@ export default class MainPage extends Block {
         addUserModal: new Modal({
           settings: { withInternalID: true },
           elemProps: [{ name: 'id', value: 'add-user-modal' }],
-          modalContent: new ModalContent('<div>{{{ form }}}</div><div>{{{ searchField }}}</div>', {
+          modalContent: new ModalContent('{{{ form }}}', {
             settings: { withInternalID: true },
-            form: new Form({
+            form: new AddUserForm({
               classList: ['modal__form'],
               formTitle: 'Добавить пользователя',
               settings: { withInternalID: true }
             },
               'addUser'
-            ),
-            searchField: new ModalSearchField({
-              settings: { withInternalID: true },
-            })
+            )
           }) as Block
         }),
         deleteUserModal: new Modal({
@@ -76,7 +75,21 @@ export default class MainPage extends Block {
               'deleteUser'
             )
           }) as Block
-        })
+        }),
+        addChatModal: new Modal({
+          settings: { withInternalID: true },
+          elemProps: [{ name: 'id', value: 'add-chat-modal' }],
+          modalContent: new ModalContent('{{{ form }}}', {
+            settings: { withInternalID: true },
+            form: new AddChatForm({
+              classList: ['modal__form'],
+              formTitle: 'Создать чат',
+              settings: { withInternalID: true }
+            },
+              'addChat'
+            )
+          }) as Block
+        }),
       } as Record<string, Block>
       this.setProps({
         dataLoaded: true, ...children

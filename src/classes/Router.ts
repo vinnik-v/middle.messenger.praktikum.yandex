@@ -147,7 +147,6 @@ export async function routerInit() {
         .start();
     
     try {
-        
         const userResp = await checkUserLogged();
         
         try {
@@ -163,6 +162,5 @@ export async function routerInit() {
     } catch {
         pathname = "/";
     }
-    
     router.go(pathname);
 }

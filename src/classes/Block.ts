@@ -255,6 +255,7 @@ export default class Block {
 
     show() {
         this._render();
+        this.apiRequest();
     }
     hide() {
         //

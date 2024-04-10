@@ -1,7 +1,6 @@
 import './login-page.scss';
 import LoginPageTemplate from './login-page.hbs?raw';
 import Block from '../../classes/Block';
-// import Form from '../../components/form';
 import LoginPageForm from './login-page-form';
 
 export default class LoginPage extends Block {

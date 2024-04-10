@@ -40,6 +40,9 @@ export const fieldSets: Record<string, Record<string, string>[]> = {
     deleteUser: [
         fields.login
     ],
+    addChat: [
+        { fieldName: 'title', fieldLabel: 'Название чата', placeholder: 'Название чата', inputType: 'text' }
+    ],
 }
 
 export const buttonsSets: Record<string, Record<string, string>[]> = {
@@ -52,7 +55,12 @@ export const buttonsSets: Record<string, Record<string, string>[]> = {
         { buttonType: 'button', buttonText: 'Войти', redirectPage: '/' }
     ],
     addUser: [
-        { buttonType: 'submit', buttonText: 'Добавить', redirectPage: '/messenger', buttonClassName: 'form-button_main'}
+        { buttonType: 'submit', buttonText: 'Добавить', redirectPage: '/messenger', buttonClassName: 'form-button_main'},
+        { buttonType: 'button', buttonText: 'Отмена' },
+    ],
+    addChat: [
+        { buttonType: 'submit', buttonText: 'Создать', redirectPage: '/messenger', buttonClassName: 'form-button_main'},
+        { buttonType: 'button', buttonText: 'Отмена' },
     ],
     deleteUser: [
         { buttonType: 'submit', buttonText: 'Удалить', redirectPage: '/messenger', buttonClassName: 'form-button_main'}
