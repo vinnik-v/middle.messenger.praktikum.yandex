@@ -1,0 +1,20 @@
+.form-input-field {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+
+    .form-input-field__name {
+        font-family: Inter-Medium, sans-serif;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 100%;
+        color: var(--form-input-text-color);
+    }
+
+    .form-input-field__error-text {
+        font-size: 10px;
+        color: var(--form-input-text-color--error);
+    }
+}

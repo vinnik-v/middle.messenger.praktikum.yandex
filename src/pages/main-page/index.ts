@@ -8,6 +8,7 @@ import ModalContent from '../../components/modal/components/modal-content';
 import Form from '../../components/form';
 import GetChats from './main-page-api/GetChats';
 import store, { StoreEvents } from '../../classes/Store';
+import ModalSearchField from './components/modal-search-field';
 
 export default class MainPage extends Block {
   constructor(props: typeof Block.prototype.props) {
@@ -22,6 +23,7 @@ export default class MainPage extends Block {
     super(template, { ...tagName, ...classList, ...props });
 
     this.apiRequest = async () => {
+      console.log('asd');
       const chatsRequest = new GetChats();
       try {
         const result = await chatsRequest.request();
@@ -36,7 +38,7 @@ export default class MainPage extends Block {
         const chats = data && Array.isArray(data) ? data : [];
         store.set('chats', chats, StoreEvents.ChatsUpdated);
       } catch (err) {
-        alert(err);
+        console.log(err);
       }
     }
 
@@ -47,7 +49,7 @@ export default class MainPage extends Block {
         addUserModal: new Modal({
           settings: { withInternalID: true },
           elemProps: [{ name: 'id', value: 'add-user-modal' }],
-          modalContent: new ModalContent('{{{ form }}}', {
+          modalContent: new ModalContent('<div>{{{ form }}}</div><div>{{{ searchField }}}</div>', {
             settings: { withInternalID: true },
             form: new Form({
               classList: ['modal__form'],
@@ -55,7 +57,10 @@ export default class MainPage extends Block {
               settings: { withInternalID: true }
             },
               'addUser'
-            )
+            ),
+            searchField: new ModalSearchField({
+              settings: { withInternalID: true },
+            })
           }) as Block
         }),
         deleteUserModal: new Modal({
