@@ -20,8 +20,12 @@ export default class ChatSession {
             try {
                 const tokenObj = JSON.parse(requestResult.response);
                 tokenObj.token ? this._chatToken = tokenObj.token : undefined;
-            } catch { }
-        } catch { }
+            } catch {
+                //
+             }
+        } catch { 
+            //
+        }
     }
 
     _startSession() {
@@ -51,7 +55,7 @@ export default class ChatSession {
         });
 
         socket.addEventListener('error', event => {
-            console.log('Ошибка', event.message);
+            console.log('Ошибка', event);
         });
     }
 }

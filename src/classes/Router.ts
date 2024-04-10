@@ -153,7 +153,9 @@ export async function routerInit() {
         try {
             const currentUser = JSON.parse(userResp.response);
             store.set('currentUser', currentUser, StoreEvents.UserLogged);
-        } catch {}
+        } catch {
+            //
+        }
 
         if (["/", "/sign-up"].includes(pathname)) {
             pathname = "/messenger";

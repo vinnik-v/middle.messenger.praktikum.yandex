@@ -25,6 +25,9 @@ class Store extends EventBus {
         this._setState(key, value);
 
         // метод EventBus
+        if (!this.listeners[StoreEvents[valueType]]) {
+            this.listeners[StoreEvents[valueType]] = [];
+        }
         this.emit(StoreEvents[valueType]);
     }
 
@@ -33,7 +36,11 @@ class Store extends EventBus {
             if (item.id === chatId) {
                 item[key] = value
             }
-        })
+        });
+        if (!this.listeners[StoreEvents.ChatUpdated]) {
+            this.listeners[StoreEvents.ChatUpdated] = [];
+        }
+        this.emit(StoreEvents.ChatUpdated);
     }
 
     public getState(key?: string) {

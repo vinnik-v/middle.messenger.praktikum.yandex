@@ -4,7 +4,7 @@ import { BaseAPI } from "../../../classes/BaseApi";
 const request = new ApiRequest('/api/v2/chats');
 
 export default class GetChatUsers extends BaseAPI {
-    chatId: String = '';
+    chatId: string = '';
     constructor(chatId: number) {
         super();
         this.chatId = String(chatId);

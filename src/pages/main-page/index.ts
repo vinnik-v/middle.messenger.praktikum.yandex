@@ -29,7 +29,9 @@ export default class MainPage extends Block {
 
         try {
           data = JSON.parse(result.response);
-        } catch {}
+        } catch {
+          //
+        }
 
         const chats = data && Array.isArray(data) ? data : [];
         store.set('chats', chats, StoreEvents.ChatsUpdated);

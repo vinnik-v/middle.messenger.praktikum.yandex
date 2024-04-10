@@ -1,4 +1,4 @@
-<div class="chat-window__contact-info">
+<div class="chat-window__info">
     <div class="avatar">
         {{#if avatar}}
         <div>avatar</div>
@@ -6,9 +6,12 @@
         {{{ chatAvatar }}}
         {{/if}}
     </div>
-    <h1 class="chat-window__contact-name">
-        {{title}}
-    </h1>
+    <div class="chat-window__title">
+        <h1 class="chat-window__name">
+            {{title}}
+        </h1>
+        <div class="chat-window__members-count">{{membersCount}} {{membersCountText}}</div>
+    </div>
 </div>
 <button class="chat-window__control button" id="chat-window-header-button">
     <div>{{{ headerButton }}}</div>
