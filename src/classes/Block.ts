@@ -7,6 +7,7 @@ type TFunc = (event: Event) => void;
 type TProps = { [key: string]: Block } | Record<string, number | string | string[] | File | boolean | null |
     Record<string, TFunc> |
     Record<string, boolean> |
+    Record<string, string>[] |
     Record<string, Block>[] |
     Record<string, Record<string, Block>[]> |
     { name: string, value: string }[]>;
