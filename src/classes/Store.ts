@@ -5,7 +5,9 @@ export enum StoreEvents {
     ChatsUpdated = 'ChatsUpdated',
     ChatUpdated = 'ChatUpdated',
     ChatSelected = 'ChatSelected',
-    UserLogged = 'UserLogged'
+    ChatUsersChanged = 'ChatUsersChanged',
+    ChatDeleted = 'ChatDeleted',
+    UserLogged = 'UserLogged',
 }
 
 interface IState {

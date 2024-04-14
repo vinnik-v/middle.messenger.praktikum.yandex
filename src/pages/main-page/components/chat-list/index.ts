@@ -6,7 +6,6 @@ import ChatCard from './components/chat-card';
 import store, { StoreEvents } from '../../../../classes/Store';
 import { IChatItem } from '../../../../types/types';
 import Button from '../../../../components/button';
-// import dropdownClickListener from '../../../../functions/dropdownClickListener';
 
 export default class ChatList extends Block {
   constructor(props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {

@@ -1,10 +1,9 @@
-import ApiRequest from "../../../classes/ApiRequest";
-import { BaseAPI } from "../../../classes/BaseApi";
+import ApiRequest from "../../../../../../../classes/ApiRequest";
+import { BaseAPI } from "../../../../../../../classes/BaseApi";
 
 const request = new ApiRequest('/api/v2/user');
 
-export default class SearchUser extends BaseAPI {
-
+export default class ChangePassword extends BaseAPI {
     constructor(data: Record<string, string>) {
         super(data);
     }
@@ -14,6 +13,6 @@ export default class SearchUser extends BaseAPI {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
         }
-        return request.post('/search', userOptions);
+        return request.put('/password', userOptions);
     }
 }

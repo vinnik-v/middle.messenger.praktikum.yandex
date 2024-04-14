@@ -5,7 +5,9 @@ import './button.scss';
 export default class Button extends Block {
     constructor(template: string, props: typeof Block.prototype.props) {
         props.tagName ? props.tagName : props.tagName = 'button';
-        const classList = ['button'];
+        const classList = props.classList? props.classList as string[] : ['button'];
+        props.classList = [...classList];
+        
 
         if (!props.events) {
             const events: Record<string, ((event: Event) => unknown)> = {};

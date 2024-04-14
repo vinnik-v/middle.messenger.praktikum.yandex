@@ -1,0 +1,15 @@
+{{#if formTitle}}
+<h2 class="form__title">
+    {{ formTitle }}
+</h2>
+{{/if}}
+<ul class="user-list">
+    {{#if noUsers}}
+    <li class="no-result-text">В чате нет пользователей</div>
+    {{else}}
+    {{{chatUsers}}}
+    {{/if}}
+</ul>
+<div class="form__buttons" id="form-buttons">
+    {{{ buttons }}}
+</div>

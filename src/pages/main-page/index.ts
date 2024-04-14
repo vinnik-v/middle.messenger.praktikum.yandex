@@ -5,12 +5,12 @@ import ChatList from './components/chat-list';
 import ChatWindow from './components/chat-window';
 import Modal from '../../components/modal';
 import ModalContent from '../../components/modal/components/modal-content';
-import Form from '../../components/form';
 import GetChats from './main-page-api/GetChats';
 import store, { StoreEvents } from '../../classes/Store';
-import ModalSearchField from './components/modal-search-field';
 import AddChatForm from './components/add-chat-form';
 import AddUserForm from './components/add-user-form';
+import DeleteUserForm from './components/delete-user-form';
+import DeleteChatForm from './components/delete-chat-form';
 
 export default class MainPage extends Block {
   constructor(props: typeof Block.prototype.props) {
@@ -25,7 +25,7 @@ export default class MainPage extends Block {
     super(template, { ...tagName, ...classList, ...props });
 
     this.apiRequest = async () => {
-      
+
       const chatsRequest = new GetChats();
       try {
         const result = await chatsRequest.request();
@@ -44,6 +44,10 @@ export default class MainPage extends Block {
       }
     }
 
+    store.on(StoreEvents.ChatDeleted, () => {
+      this.apiRequest();
+    })
+
     store.on(StoreEvents.ChatsUpdated, () => {
       const children = {
         chatList: new ChatList({ settings: { withInternalID: true } }),
@@ -57,8 +61,7 @@ export default class MainPage extends Block {
               classList: ['modal__form'],
               formTitle: 'Добавить пользователя',
               settings: { withInternalID: true }
-            },
-              'addUser'
+            }
             )
           }) as Block
         }),
@@ -67,12 +70,11 @@ export default class MainPage extends Block {
           elemProps: [{ name: 'id', value: 'delete-user-modal' }],
           modalContent: new ModalContent('{{{ form }}}', {
             settings: { withInternalID: true },
-            form: new Form({
+            form: new DeleteUserForm({
               classList: ['modal__form'],
               formTitle: 'Удалить пользователя',
               settings: { withInternalID: true }
-            },
-              'deleteUser'
+            }
             )
           }) as Block
         }),
@@ -90,7 +92,20 @@ export default class MainPage extends Block {
             )
           }) as Block
         }),
-      } as Record<string, Block>
+        chatDeleteConfirmModal: new Modal({
+          settings: { withInternalID: true },
+          elemProps: [{ name: 'id', value: 'delete-chat-modal' }],
+          modalContent: new ModalContent('{{{ form }}}', {
+            settings: { withInternalID: true },
+            form: new DeleteChatForm({
+              classList: ['modal__form'],
+              formTitle: 'Подтвердите удаление чата',
+              settings: { withInternalID: true }
+            })
+          }) as Block
+        }),
+      } as Record<string, Block>;
+
       this.setProps({
         dataLoaded: true, ...children
       })
@@ -100,9 +115,3 @@ export default class MainPage extends Block {
 
   }
 }
-
-// function hocFunction(Component: typeof Block) {
-//   return 
-// } 
-
-// export default hocFunction(Block);

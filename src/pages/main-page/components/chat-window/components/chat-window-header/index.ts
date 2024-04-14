@@ -9,6 +9,7 @@ import headerButton from './assets/icons/header-button-icon.svg?raw';
 import addButtonIcon from './components/dropdown-content/assets/icons/add-button.svg?raw';
 import deleteButtonIcon from './components/dropdown-content/assets/icons/delete-button.svg?raw';
 import store, { StoreEvents } from '../../../../../../classes/Store';
+import Button from '../../../../../../components/button';
 import * as types from '../../../../../../types/types';
 
 export default class ChatWindowHeader extends Block {
@@ -23,6 +24,14 @@ export default class ChatWindowHeader extends Block {
     const icons = {
       headerButton
     }
+
+    const deleteChatButton = new Button('',{
+      buttonText: 'Удалить чат',
+      classList: ['button', 'delete-chat-button', 'list-item__button'],
+      elemProps: [{ name: 'id', value: 'delete-chat-button' }],
+      settings: { withInternalID: true },
+    }) as Block
+
     const children = {
       chatAvatar: new ChatAvatar({ settings: { withInternalID: true } }),
       dropdown: new Dropdown({
@@ -31,7 +40,8 @@ export default class ChatWindowHeader extends Block {
         dropdownContent: new DropDownContent(DropDownContentTemplate, {
           settings: { withInternalID: true },
           addButtonIcon,
-          deleteButtonIcon
+          deleteButtonIcon,
+          deleteChatButton: [{deleteChatButton}]
         }) as Block
       }),
       

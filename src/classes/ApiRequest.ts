@@ -58,10 +58,10 @@ export default class ApiRequest {
     return this.request(path, METHODS.POST, options);
   };
   put: HTTPMethod = (path, options) => {
-    return this.request(path, METHODS.GET, options);
+    return this.request(path, METHODS.PUT, options);
   };
   delete: HTTPMethod = (path, options) => {
-    return this.request(path, METHODS.GET, options);
+    return this.request(path, METHODS.DELETE, options);
   };
 
   request: Request = (path, method, options, timeout = 5000) => {

@@ -3,11 +3,11 @@ import { BaseAPI } from "../../../classes/BaseApi";
 
 const request = new ApiRequest('/api/v2/chats');
 
-export default class AddUser extends BaseAPI {
+export default class DeleteUser extends BaseAPI {
     data: Record<string, number[] | number> | null = null;
-    constructor(data: unknown) {
+    constructor(data: Record<string, number[] | number>) {
         super();
-        this.data = data as Record<string, number[] | number>;
+        this.data = data;
     }
     request(): Promise<XMLHttpRequest> {
         const userOptions = {
@@ -15,6 +15,6 @@ export default class AddUser extends BaseAPI {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
         }
-        return request.put('/users', userOptions);
+        return request.delete('/users', userOptions);
     }
 }

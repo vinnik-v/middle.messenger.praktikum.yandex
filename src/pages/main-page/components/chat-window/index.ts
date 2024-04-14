@@ -22,13 +22,17 @@ export default class ChatWindow extends Block {
     super(template, { chatSelected: false, ...tagName, ...className, ...props });
 
     store.on(StoreEvents.ChatSelected, async () => {
-      
+      getChatUsers();
+    })
+
+    store.on(StoreEvents.ChatUsersChanged, async () => {
+      getChatUsers();
+    })
+
+    const getChatUsers = async () => {
       const chatId = store.getState('selectedChatId') as number;
       const chats = store.getState('chats') as types.IChatItem[]
       const { title, avatar } = chats.filter(item => item.id === chatId)[0];
-
-      // const currentUser = store.getState('currentUser') as types.IUser;
-      // const chatSession = new ChatSession({ chatId, currentUserId: currentUser.id });
 
       const chatUsersReq = new GetChatUsers(chatId);
       let chatUsers = [];
@@ -50,7 +54,7 @@ export default class ChatWindow extends Block {
       this.setProps({
         ...children, chatSelected: true
       })
-    })
+    }
 
   }
 }

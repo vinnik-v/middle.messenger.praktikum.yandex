@@ -4,11 +4,12 @@ import uuidv4 from '../functions/uuidv4';
 
 type TFunc = (event: Event) => void;
 
-type TProps = { [key: string]: Block } | Record<string, number | string | string[] | File | boolean | null |
+type TProps = { [key: string]: Block } | Record<string, number | string | string[] | number[] | File | boolean | null |
     Record<string, TFunc> |
     Record<string, boolean> |
     Record<string, string>[] |
     Record<string, Block>[] |
+    Record<string, string | number> |
     Record<string, Record<string, Block>[]> |
     { name: string, value: string }[]>;
 
@@ -261,7 +262,7 @@ export default class Block {
     hide() {
         //
     }
-    apiRequest(data?: Record<string, string>) {
+    apiRequest(data?: unknown) {
         data
     }
 }

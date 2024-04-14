@@ -1,4 +1,4 @@
-const fields = {
+export const fields = {
     login: { fieldName: 'login', fieldLabel: 'Логин', placeholder: 'Логин', inputType: 'text', value: 'ivanivanov' },
     password: { fieldName: 'password', fieldLabel: 'Пароль', placeholder: 'Пароль', inputType: 'password', value: 'ivanivanov' },
     email: { fieldName: 'email', fieldLabel: 'Почта', placeholder: 'Почта', inputType: 'email', value: 'pochta@yandex.ru' },
@@ -6,6 +6,9 @@ const fields = {
     second_name: { fieldName: 'second_name', fieldLabel: 'Фамилия', placeholder: 'Фамилия', inputType: 'text', value: 'Иванов' },
     phone: { fieldName: 'phone', fieldLabel: 'Телефон', placeholder: '+7 (000) 000-00-00', inputType: 'tel', value: '+7 (909) 967 30 30' },
     password_again: { fieldName: 'password-again', fieldLabel: 'Пароль еще раз', placeholder: 'Пароль', inputType: 'password', value: 'ivanivanov' },
+    new_password: { fieldName: 'newPassword', fieldLabel: 'Новый пароль', placeholder: 'Новый пароль', inputType: 'password' },
+    new_password_again: { fieldName: 'newPasswordAgain', fieldLabel: 'Новый пароль еще раз', placeholder: 'Новый пароль еще раз', inputType: 'password' },
+    old_password: { fieldName: 'oldPassword', fieldLabel: 'Старый пароль', placeholder: 'Старый пароль', inputType: 'password' },
     display_name: { fieldName: 'display_name', fieldLabel: 'Имя в чате', placeholder: 'Имя в чате', inputType: 'text', value: 'Иван' },
 }
 export const fieldSets: Record<string, Record<string, string>[]> = {
@@ -31,8 +34,9 @@ export const fieldSets: Record<string, Record<string, string>[]> = {
         fields.phone,
     ],
     changePassword: [
-        fields.password,
-        fields.password_again,
+        fields.old_password,
+        fields.new_password,
+        fields.new_password_again,
     ],
     addUser: [
         fields.login

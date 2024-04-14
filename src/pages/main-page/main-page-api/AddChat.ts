@@ -10,7 +10,7 @@ export default class AddChat extends BaseAPI {
     }
     request(): Promise<XMLHttpRequest> {
         const userOptions = {
-            data: this._data ? this._data : null,
+            data: this._data ? this._data as Record<string, string> : null,
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
         }
