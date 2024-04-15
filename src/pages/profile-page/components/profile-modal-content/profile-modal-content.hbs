@@ -3,6 +3,13 @@
     {{{ modalTitle }}}
 </h1>
 {{/if}}
-<label for="avatar" id="file-label">Выберите файл на компьютере</label>
-<input type="file" id="avatar" name="avatar" style="display:none" />
-{{{ button }}}
+<label for="avatar" id="file-input-label">{{labelText}}</label>
+{{{input}}}
+{{#if errorText}}
+<p class="form-error-text">{{errorText}}</p>
+<br>
+{{/if}}
+<div class="modal__buttons">
+    {{{ buttons }}}
+</div>
+

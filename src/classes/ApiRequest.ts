@@ -30,7 +30,7 @@ function queryStringify(data: Record<string, unknown>) {
 
 type Options = {
   timeout?: number,
-  data: Record<string, unknown> | null,
+  data: Record<string, unknown> | FormData | null,
   headers: Record<string, string>,
   credentials?: string
 }
@@ -50,7 +50,7 @@ export default class ApiRequest {
   get: HTTPMethod = (path, options) => {
     const { data } = options;
 
-    const reqData = data ? queryStringify(data) : '';
+    const reqData = data ? queryStringify(data as Record<string, unknown>) : '';
 
     return this.request(path + reqData, METHODS.GET, options);
   };
@@ -72,7 +72,9 @@ export default class ApiRequest {
       xhr.open(method, this._apiUrl + path);
       const headersEntries = Object.entries(headers);
       headersEntries.forEach(([key, value]) => {
-        xhr.setRequestHeader(key, value);
+        if (value !== 'multipart/form-data') {
+          xhr.setRequestHeader(key, value);
+        }
       })
 
       credentials && credentials === 'include' ? xhr.withCredentials = true : undefined;
@@ -95,7 +97,9 @@ export default class ApiRequest {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        const headersEntries = Object.values(headers);
+        const outData = headersEntries.includes('multipart/form-data') ? data as FormData : JSON.stringify(data)
+        xhr.send(outData);
       }
     });
   };

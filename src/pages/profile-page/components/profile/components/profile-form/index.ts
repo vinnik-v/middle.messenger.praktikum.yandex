@@ -24,10 +24,11 @@ export default class ProfileForm extends Form {
             createDefChildren();
         })
 
-        const createDefFields = (userData: Record<string, string>) => {
+        const createDefFields = (inpUserData: Record<string, string>) => {
             const fields: Record<string, Block>[] = [];
 
-            if (userData) {
+            if (inpUserData) {
+                const userData = {...inpUserData};
                 delete userData.avatar;
                 delete userData.id;
 
