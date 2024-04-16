@@ -120,6 +120,6 @@ export default class MessageBox extends Block {
       const scrollingContainer = document.getElementById("messages");
       scrollingContainer ? scrollingContainer.scrollTop = scrollingContainer.scrollHeight : undefined;
       return null;
-    };
+    }
   }
 }
