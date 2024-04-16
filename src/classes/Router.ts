@@ -160,7 +160,7 @@ export async function routerInit() {
             pathname = "/messenger";
         }
     } catch {
-        pathname = "/";
+        pathname = pathname === "/sign-up"? pathname : "/";
     }
     router.go(pathname);
 }
