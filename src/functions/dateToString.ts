@@ -11,7 +11,7 @@ export default function dateToString(inpDate: string | Date, dateType?: string) 
     const date = new Date(inpDate);
 
     const day = dateElemNormalize(date.getDate());
-    const month = dateElemNormalize(date.getMonth());
+    const month = dateElemNormalize(date.getMonth()+1);
     const year = String(date.getFullYear());
 
     const hours = dateElemNormalize(date.getHours());
