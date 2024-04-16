@@ -18,7 +18,7 @@ export type ILastMessage ={
 }
 
 export interface IChatItem {
-  [key: string]: string | number | ILastMessage | IUser[],
+  [key: string]: string | number | ILastMessage | IUser[] | boolean,
   id: number,
   title: string,
   avatar: string,

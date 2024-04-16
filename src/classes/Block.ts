@@ -74,7 +74,6 @@ export default class Block {
             if (value instanceof Block) {
                 children[key] = value;
             } else if (Array.isArray(value)) {
-                // console.log(value)
                 const blockValue = value.find(item => {
                     const itemEntries = Object.values(item);
                     if (itemEntries[0] instanceof Block) {

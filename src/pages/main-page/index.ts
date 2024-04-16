@@ -44,8 +44,8 @@ export default class MainPage extends Block {
 
         const chats = data && Array.isArray(data) ? data : [];
         store.set('chats', chats, StoreEvents.ChatsUpdated);
-      } catch {
-        //
+      } catch (err) {
+        console.log(err);
       }
     }
 
@@ -54,6 +54,7 @@ export default class MainPage extends Block {
     })
 
     store.on(StoreEvents.ChatsUpdated, () => {
+
       const children = {
         chatList: new ChatList({ settings: { withInternalID: true } }),
         chatWindow: new ChatWindow({ settings: { withInternalID: true } }),
@@ -116,7 +117,6 @@ export default class MainPage extends Block {
       })
     });
 
-    console.log(store.getState());
     const currentUser = store.getState('currentUser');
     if (currentUser) {
       this.apiRequest();
@@ -124,7 +124,6 @@ export default class MainPage extends Block {
     
 
     this.show = function() {
-      console.log('asd');
       this.apiRequest();
       this._render()
     }

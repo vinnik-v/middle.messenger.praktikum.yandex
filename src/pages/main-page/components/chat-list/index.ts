@@ -4,8 +4,9 @@ import Block from '../../../../classes/Block';
 import ChatListHeader from './components/chat-list-header';
 import ChatCard from './components/chat-card';
 import store, { StoreEvents } from '../../../../classes/Store';
-import { IChatItem } from '../../../../types/types';
+import { IChatItem, IUser } from '../../../../types/types';
 import Button from '../../../../components/button';
+import dateToString from '../../../../functions/dateToString';
 
 export default class ChatList extends Block {
   constructor(props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
@@ -46,13 +47,19 @@ export default class ChatList extends Block {
       const chatsData = store.getState('chats') as IChatItem[];
       
       const chats = chatsData.map((item, index) => {
+        const currentUserLogin = (<IUser>store.getState('currentUser')).login;
+        const messageFromMe = item.last_message?.user?.login === currentUserLogin;
+        const lastMessage = item.last_message?.content;
+        const lastMessageTime = item.last_message? dateToString(item.last_message.time, 'date') : null;
         const ChatCardName: string = 'chat_' + (index + 1);
         const value = new ChatCard({
           ...item as Record<string, string | Date | boolean | number>,
           settings: { withInternalID: true },
+          messageFromMe,
+          lastMessage,
+          lastMessageTime,
           events: {
             click() {
-              // const selectedChatId = store.getState('selectedChatId');
               store.set('selectedChatId', item.id, StoreEvents.ChatSelected);
             }
           }

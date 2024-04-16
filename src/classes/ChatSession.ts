@@ -66,7 +66,6 @@ export default class ChatSession extends EventBus {
         this.socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${this.currentUserId}/${this.chatId}/${this._chatToken}`);
 
         this.socket.addEventListener('open', () => {
-            console.log('Соединение установлено');
             this.emit(SessionEvents.Connected);
             this.ping = setInterval(()=> {
                 this.socket ? this.socket.send(JSON.stringify({
