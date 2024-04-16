@@ -31,6 +31,7 @@
     text-align: center;
     color: var(--form-input-text-color--error, #FF2F2F);
 }
+
 .form__input {
     position: relative;
 }
@@ -51,6 +52,7 @@
     background-color: white;
     top: 35px;
 }
+
 .no-result-text {
     color: grey;
 }
@@ -58,10 +60,12 @@
 .form-button_main-disabled {
     cursor: default;
     background-color: rgb(51 105 243 / 26%);
+
     &:hover {
         background-color: rgb(51 105 243 / 26%);
     }
 }
+
 .selected-users {
     display: flex;
     flex-direction: column;

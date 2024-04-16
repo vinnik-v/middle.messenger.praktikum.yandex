@@ -27,13 +27,13 @@
     padding: 4px;
     box-sizing: border-box;
     border-radius: 8px;
-    // box-shadow: var(--modal-box-shadow);
     display: flex;
     flex-direction: column;
     gap: .3rem;
     background-color: white;
     top: 35px;
 }
+
 .no-result-text {
     color: grey;
 }
@@ -41,10 +41,12 @@
 .form-button_main-disabled {
     cursor: default;
     background-color: rgb(51 105 243 / 26%);
+
     &:hover {
         background-color: rgb(51 105 243 / 26%);
     }
 }
+
 .selected-users {
     display: flex;
     flex-direction: column;
