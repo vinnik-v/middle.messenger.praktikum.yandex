@@ -5,6 +5,7 @@ enum SessionEvents {
     Connected = 'Connected',
     MessageIn = 'MessageIn',
     MessageOut = 'MessageOut',
+    DataReceived = 'DataReceived',
 }
 export default class ChatSession extends EventBus {
     chatId: number;
@@ -21,6 +22,7 @@ export default class ChatSession extends EventBus {
         this.listeners[SessionEvents.MessageIn] = [];
         this.listeners[SessionEvents.MessageOut] = [];
         this.listeners[SessionEvents.Connected] = [];
+        this.listeners[SessionEvents.DataReceived] = [];
         this._getChatToken();
     }
 
@@ -43,7 +45,7 @@ export default class ChatSession extends EventBus {
          }
     }
 
-    send(content: unknown) {
+    sendMessage(content: unknown) {
          if (this.socket) {
             this.socket.send(JSON.stringify({
                 content: content,
@@ -52,6 +54,13 @@ export default class ChatSession extends EventBus {
             this.emit(SessionEvents.MessageOut)
          }
     }
+
+    send(data: unknown) {
+        if (this.socket) {
+           this.socket.send(JSON.stringify(data))
+           this.emit(SessionEvents.MessageOut)
+        }
+   }
 
     async _startSession() {
         this.socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${this.currentUserId}/${this.chatId}/${this._chatToken}`);
@@ -74,6 +83,8 @@ export default class ChatSession extends EventBus {
             const data = JSON.parse(event.data);
             if (data.type === 'message') {
                 this.emit(SessionEvents.MessageIn, data);
+            } else if (Array.isArray(data)) {
+                this.emit(SessionEvents.DataReceived, data);
             }
         });
 
