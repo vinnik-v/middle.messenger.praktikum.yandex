@@ -257,10 +257,9 @@ export default class Block {
 
     show() {
         this._render();
-        this.apiRequest();
     }
     hide() {
-        //
+        this._removeEvents();
     }
     apiRequest(data?: unknown) {
         data

@@ -4,7 +4,7 @@ import Block from '../../../../../../classes/Block';
 import ChatAvatar from '../../../../../../components/contact-avatar';
 
 export default class ChatCard extends Block {
-    constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
+    constructor(props: typeof Block.prototype.props) {
         const template = ChatCardTemplate as string;
         const classList = {
             classList: ['chat-card']
@@ -13,8 +13,13 @@ export default class ChatCard extends Block {
             tagName: 'li'
         }
 
+        const avatar = props.avatar as string;
+
         const children = {
-            ChatAvatar: new ChatAvatar({ settings: { withInternalID: true } }),
+            ChatAvatar: new ChatAvatar({ 
+                settings: { withInternalID: true },
+                avatar
+            }),
           } as Record<string, Block>
 
         super(template, {...tagName, ...children, ...classList, ...props});

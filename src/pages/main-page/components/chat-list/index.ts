@@ -52,11 +52,8 @@ export default class ChatList extends Block {
           settings: { withInternalID: true },
           events: {
             click() {
-              const selectedChatId = store.getState('selectedChatId');
-              if (!selectedChatId || selectedChatId !== item.id) {
-                store.set('selectedChatId', item.id, StoreEvents.ChatSelected);
-              }
-              
+              // const selectedChatId = store.getState('selectedChatId');
+              store.set('selectedChatId', item.id, StoreEvents.ChatSelected);
             }
           }
         }) as Block;

@@ -26,6 +26,11 @@ export default class MainPage extends Block {
 
     this.apiRequest = async () => {
 
+      this.children = {};
+      this.setProps({
+        dataLoaded: false 
+      })
+
       const chatsRequest = new GetChats();
       try {
         const result = await chatsRequest.request();
@@ -111,7 +116,18 @@ export default class MainPage extends Block {
       })
     });
 
-    this.apiRequest();
+    console.log(store.getState());
+    const currentUser = store.getState('currentUser');
+    if (currentUser) {
+      this.apiRequest();
+    }
+    
+
+    this.show = function() {
+      console.log('asd');
+      this.apiRequest();
+      this._render()
+    }
 
   }
 }

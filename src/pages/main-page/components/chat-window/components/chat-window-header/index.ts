@@ -25,15 +25,20 @@ export default class ChatWindowHeader extends Block {
       headerButton
     }
 
-    const deleteChatButton = new Button('',{
+    const deleteChatButton = new Button('', {
       buttonText: 'Удалить чат',
       classList: ['button', 'delete-chat-button', 'list-item__button'],
       elemProps: [{ name: 'id', value: 'delete-chat-button' }],
       settings: { withInternalID: true },
     }) as Block
 
+    const avatar = props.avatar as string;
+
     const children = {
-      chatAvatar: new ChatAvatar({ settings: { withInternalID: true } }),
+      chatAvatar: new ChatAvatar({
+        settings: { withInternalID: true },
+        avatar
+      }),
       dropdown: new Dropdown({
         settings: { withInternalID: true },
         elemProps: [{ name: 'style', value: 'top: 120%; right: 10px;' }, { name: 'id', value: 'chat-window-header-dropdown' }],
@@ -41,28 +46,35 @@ export default class ChatWindowHeader extends Block {
           settings: { withInternalID: true },
           addButtonIcon,
           deleteButtonIcon,
-          deleteChatButton: [{deleteChatButton}]
+          deleteChatButton: [{ deleteChatButton }]
         }) as Block
       }),
-      
+
     } as Record<string, Block>
 
     const membersCount = 1;
     const membersCountText = membersCount === 1 ? 'member' : 'members';
 
     super(template, { ...tagName, membersCount, membersCountText, ...children, ...icons, ...className, ...props });
-    
+
     store.on(StoreEvents.ChatUpdated, () => {
+      initData();
+    })
+
+    const initData = () => {
       const chats = store.getState('chats') as types.IChatItem[];
-      if (this.props.chatId) {
+      if (chats && this.props.chatId) {
         const currentChat = chats.filter(item => item.id === this.props.chatId)[0];
         const membersCount = currentChat.users ? currentChat.users.length : 1;
         const membersCountText = membersCount === 1 ? 'member' : 'members';
+
         this.setProps({
           membersCount, membersCountText
         })
       }
-    })
+    }
+
+    initData();
 
   }
 }

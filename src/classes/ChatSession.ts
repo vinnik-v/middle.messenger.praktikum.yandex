@@ -1,15 +1,27 @@
 import ChatTokenRequest from "./ChatTokenRequest";
+import EventBus from "./EventBus";
 
-export default class ChatSession {
+enum SessionEvents {
+    Connected = 'Connected',
+    MessageIn = 'MessageIn',
+    MessageOut = 'MessageOut',
+}
+export default class ChatSession extends EventBus {
     chatId: number;
     _chatToken: string | null = null;
     currentUserId: number;
+    socket: WebSocket | null = null;
+    ping: NodeJS.Timeout | null = null;
     constructor(props: Record<string, number>) {
+        super();
+
         const { chatId, currentUserId } = props;
         this.chatId = chatId;
         this.currentUserId = currentUserId;
+        this.listeners[SessionEvents.MessageIn] = [];
+        this.listeners[SessionEvents.MessageOut] = [];
+        this.listeners[SessionEvents.Connected] = [];
         this._getChatToken();
-        this._startSession();
     }
 
     async _getChatToken() {
@@ -20,41 +32,53 @@ export default class ChatSession {
             try {
                 const tokenObj = JSON.parse(requestResult.response);
                 tokenObj.token ? this._chatToken = tokenObj.token : undefined;
-            } catch {
-                //
+                if (this._chatToken) {
+                    this._startSession();
+                }
+            } catch (err) {
+                console.log(err);
              }
-        } catch { 
-            //
-        }
+        } catch (err) {
+            console.log(err);
+         }
     }
 
-    _startSession() {
-        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${this.currentUserId}/${this.chatId}/${this._chatToken}`);
-
-        socket.addEventListener('open', () => {
-            console.log('Соединение установлено');
-
-            socket.send(JSON.stringify({
-                content: 'Моё первое сообщение миру!',
+    send(content: unknown) {
+         if (this.socket) {
+            this.socket.send(JSON.stringify({
+                content: content,
                 type: 'message',
-            }));
+            }))
+            this.emit(SessionEvents.MessageOut)
+         }
+    }
+
+    async _startSession() {
+        this.socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${this.currentUserId}/${this.chatId}/${this._chatToken}`);
+
+        this.socket.addEventListener('open', () => {
+            console.log('Соединение установлено');
+            this.emit(SessionEvents.Connected);
+            this.ping = setInterval(()=> {
+                this.socket ? this.socket.send(JSON.stringify({
+                    type: "ping",
+                })) : undefined;
+            }, 5000);
         });
 
-        socket.addEventListener('close', event => {
-            if (event.wasClean) {
-                console.log('Соединение закрыто чисто');
-            } else {
-                console.log('Обрыв соединения');
+        this.socket.addEventListener('close', () => {
+            clearInterval(this.ping as NodeJS.Timeout);
+        });
+
+        this.socket.addEventListener('message', event => {
+            const data = JSON.parse(event.data);
+            if (data.type === 'message') {
+                this.emit(SessionEvents.MessageIn, data);
             }
-
-            console.log(`Код: ${event.code} | Причина: ${event.reason}`);
         });
 
-        socket.addEventListener('message', event => {
-            console.log('Получены данные', event.data);
-        });
-
-        socket.addEventListener('error', event => {
+        this.socket.addEventListener('error', event => {
+            clearInterval(this.ping as NodeJS.Timeout);
             console.log('Ошибка', event);
         });
     }

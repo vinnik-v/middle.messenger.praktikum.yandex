@@ -6,8 +6,9 @@ import ChatWindowFooter from './components/chat-window-footer';
 import MessageBox from './components/message-box';
 import store, { StoreEvents } from '../../../../classes/Store';
 import * as types from '../../../../types/types';
-// import ChatSession from '../../../../classes/ChatSession';
+import ChatSession from '../../../../classes/ChatSession';
 import GetChatUsers from '../../main-page-api/GetChatUsers';
+import { IUser } from '../../../../types/types';
 
 export default class ChatWindow extends Block {
   constructor(props: typeof Block.prototype.props) {
@@ -23,6 +24,20 @@ export default class ChatWindow extends Block {
 
     store.on(StoreEvents.ChatSelected, async () => {
       getChatUsers();
+      const currentUser = store.getState('currentUser') as IUser;
+      const selectedChatId = store.getState('selectedChatId') as number;
+
+      const chatSessionKey  = 'chat_session_'+selectedChatId
+
+      let chatSession = store.getChatSession(chatSessionKey);
+
+      if (!chatSession) {
+        chatSession = new ChatSession({
+          currentUserId: currentUser.id,
+          chatId: selectedChatId
+        })
+        store.setChatSession(chatSessionKey, chatSession);
+      }
     })
 
     store.on(StoreEvents.ChatUsersChanged, async () => {
@@ -42,7 +57,6 @@ export default class ChatWindow extends Block {
       } catch {
         //
       }
-
       store.updateChatData(chatId, 'users', chatUsers);
 
       const children = {

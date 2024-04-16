@@ -1,7 +1,7 @@
 import './index.scss';
 import dropdownClickListener from './functions/dropdownClickListener';
-import changeProfileDataHandle from './functions/changeProfileDataHandle';
-import changePasswordHandle from './functions/changePasswordHandle';
+// import changeProfileDataHandle from './functions/changeProfileDataHandle';
+// import changePasswordHandle from './functions/changePasswordHandle';
 import { routerInit } from './classes/Router';
 
 document.addEventListener('DOMContentLoaded', () => {

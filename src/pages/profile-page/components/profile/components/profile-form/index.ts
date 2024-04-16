@@ -17,11 +17,7 @@ export default class ProfileForm extends Form {
     constructor(props: typeof Block.prototype.props) {
 
         store.on('UserLogged', () => {
-            const userData = store.getState('currentUser') as Record<string, string>;
-            this.setProps({
-                userData
-            })
-            createDefChildren();
+            initData();
         })
 
         const createDefFields = (inpUserData: Record<string, string>) => {
@@ -214,6 +210,9 @@ export default class ProfileForm extends Form {
 
                         try {
                             await logoutRequest.request();
+
+                            store.clearState();
+
                             const router = new Router();
                             router.go("/");
 
@@ -227,11 +226,6 @@ export default class ProfileForm extends Form {
             buttons.push({ changeDataButton }, { changePasswordButton }, { logoutButton });
             return buttons;
         }
-
-        // const children = {
-        //     fields: createDefFields(),
-        //     buttons: createDefButtons()
-        // }
 
         super(props);
 
@@ -265,5 +259,17 @@ export default class ProfileForm extends Form {
                 buttonsChanged: true
             })
         }
+
+        const initData = () => {
+            const userData = store.getState('currentUser') as Record<string, string>;
+            if (userData) {
+                this.setProps({
+                    userData
+                })
+                createDefChildren();
+            }
+        }
+
+        initData();
     }
 }
