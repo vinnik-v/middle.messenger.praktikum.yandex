@@ -12,7 +12,7 @@ import AddUserForm from './components/add-user-form';
 import DeleteUserForm from './components/delete-user-form';
 import DeleteChatForm from './components/delete-chat-form';
 
-export default class MainPage extends Block {
+export default class MainPage extends Block<Record<string, unknown>> {
   constructor(props: typeof Block.prototype.props) {
     const template = MainPageTemplate as string;
     const classList = {
@@ -69,7 +69,7 @@ export default class MainPage extends Block {
               settings: { withInternalID: true }
             }
             )
-          }) as Block
+          })
         }),
         deleteUserModal: new Modal({
           settings: { withInternalID: true },
@@ -82,7 +82,7 @@ export default class MainPage extends Block {
               settings: { withInternalID: true }
             }
             )
-          }) as Block
+          })
         }),
         addChatModal: new Modal({
           settings: { withInternalID: true },
@@ -96,7 +96,7 @@ export default class MainPage extends Block {
             },
               'addChat'
             )
-          }) as Block
+          })
         }),
         chatDeleteConfirmModal: new Modal({
           settings: { withInternalID: true },
@@ -108,9 +108,9 @@ export default class MainPage extends Block {
               formTitle: 'Подтвердите удаление чата',
               settings: { withInternalID: true }
             })
-          }) as Block
+          })
         }),
-      } as Record<string, Block>;
+      }
 
       this.setProps({
         dataLoaded: true, ...children

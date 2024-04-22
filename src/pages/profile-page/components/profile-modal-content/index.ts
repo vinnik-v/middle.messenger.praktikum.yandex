@@ -7,7 +7,7 @@ import ChangeAvatar from '../profile/profile-api/ChangeAvatar';
 import store, { StoreEvents } from '../../../../classes/Store';
 import checkUserLogged from '../../../../functions/checkUserLogged';
 
-export default class ProfileModalContent extends Block {
+export default class ProfileModalContent extends Block<Record<string, unknown>> {
     constructor(props: typeof Block.prototype.props) {
 
         const tagName = 'form';
@@ -20,7 +20,7 @@ export default class ProfileModalContent extends Block {
             elemProps: [{ name: 'id', value: 'file-accept-button' }],
             settings: { withInternalID: true },
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     eventBus.emit('submit');
                 }
@@ -30,13 +30,13 @@ export default class ProfileModalContent extends Block {
         const eventBus = new EventBus();
 
         eventBus.on('inputChanged', ()=> {
-            const submitButton = (<Record<string, Block>[]>this.children.buttons).find(item => item.submitButton);
+            const submitButton = (<Record<string, Record<string, unknown>>[]>this.children.buttons).find(item => item.submitButton);
             const file = this.props.file as number[];
             if (submitButton) {
                 if (file) {
-                    submitButton.submitButton._element.classList.remove('form-button_main-disabled');
+                    (<HTMLElement>submitButton.submitButton._element).classList.remove('form-button_main-disabled');
                 } else {
-                    submitButton.submitButton._element.classList.add('form-button_main-disabled');
+                    (<HTMLElement>submitButton.submitButton._element).classList.add('form-button_main-disabled');
                 }
             }
         })
@@ -82,7 +82,7 @@ export default class ProfileModalContent extends Block {
                 { name: 'style', value: 'display:none' }
             ],
             events: {
-                change: (e) => {
+                change: (e: Event) => {
                     const target = e.target as HTMLInputElement;
                     const files = target.files;
                     if (files && files.length > 0) {
@@ -121,7 +121,7 @@ export default class ProfileModalContent extends Block {
             settings: { withInternalID: true },
             classList: ['form-button'],
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     const dropdown = document.getElementById('change-profile-photo-modal');
                     if (dropdown) {

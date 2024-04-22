@@ -4,7 +4,7 @@ import Block from '../../../../../../classes/Block';
 import profileNoPhotoIcon from '../../assets/icons/no-photo-icon.svg?raw';
 import store from '../../../../../../classes/Store';
 
-export default class ProfileHeader extends Block {
+export default class ProfileHeader extends Block<Record<string, unknown>> {
     constructor(props: typeof Block.prototype.props) {
         const tagName = 'header';
         const classList = ['profile__header'];

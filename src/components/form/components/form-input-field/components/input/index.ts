@@ -1,7 +1,7 @@
 import './input.scss';
 import Block from "../../../../../../classes/Block";
-export default class InputElem extends Block {
-    constructor(props: Record<string, string | string[] | Record<string, | Block | boolean | ((event: Event) => unknown)> | { name: string, value: string }[]>) {
+export default class InputElem extends Block<Record<string, unknown>> {
+    constructor(props: typeof Block.prototype.props) {
         const tagName = {
             tagName: 'input'
         }

@@ -9,7 +9,7 @@ import { IChatItem } from "../../../../types/types";
 import UserRow from "./components/user-row";
 import CheckBoxElem from "./components/checkbox-elem";
 
-export default class DeleteUserForm extends Block {
+export default class DeleteUserForm extends Block<Record<string, unknown>> {
     constructor(
         props: typeof Block.prototype.props
     ) {
@@ -29,13 +29,13 @@ export default class DeleteUserForm extends Block {
         const eventBus = new EventBus();
 
         eventBus.on('dataChecked', ()=> {
-            const submitButton = (<Record<string, Block>[]>this.children.buttons).find(item => item.submitButton);
+            const submitButton = (<Record<string, Record<string, unknown>>[]>this.children.buttons).find(item => item.submitButton);
             const toDeleteIds = this.props.toDeleteIds as number[];
             if (submitButton) {
                 if (toDeleteIds.length === 0) {
-                    submitButton.submitButton._element.classList.add('form-button_main-disabled');
+                    (<HTMLElement>submitButton.submitButton._element).classList.add('form-button_main-disabled');
                 } else {
-                    submitButton.submitButton._element.classList.remove('form-button_main-disabled');
+                    (<HTMLElement>submitButton.submitButton._element).classList.remove('form-button_main-disabled');
                 }
             }
         })
@@ -69,20 +69,20 @@ export default class DeleteUserForm extends Block {
             classList: ['form-button', 'form-button_main', 'form-button_main-disabled'],
             disabled: true,
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     eventBus.emit('submit');
                 }
             }
 
-        }) as Block
+        })
 
         const cancelButton = new Button('', {
             buttonText: 'Отмена',
             settings: { withInternalID: true },
             classList: ['form-button'],
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     const dropdown = document.getElementById('delete-user-modal');
                     if (dropdown) {
@@ -91,7 +91,7 @@ export default class DeleteUserForm extends Block {
                     }
                 }
             }
-        }) as Block;
+        });
 
         super(template, { ...tagName, toDeleteIds: [], buttons: [{ submitButton }, { cancelButton }], ...{ events: events } as Record<string, Record<string, ((event: Event) => unknown)>>, ...props });
 
@@ -112,7 +112,7 @@ export default class DeleteUserForm extends Block {
                     userId: item.id,
                     elemProps: [{ name: 'type', value: 'checkbox' }, { name: 'id', value:checkboxId },  { name: 'name', userName }],
                     events: {
-                        click: (e) => {
+                        click: (e: Event) => {
                             const checkbox = e.target as HTMLInputElement;
                             const checked = checkbox.checked;
                             let toDeleteIds = [...this.props.toDeleteIds as number[]];

@@ -1,7 +1,7 @@
 import Block from '../../../../classes/Block';
 
-export default class ModalContent extends Block {
-    constructor(template: string, props: Record<string, string | string[] | Block | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
+export default class ModalContent extends Block<Record<string, unknown>> {
+    constructor(template: string, props: typeof Block.prototype.props) {
       const className = {
         className: 'modal__content'
       }

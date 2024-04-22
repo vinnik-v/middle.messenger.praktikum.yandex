@@ -15,7 +15,7 @@ import InputElem from '../../../../../../components/form/components/form-input-f
 import Button from '../../../../../../components/button';
 import store from '../../../../../../classes/Store';
 
-export default class ChatWindowFooter extends Block {
+export default class ChatWindowFooter extends Block<Record<string, unknown>> {
   constructor(props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
     const template = ChatWindowFooterTemplate as string;
     const className = {
@@ -38,14 +38,14 @@ export default class ChatWindowFooter extends Block {
                 fileIcon,
                 locationIcon,
                 photoIcon
-            }) as Block
+            })
         }),
         input: new InputElem({
           settings: { withInternalID: true },
           classList: ['message-input'],
           elemProps: [{ name: 'type', value: 'text' }, { name: 'name', value: 'message' }, { name: 'placeholder', value: 'Сообщение' }, { name: 'id', value: 'message-input' }],
           events: {
-            input: (e)=> {
+            input: (e: Event)=> {
               e.preventDefault();
               const target = e.target as HTMLInputElement;
               const value = target.value;
@@ -61,7 +61,7 @@ export default class ChatWindowFooter extends Block {
           classList: ['send-message-button', 'button'],
           sendMessageIcon,
           events: {
-            click: (e)=> {
+            click: (e: Event)=> {
               e.preventDefault();
               const messageText = this.props.messageText;
               if (messageText) {
@@ -83,7 +83,7 @@ export default class ChatWindowFooter extends Block {
             }
           }
         })
-    } as Record<string, Block>
+    }
 
     super(template, { ...tagName, ...children, ...icons, ...className, ...props });
 

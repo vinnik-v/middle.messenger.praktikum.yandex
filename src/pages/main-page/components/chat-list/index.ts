@@ -8,7 +8,7 @@ import { IChatItem, IUser } from '../../../../types/types';
 import Button from '../../../../components/button';
 import dateToString from '../../../../functions/dateToString';
 
-export default class ChatList extends Block {
+export default class ChatList extends Block<Record<string, unknown>> {
   constructor(props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
     const template = ChatListTemplate as string;
     const className = {
@@ -28,7 +28,7 @@ export default class ChatList extends Block {
         buttonText: 'Создать чат',
         settings: { withInternalID: true },
         events: {
-          click: (e) => {
+          click: (e: Event) => {
             e.preventDefault();
             const dropdown = document.getElementById('add-chat-modal');
             if (dropdown) {
@@ -38,10 +38,10 @@ export default class ChatList extends Block {
           }
         } 
       })
-    } as Record<string, Block>
+    }
 
 
-    super(template, { ...tagName, ...{ chats: chats } as Record<string, Record<string, Block>[]>, ...children, ...className, ...props });
+    super(template, { ...tagName, ...{ chats: chats }, ...children, ...className, ...props });
 
     function prepareData() {
       const chatsData = store.getState('chats') as IChatItem[];
@@ -63,9 +63,9 @@ export default class ChatList extends Block {
               store.set('selectedChatId', item.id, StoreEvents.ChatSelected);
             }
           }
-        }) as Block;
+        });
         return { [ChatCardName]: value };
-      }) as Record<string, Block>[];
+      });
 
       return chats;
     }

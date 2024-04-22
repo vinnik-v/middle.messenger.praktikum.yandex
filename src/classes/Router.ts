@@ -10,7 +10,7 @@ import store, { StoreEvents } from "./Store";
 
 type TBlock = typeof LoginPage | typeof RegisterPage | typeof MainPage | typeof ErrorPage | typeof NotFoundPage | typeof ProfilePage
 
-function render(query: string, block: Block) {
+function render(query: string, block: Block<Record<string, unknown>>) {
     const root = document.querySelector(query);
     (<HTMLElement>root).innerHTML = '';
     (<HTMLElement>root).appendChild(block.getContent());
@@ -20,7 +20,7 @@ function render(query: string, block: Block) {
 class Route {
     _pathname: string;
     _blockClass: TBlock;
-    _block: null | Block;
+    _block: null | Block<Record<string, unknown>>;
     _props: Record<string, string>;
 
     constructor(pathname: string, view: TBlock, props: Record<string, string>) {

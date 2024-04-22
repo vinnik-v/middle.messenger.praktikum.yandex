@@ -2,7 +2,6 @@ import Template from './modal-search-field.hbs?raw';
 import './modal-search-field.scss';
 import FormInputField from "../../../../../../components/form/components/form-input-field";
 import InputElem from "../../../../../../components/form/components/form-input-field/components/input";
-import Block from '../../../../../../classes/Block';
 import SearchUser from '../../../../main-page-api/SearchUser';
 import SearchResultRow from '../search-result-row';
 
@@ -50,9 +49,9 @@ export default class ModalSearchField extends FormInputField {
                                     userName: `${item.login} (${item.first_name + ' ' + item.second_name})`,
                                     settings: { withInternalID: true },
                                     elemProps: [{ name: 'id', value: item.login }]
-                                }) as Block;
+                                });
                                 return { [userLogin]: value };
-                            }) as Record<string, Block>[];
+                            }) as Record<string, unknown>[];
 
                             this.setProps({
                                 noResult,
@@ -75,7 +74,7 @@ export default class ModalSearchField extends FormInputField {
                 
                 }
             }
-        }) as Block;
+        });
         
         super({input, ...tagName, ...className, ...props}, propTemplate);
     }

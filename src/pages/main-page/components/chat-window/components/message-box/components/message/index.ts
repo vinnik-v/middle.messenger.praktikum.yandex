@@ -7,7 +7,7 @@ import messagePhoto from './assets/img/message-photo.png';
 import messageReadIcon from './assets/icons/message-read-icon.svg?raw';
 import messageUnreadIcon from './assets/icons/message-unred-icon.svg?raw';
 
-export default class Message extends Block {
+export default class Message extends Block<Record<string, unknown>> {
     constructor(props: Record<string, string | File | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
       const template = MessageTemplate as string;
       const className = {

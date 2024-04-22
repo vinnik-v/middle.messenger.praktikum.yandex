@@ -12,7 +12,7 @@ import store, { StoreEvents } from '../../../../../../classes/Store';
 import Button from '../../../../../../components/button';
 import * as types from '../../../../../../types/types';
 
-export default class ChatWindowHeader extends Block {
+export default class ChatWindowHeader extends Block<Record<string, unknown>> {
   constructor(props: typeof Block.prototype.props) {
     const template = ChatWindowHeaderTemplate as string;
     const className = {
@@ -30,7 +30,7 @@ export default class ChatWindowHeader extends Block {
       classList: ['button', 'delete-chat-button', 'list-item__button'],
       elemProps: [{ name: 'id', value: 'delete-chat-button' }],
       settings: { withInternalID: true },
-    }) as Block
+    })
 
     const avatar = props.avatar as string;
 
@@ -47,10 +47,10 @@ export default class ChatWindowHeader extends Block {
           addButtonIcon,
           deleteButtonIcon,
           deleteChatButton: [{ deleteChatButton }]
-        }) as Block
+        })
       }),
 
-    } as Record<string, Block>
+    }
 
     const membersCount = 1;
     const membersCountText = membersCount === 1 ? 'member' : 'members';

@@ -6,7 +6,7 @@ import Button from '../../../../../../components/button';
 import headerButtonIcon from './assets/icons/header-menu-button.svg?raw';
 import searchIcon from './assets/icons/search-icon.svg?raw';
 
-export default class ChatListHeader extends Block {
+export default class ChatListHeader extends Block<Record<string, unknown>> {
     constructor(props: typeof Block.prototype.props) {
         const template = ChatListHeaderTemplate as string;
         const classList = {
@@ -21,7 +21,7 @@ export default class ChatListHeader extends Block {
                 className: 'chat-list__header-button',
                 redirectPage: '/settings'
             })
-        } as Record<string, Block>
+        }
 
         const icons = {
             headerButtonIcon,

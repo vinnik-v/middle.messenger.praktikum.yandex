@@ -1,4 +1,4 @@
-import Block from "../../../../classes/Block";
+import Button from "../../../../components/button";
 import Form from "../../../../components/form";
 import AddChat from "../../main-page-api/AddChat";
 
@@ -12,7 +12,7 @@ export default class AddChatForm extends Form {
 
             return apiRequest.request();
         }
-        const buttons = this.children.buttons as Record<string, Block>[];
+        const buttons = this.children.buttons as Button[];
         
         const cancelButton = buttons.find(item => {
             const button = Object.values(item)[0];
@@ -22,7 +22,7 @@ export default class AddChatForm extends Form {
             const button = Object.values(cancelButton)[0];
             button.setProps({
                 events: {
-                    click: (e)=> {
+                    click: (e: Event)=> {
                         e.preventDefault();
                         const dropdown = document.getElementById('add-chat-modal');
                         if (dropdown) {

@@ -5,7 +5,7 @@ import ProfileForm from './components/profile-form';
 import ProfileHeader from './components/profile-header';
 
 
-export default class Profile extends Block {
+export default class Profile extends Block<Record<string, unknown>> {
   constructor(props: typeof Block.prototype.props) {
       const template = ProfileTemplate as string;
       const classList = {
@@ -23,7 +23,7 @@ export default class Profile extends Block {
           header: new ProfileHeader({
             settings: { withInternalID: true },
           })
-      } as Record<string, Block>
+      }
 
       super(template, {...tagName, ...children, ...classList, ...props});
       

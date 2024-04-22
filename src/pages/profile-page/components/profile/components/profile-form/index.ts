@@ -21,7 +21,7 @@ export default class ProfileForm extends Form {
         })
 
         const createDefFields = (inpUserData: Record<string, string>) => {
-            const fields: Record<string, Block>[] = [];
+            const fields: Record<string, unknown>[] = [];
 
             if (inpUserData) {
                 const userData = {...inpUserData};
@@ -51,8 +51,8 @@ export default class ProfileForm extends Form {
                             settings: { withInternalID: true },
                             className: 'form-input-field__input',
                             elemProps: inputElemProps,
-                        }) as Block,
-                    }) as Block;
+                        }),
+                    });
 
                     fields.push({ [fieldName]: field })
                 });
@@ -60,8 +60,8 @@ export default class ProfileForm extends Form {
 
             fields.forEach(item => {
                 const key = Object.keys(item)[0];
-                const field = item[key] as Block;
-                const input = (<Record<string, Block>>field.children).input._element as HTMLInputElement;
+                const field = item[key] as Record<string, unknown>;
+                const input = (<Record<string, Record<string, unknown>>>field.children).input._element as HTMLInputElement;
                 input.disabled = true;
             })
             return fields;
@@ -72,7 +72,7 @@ export default class ProfileForm extends Form {
             buttonText: 'Отмена',
             classList: ['form-button', 'cancel-button'],
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     createDefChildren();
                 }
@@ -80,7 +80,7 @@ export default class ProfileForm extends Form {
         })
 
         const createDefButtons = () => {
-            const buttons: Record<string, Block>[] = []//prepareButtons(buttonsProps);
+            const buttons: Record<string, unknown>[] = []//prepareButtons(buttonsProps);
 
             const changeDataButton = new Button('', {
                 settings: { withInternalID: true },
@@ -89,11 +89,11 @@ export default class ProfileForm extends Form {
                 events: {
                     click: (event: Event) => {
                         event.preventDefault();
-                        const fields = this.children.fields as Record<string, Block>[];
+                        const fields = this.children.fields as Record<string, unknown>[];
                         fields.forEach(item => {
                             const key = Object.keys(item)[0];
-                            const field = item[key] as Block;
-                            const input = (<Record<string, Block>>field.children).input._element as HTMLInputElement;
+                            const field = item[key] as Record<string, unknown>;
+                            const input = (<Record<string, Record<string, unknown>>>field.children).input._element as HTMLInputElement;
                             input.disabled = false;
                         });
                         const saveDataButton = new Button('', {
@@ -101,16 +101,16 @@ export default class ProfileForm extends Form {
                             buttonText: 'Сохранить данные',
                             classList: ['form-button', 'form-button_main'],
                             events: {
-                                click: async (e) => {
+                                click: async (e: Event) => {
                                     e.preventDefault();
                                     const formIsValid = this.validate();
                                     if (formIsValid) {
                                         const resultFormObj: Record<string, string> = {};
-                                        (<Record<string, Block>[]>this.children.fields).forEach(item => {
+                                        (<Record<string, unknown>[]>this.children.fields).forEach(item => {
                                             const key = Object.keys(item)[0];
-                                            const inputFieldBlock = item[key];
-                                            const imputFieldInput = inputFieldBlock.children.input as Block;
-                                            const inputElem = imputFieldInput._element as HTMLInputElement;
+                                            const inputFieldBlock = item[key] as Record<string, Record<string, unknown>>;
+                                            const imputFieldInput = inputFieldBlock.children.input;
+                                            const inputElem = (<Record<string, unknown>>imputFieldInput)._element as HTMLInputElement;
                                             resultFormObj[inputElem.name] = inputElem.value;
                                         });
                                         try {
@@ -153,22 +153,22 @@ export default class ProfileForm extends Form {
                 events: {
                     click: (event: Event) => {
                         event.preventDefault();
-                        const fields = prepareFields(fieldSets.changePassword, true) as Record<string, Block>[];
+                        const fields = prepareFields(fieldSets.changePassword, true) as Record<string, unknown>[];
                         this.children.fields = fields;
                         const savePasswordButton = new Button('', {
                             settings: { withInternalID: true },
                             buttonText: 'Сохранить пароль',
                             classList: ['form-button', 'form-button_main'],
                             events: {
-                                click: async (e) => {
+                                click: async (e: Event) => {
                                     e.preventDefault();
                                     const formIsValid = this.validate();
                                     if (formIsValid) {
                                         const resultFormObj: Record<string, string> = {};
-                                        (<Record<string, Block>[]>this.children.fields).forEach(item => {
+                                        (<Record<string, unknown>[]>this.children.fields).forEach(item => {
                                             const key = Object.keys(item)[0];
-                                            const inputFieldBlock = item[key];
-                                            const imputFieldInput = inputFieldBlock.children.input as Block;
+                                            const inputFieldBlock = item[key] as Record<string, Record<string, unknown>>;
+                                            const imputFieldInput = inputFieldBlock.children.input as Record<string, unknown>;
                                             const inputElem = imputFieldInput._element as HTMLInputElement;
                                             resultFormObj[inputElem.name] = inputElem.value;
                                         });
@@ -232,17 +232,17 @@ export default class ProfileForm extends Form {
         this.validate = () => {
             let formIsValid = true;
             let passw: string | null;
-            (<Record<string, Block>[]>this.children.fields).forEach(item => {
+            (<Record<string, unknown>[]>this.children.fields).forEach(item => {
                 const key = Object.keys(item)[0];
-                const inputFieldBlock = item[key];
-                const imputFieldInput = inputFieldBlock.children.input as Block;
+                const inputFieldBlock = item[key] as Record<string, unknown | (()=> unknown)>;
+                const imputFieldInput = (<Record<string, unknown>>inputFieldBlock.children).input as Record<string, unknown>;
                 const inputElem = imputFieldInput._element as HTMLInputElement;
                 if (inputElem.name === 'newPassword') passw = inputElem.value;
                 const validationResult = fieldValidation(inputElem.name, inputElem.value);
                 if (!validationResult.success) formIsValid = false;
-                inputFieldBlock.setProps(validationResult);
+                (<Record<string, (<T extends Record<string, unknown>>(arg: T)=> unknown)>>inputFieldBlock).setProps(validationResult);
                 if (validationResult.success && inputElem.name === 'newPasswordAgain' && inputElem.value !== passw) {
-                    inputFieldBlock.setProps({ success: false, errorText: 'Пароли не совпадают' });
+                    (<Record<string, (<T extends Record<string, unknown>>(arg: T)=> unknown)>>inputFieldBlock).setProps({ success: false, errorText: 'Пароли не совпадают' });
                     formIsValid = false;
                 }
             });
@@ -252,8 +252,8 @@ export default class ProfileForm extends Form {
         const createDefChildren = () => {
             const buttons = createDefButtons();
             this.children.buttons = buttons;
-
-            const fields = createDefFields(this.props.userData as Record<string, string>);
+            
+            const fields = createDefFields((<Record<string, unknown>>this.props).userData as Record<string, string>);
             this.children.fields = fields;
             this.setProps({
                 buttonsChanged: true
@@ -261,7 +261,7 @@ export default class ProfileForm extends Form {
         }
 
         const initData = () => {
-            const userData = store.getState('currentUser') as Record<string, string>;
+            const userData = store.getState('currentUser');
             if (userData) {
                 this.setProps({
                     userData

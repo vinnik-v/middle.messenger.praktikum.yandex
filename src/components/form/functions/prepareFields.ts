@@ -1,8 +1,7 @@
 import FormInputField from "../components/form-input-field";
 import InputElem from "../components/form-input-field/components/input";
-import Block from "../../../classes/Block";
 
-export default function prepareFields(fieldsProps: Record<string, string>[], showValues?: boolean): Record<string, Block>[] {
+export default function prepareFields(fieldsProps: Record<string, string>[], showValues?: boolean): Record<string, unknown>[] {
     return fieldsProps.map((item, index) => {
         const fieldName: string = item.fieldName? item.fieldName : 'field_'+(index+1);
         const inputElemProps = [
@@ -21,8 +20,8 @@ export default function prepareFields(fieldsProps: Record<string, string>[], sho
                 settings: { withInternalID: true },
                 className: 'form-input-field__input',
                 elemProps: inputElemProps,
-            }) as Block,
-        }) as Block;
+            }),
+        });
         return { [fieldName]: value };
-    }) as Record<string, Block>[];
+    });
 }
