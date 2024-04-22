@@ -1,0 +1,10 @@
+<div class="profile__photo" id="profile-photo">
+    {{#if avatar}}
+    <img class="profile__avatar" src="{{avatar}}" alt="avatar"/>
+    {{else}}
+    <div class="no-photo-icon">{{{ profileNoPhotoIcon }}}</div>
+    {{/if}}
+</div>
+<h1 class="profile__user-name">
+    {{ userName }}
+</h1>

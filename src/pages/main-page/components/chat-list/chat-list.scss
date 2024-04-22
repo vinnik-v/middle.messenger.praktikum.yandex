@@ -17,3 +17,15 @@
     flex-direction: column;
     flex-grow: 1;
 }
+
+.empty-chats-text {
+    width: 100%;
+    text-align: center;
+    color: #838383;
+    font-family: Inter-Medium, sans-serif;
+    font-size: 12px;
+}
+
+.chat-list__footer{
+    padding: 1rem;
+}

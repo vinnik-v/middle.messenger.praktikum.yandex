@@ -1,9 +1,11 @@
+const BASE_API_URI = 'https://ya-praktikum.tech';
+
 enum METHODS {
-    GET = 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    PATCH = 'PATCH',
-    DELETE = 'DELETE'
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE'
 }
 /**
 * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
@@ -11,73 +13,94 @@ enum METHODS {
 * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
 */
 function queryStringify(data: Record<string, unknown>) {
-    if (!data) return undefined;
-    if (typeof data === 'object') {
-        return '?' + Object.entries(data).map(item => {
-            let elem = item[1];
-            if (Array.isArray(item[1])) {
-                elem = item[1].join()
-            } else if (typeof item[1] === 'object') {
-                elem = JSON.stringify(item[1]);
-            }
-            
-            return item[0] + '=' + elem;
-        }).join('&');
-    } else throw new Error('Wrond data type');
+  if (!data) return undefined;
+  if (typeof data === 'object') {
+    return '?' + Object.entries(data).map(item => {
+      let elem = item[1];
+      if (Array.isArray(item[1])) {
+        elem = item[1].join()
+      } else if (typeof item[1] === 'object') {
+        elem = JSON.stringify(item[1]);
+      }
+
+      return item[0] + '=' + elem;
+    }).join('&');
+  } else throw new Error('Wrond data type');
 }
 
-type options = {
-    timeout: number,
-    data: Record<string, unknown> | null,
-    headers: Record<string, string>,
+type Options = {
+  timeout?: number,
+  data: Record<string, unknown> | FormData | null,
+  headers: Record<string, string>,
+  credentials?: string
 }
+
+type HTTPMethod = (path: string, options: Options) => Promise<XMLHttpRequest>;
+type Request = (path: string, method: METHODS, options: Options, timeout?: number) => Promise<XMLHttpRequest>;
 
 export default class ApiRequest {
-    get = (url: string, options: options) => {
-        const { data } = options;
 
-        const reqData = data ? queryStringify(data): '';
-        
-        return this.request(url + reqData, METHODS.GET, options);
-    };
-    post = (url: string, options: options) => {
-        return this.request(url, METHODS.POST, options);
-    };
-    put = (url: string, options: options) => {
-        return this.request(url, METHODS.GET, options);
-    };
-    delete = (url: string, options: options) => {
-        return this.request(url, METHODS.GET, options);
-    };
+  _apiUrl: string = '';
+  _baseApiUrl: string = '';
 
-    request = (url: string, method: METHODS, options: options, timeout = 5000) => {
-        const { data, headers } = options;
-        return new Promise((resolve, reject) => {
-          const xhr = new XMLHttpRequest();
-          xhr.timeout = timeout;
-          xhr.open(method, url);
-          const headersEntries = Object.entries(headers);
-          headersEntries.forEach(([key, value])=> {
-            xhr.setRequestHeader(key, value);
-          })
-          
-          xhr.onload = function() {
-            if (xhr.status >= 200 && xhr.status < 300) { 
-                resolve(xhr);
-              } else { 
-                reject(new Error(`${xhr.status}: ${xhr.statusText}`));
-              }
-          };
-      
-          xhr.onabort = () => reject(new Error('Request aborted'));
-          xhr.onerror = () => reject(new Error(`Ошибка ${xhr.status}: ${xhr.statusText}`));
-          xhr.ontimeout = () => reject(new Error('Превышен таймаут'));
-          
-          if (method === METHODS.GET || !data) {
-            xhr.send();
-          } else {
-            xhr.send(JSON.stringify(data));
-          }
-        });
+  constructor(apiSubUrl: string) {
+    this._apiUrl = BASE_API_URI + apiSubUrl;
+  }
+
+  get: HTTPMethod = (path, options) => {
+    const { data } = options;
+
+    const reqData = data ? queryStringify(data as Record<string, unknown>) : '';
+
+    return this.request(path + reqData, METHODS.GET, options);
+  };
+  post: HTTPMethod = (path, options) => {
+    return this.request(path, METHODS.POST, options);
+  };
+  put: HTTPMethod = (path, options) => {
+    return this.request(path, METHODS.PUT, options);
+  };
+  delete: HTTPMethod = (path, options) => {
+    return this.request(path, METHODS.DELETE, options);
+  };
+
+  request: Request = (path, method, options, timeout = 5000) => {
+    const { data, headers, credentials } = options;
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.timeout = timeout;
+      xhr.open(method, this._apiUrl + path);
+      const headersEntries = Object.entries(headers);
+      headersEntries.forEach(([key, value]) => {
+        if (value !== 'multipart/form-data') {
+          xhr.setRequestHeader(key, value);
+        }
+      })
+
+      credentials && credentials === 'include' ? xhr.withCredentials = true : undefined;
+
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve(xhr);
+        } else {
+          reject(new Error(
+            xhr.status === 401 ? 'Ошибка авторизации, проверьте логин и пароль' :
+              xhr.status === 400 ? JSON.parse(xhr.response).reason ? `Ошибка: ${JSON.parse(xhr.response).reason}` : 'Неизвестная ошибки' :
+                `Ошибка ${xhr.status}: ${xhr.statusText}`));
+        }
       };
+
+      xhr.onabort = () => reject(new Error('Request aborted'));
+      xhr.onerror = () => reject(new Error(`Ошибка ${xhr.status}: ${xhr.statusText}`));
+      xhr.ontimeout = () => reject(new Error('Превышен таймаут'));
+
+      if (method === METHODS.GET || !data) {
+        xhr.send();
+      } else {
+        const headersEntries = Object.values(headers);
+        const outData = headersEntries.includes('multipart/form-data') ? data as FormData : JSON.stringify(data)
+        xhr.send(outData);
+      }
+    });
+  };
 }

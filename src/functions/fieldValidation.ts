@@ -12,6 +12,9 @@ export default function fieldValidation (fieldName: string, value: string) {
             }
             break;
         case 'password-again':
+        case 'newPassword':
+        case 'newPasswordAgain':
+        case 'oldPassword':
         case 'password':
             if (!value) {
                 success = false;

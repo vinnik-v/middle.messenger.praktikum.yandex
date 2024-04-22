@@ -9,6 +9,7 @@
     background-color: rgb(221 230 246 / 37%);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     &__body {
         flex-grow: 1;
@@ -18,6 +19,7 @@
 
 .chat-window__body {
     flex-grow: 1;
+    overflow: hidden;
 }
 
 .chat-window__no-data-text {

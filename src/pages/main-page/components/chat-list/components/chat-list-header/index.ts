@@ -19,7 +19,7 @@ export default class ChatListHeader extends Block {
         const children = {
             button: new Button( headerButtonIcon,{
                 className: 'chat-list__header-button',
-                redirectPage: 'profile'
+                redirectPage: '/settings'
             })
         } as Record<string, Block>
 

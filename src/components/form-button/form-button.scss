@@ -7,6 +7,11 @@
     font-family: Inter-Medium, sans-serif;
     font-size: 11px;
     border: none;
+    padding: 0;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .form-button_main {

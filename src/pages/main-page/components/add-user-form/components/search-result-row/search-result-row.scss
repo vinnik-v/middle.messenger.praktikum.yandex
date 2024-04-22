@@ -1,0 +1,12 @@
+.search-result__row {
+    padding: 4px;
+    cursor: pointer;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid var(--item-border);
+    }
+
+    &:hover {
+        background-color: #eaeaea5e;
+    }
+}

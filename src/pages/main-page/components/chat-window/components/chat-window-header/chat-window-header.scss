@@ -9,16 +9,27 @@
     position: relative;
 }
 
-.chat-window__contact-info {
+.chat-window__info {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
 
-.chat-window__contact-name {
+.chat-window__name {
     font-family: Inter-Bold, sans-serif;
     font-size: 13px;
     color: #1E1E1E;
+}
+
+.chat-window__title {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.chat-window__members-count {
+    font-size: 12px;
+    color: #8e8a8a;
 }
 
 .chat-window__control {
@@ -27,4 +38,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.delete-chat-button {
+    background-color: red;
+    color: white;
+    padding: 4px 9px;
+    border: none;
+    border-radius: 6px;
 }

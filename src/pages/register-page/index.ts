@@ -1,8 +1,7 @@
 import './register-page.scss';
 import RegisterPageTemplate from './register-page.hbs?raw';
 import Block from '../../classes/Block';
-import Form from '../../components/form';
-import { fieldSets, buttonsSets } from '../../components/form/elementsProps';
+import RegisterPageForm from './register-page-form/RegisterPageForm';
 
 export default class RegisterPage extends Block {
     
@@ -12,13 +11,12 @@ export default class RegisterPage extends Block {
             classList: ['main-container', 'registration-page']
         }
         const children = {
-            form: new Form({
+            form: new RegisterPageForm({
                 classList: ['registration-page__form'],
                 formTitle: 'Регистрация',
                 settings: { withInternalID: true }
             }, 
-            fieldSets.register, 
-            buttonsSets.register
+            'register'
             )
         } as Record<string, Block>
         const tagName = {

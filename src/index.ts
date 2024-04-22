@@ -1,25 +1,17 @@
 import './index.scss';
 import dropdownClickListener from './functions/dropdownClickListener';
-import fileInputHandle from './functions/fileInputHandle';
-import fileAcceptHandle from './functions/fileAcceptHandle';
-import changeProfileDataHandle from './functions/changeProfileDataHandle';
-import changePasswordHandle from './functions/changePasswordHandle';
-import router from './router/router';
+import { routerInit } from './classes/Router';
 
 document.addEventListener('DOMContentLoaded', () => {
-  router();
+  routerInit();
 });
 
 document.addEventListener('click', (e: Event) => {
 
-  fileInputHandle(e);
-  if (fileAcceptHandle(e) === null) return;
-
-  changePasswordHandle(e);
-  changeProfileDataHandle(e);
   dropdownClickListener(e, '#attach-file-button', 'choose-file-dropdown');
   dropdownClickListener(e, '#chat-window-header-button', 'chat-window-header-dropdown');
   dropdownClickListener(e, '#add-user-button', 'add-user-modal');
   dropdownClickListener(e, '#delete-user-button', 'delete-user-modal');
+  dropdownClickListener(e, '#delete-chat-button', 'delete-chat-modal');
   dropdownClickListener(e, '#profile-photo', 'change-profile-photo-modal');
 });

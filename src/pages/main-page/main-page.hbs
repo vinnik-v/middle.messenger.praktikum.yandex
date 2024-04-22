@@ -1,7 +1,15 @@
+{{#if dataLoaded}}
 <div class="main-page__content">
     {{{ chatList }}}
     {{{ chatWindow }}}
     {{{ addUserModal }}}
     {{{ deleteUserModal }}}
+    {{{ addChatModal }}}
+    {{{ chatDeleteConfirmModal }}}
 </div>
+{{else}}
+<div class="main-page__content">
+    Загрузка...
+</div>
+{{/if}}
 

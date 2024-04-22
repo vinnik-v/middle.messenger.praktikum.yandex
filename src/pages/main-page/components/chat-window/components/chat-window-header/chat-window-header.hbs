@@ -1,10 +1,15 @@
-<div class="chat-window__contact-info">
-    {{{ contactAvatar }}}
-    <h1 class="chat-window__contact-name">
-        Вадим
-    </h1>
+<div class="chat-window__info">
+    <div class="avatar">
+        {{{ chatAvatar }}}
+    </div>
+    <div class="chat-window__title">
+        <h1 class="chat-window__name">
+            {{title}}
+        </h1>
+        <div class="chat-window__members-count">{{membersCount}} {{membersCountText}}</div>
+    </div>
 </div>
-<button class="chat-window__control" id="chat-window-header-button">
+<button class="chat-window__control button" id="chat-window-header-button">
     <div>{{{ headerButton }}}</div>
     {{{ dropdown }}}
 </button>

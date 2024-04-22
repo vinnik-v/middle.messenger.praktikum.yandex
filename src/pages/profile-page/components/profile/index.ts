@@ -2,8 +2,9 @@ import './profile.scss';
 import ProfileTemplate from './profile.hbs?raw';
 import Block from '../../../../classes/Block';
 import ProfileForm from './components/profile-form';
+import ProfileHeader from './components/profile-header';
 
-import profileNoPhotoIcon from './assets/icons/no-photo-icon.svg?raw';
+
 export default class Profile extends Block {
   constructor(props: typeof Block.prototype.props) {
       const template = ProfileTemplate as string;
@@ -14,18 +15,17 @@ export default class Profile extends Block {
           tagName: 'div'
       }
 
-      const icons = {
-        profileNoPhotoIcon
-      }
-
       const children = {
           form: new ProfileForm({
               classList: ['profile-form'],
               settings: { withInternalID: true },
-            }) as Block
+            }),
+          header: new ProfileHeader({
+            settings: { withInternalID: true },
+          })
       } as Record<string, Block>
 
-      super(template, {...tagName, ...children, ...icons, ...classList, ...props});
+      super(template, {...tagName, ...children, ...classList, ...props});
       
   }
 }

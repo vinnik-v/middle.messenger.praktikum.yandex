@@ -11,7 +11,7 @@ export default function prepareFields(fieldsProps: Record<string, string>[], sho
             { name: 'type', value: item.inputType },
         ]
         if (showValues) {
-            inputElemProps.push({ name: 'value', value: item.value })
+            item.value ? inputElemProps.push({ name: 'value', value: item.value }) : undefined;
         }
         const value = new FormInputField({
             fieldName: item.fieldName,

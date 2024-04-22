@@ -2,7 +2,7 @@
 import Block from '../../../../classes/Block';
 
 export default class DropDownContent extends Block {
-    constructor(template: string, props: Record<string, string | string[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
+    constructor(template: string, props: typeof Block.prototype.props) {
       const className = {
         className: 'dropdown-content'
       }

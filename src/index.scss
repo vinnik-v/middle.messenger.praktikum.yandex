@@ -42,7 +42,9 @@ li {
     list-style: none;
 }
 
-h1, h2, p {
+h1,
+h2,
+p {
     margin: 0;
 }
 
@@ -50,21 +52,13 @@ body {
     font-family: Inter-Regular, sans-serif;
 }
 
-html, body, .app {
+html,
+body,
+.app {
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
-}
-
-button {
-    border: none;
-    padding: 0;
-    background: none;
-
-    &:focus {
-        outline: none;
-    }
 }
 
 .main-container {
@@ -97,5 +91,25 @@ button {
             display: flex;
             align-items: center;
         }
+    }
+}
+
+* {
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        display: none;
+        background: rgb(210 210 210);
+        border: 4px solid transparent;
+        background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgb(210 210 210);
+        border: 1px solid rgb(210 210 210);
+        border-radius: 5px;
     }
 }

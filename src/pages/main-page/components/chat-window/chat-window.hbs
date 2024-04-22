@@ -1,8 +1,13 @@
 <div class="chat-window__content">
-    {{{ chatWindowHeader }}}
-    <div class="chat-window__body">
-        {{{ messageBox }}}
-    </div>
-    {{{ chatWindowFooter }}}
+    {{#if chatSelected}}
+        {{{ chatWindowHeader }}}
+        <div class="chat-window__body">
+            {{{ messageBox }}}
+        </div>
+        {{{ chatWindowFooter }}}
+    {{else}}
+    <p class="chat-window__no-data-text">Выберите чат чтобы отправить сообщение</p>
+    {{/if}}
 </div>
+
 

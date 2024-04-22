@@ -23,7 +23,7 @@ export default class ErrorPageContent extends Block {
         const button = new Button('{{buttonText}}',{
             buttonText: 'Назад к чатам',
             className: 'navigate-button',
-            redirectPage: 'main',
+            redirectPage: '/messenger',
             elemProps: [{ name: 'id', value: 'err-page-button' }], 
             settings: { withInternalID: true },
         }) as Block;

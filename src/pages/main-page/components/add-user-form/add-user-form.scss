@@ -1,0 +1,73 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    width: 340px;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--modal-box-shadow);
+    background: var(--background-color);
+}
+
+.form__title {
+    text-align: center;
+    color: var(--title-text-color);
+    font-size: 20px;
+    font-weight: 500;
+    font-family: Inter-Medium, sans-serif;
+    padding-top: 20px;
+}
+
+.form__fields {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 16px;
+}
+
+.form-error-text {
+    font-size: 12px;
+    text-align: center;
+    color: var(--form-input-text-color--error, #FF2F2F);
+}
+
+.form__input {
+    position: relative;
+}
+
+.search-result {
+    max-height: 300px;
+    overflow: auto;
+    width: 100%;
+    border: 1px solid var(--item-border);
+    padding: 4px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: var(--modal-box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    position: absolute;
+    background-color: white;
+    top: 35px;
+}
+
+.no-result-text {
+    color: grey;
+}
+
+.form-button_main-disabled {
+    cursor: default;
+    background-color: rgb(51 105 243 / 26%);
+
+    &:hover {
+        background-color: rgb(51 105 243 / 26%);
+    }
+}
+
+.selected-users {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
