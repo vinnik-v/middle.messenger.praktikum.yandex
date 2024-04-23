@@ -37,7 +37,9 @@ export default class ChatWindowHeader extends Block<Record<string, unknown>> {
     const children = {
       chatAvatar: new ChatAvatar({
         settings: { withInternalID: true },
-        avatar
+        avatar,
+        classList: ['chat-window-avatar'],
+        elemProps: [{ name: 'id', value: 'chat-photo' }],
       }),
       dropdown: new Dropdown({
         settings: { withInternalID: true },
@@ -65,11 +67,17 @@ export default class ChatWindowHeader extends Block<Record<string, unknown>> {
       const chats = store.getState('chats') as types.IChatItem[];
       if (chats && this.props.chatId) {
         const currentChat = chats.filter(item => item.id === this.props.chatId)[0];
+        
         const membersCount = currentChat.users ? currentChat.users.length : 1;
         const membersCountText = membersCount === 1 ? 'member' : 'members';
 
+        const avatar = currentChat.avatar;
+        const avatarElem = this.children.chatAvatar as Record<string, (<T extends Record<string, unknown>>(arg: T)=> unknown)>
+        avatarElem.setProps({
+          avatar
+        })
         this.setProps({
-          membersCount, membersCountText
+          membersCount, membersCountText, avatar
         })
       }
     }

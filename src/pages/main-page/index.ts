@@ -11,6 +11,7 @@ import AddChatForm from './components/add-chat-form';
 import AddUserForm from './components/add-user-form';
 import DeleteUserForm from './components/delete-user-form';
 import DeleteChatForm from './components/delete-chat-form';
+import ChangePhotoModalContent from './components/change-photo-modal-content/ChangePhotoModalContent';
 
 export default class MainPage extends Block<Record<string, unknown>> {
   constructor(props: typeof Block.prototype.props) {
@@ -107,6 +108,17 @@ export default class MainPage extends Block<Record<string, unknown>> {
               classList: ['modal__form'],
               formTitle: 'Подтвердите удаление чата',
               settings: { withInternalID: true }
+            })
+          })
+        }),
+        changeChatPhotoModal: new Modal({
+          settings: { withInternalID: true },
+          elemProps: [{ name: 'id', value: 'change-chat-photo-modal' }],
+          modalContent: new ModalContent('{{{ profileModal }}}', {
+            classList: ['change-profile-photo-modal'],
+            settings: { withInternalID: true },
+            profileModal: new ChangePhotoModalContent({
+              settings: { withInternalID: true },
             })
           })
         }),

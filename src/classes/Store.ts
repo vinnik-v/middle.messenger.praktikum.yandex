@@ -63,7 +63,7 @@ class Store extends EventBus {
         if (!this.listeners[StoreEvents.ChatUpdated]) {
             this.listeners[StoreEvents.ChatUpdated] = [];
         }
-        this.emit(StoreEvents.ChatUpdated);
+        this.emit(StoreEvents.ChatUpdated, chatId);
     }
 
     public getState(key?: string) {

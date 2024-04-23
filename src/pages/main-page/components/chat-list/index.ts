@@ -77,5 +77,13 @@ export default class ChatList extends Block<Record<string, unknown>> {
       })
     })
 
+    store.on(StoreEvents.ChatUpdated, () => {
+      const chats = prepareData();
+      this.setProps({
+        chats: chats
+      })
+    })
+
+
   }
 }
