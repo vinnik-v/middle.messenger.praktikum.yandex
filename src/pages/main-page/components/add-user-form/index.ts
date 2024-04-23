@@ -82,6 +82,18 @@ export default class AddUserForm extends Block<Record<string, unknown>> {
                 input: async (e: Event) => {
                     e.preventDefault();
                     const value = (<HTMLInputElement>e.target).value;
+                    if (!value) {
+                        this.setProps({
+                            showClearButton: false
+                        });
+                        (<HTMLElement>e.target).focus();
+                    }
+                    if (value && !this.props.showClearButton) {
+                        this.setProps({
+                            showClearButton: true
+                        });
+                        (<HTMLElement>e.target).focus();
+                    }
                     eventBus.emit('inputChanged');
                     if (value && this.props.isValid) {
                         (<HTMLElement>e.target).focus();
@@ -167,6 +179,24 @@ export default class AddUserForm extends Block<Record<string, unknown>> {
             }
         });
 
+        const clearButton = new Button('', {
+            settings: { withInternalID: true },
+            classList: ['delete-button', 'button'],
+            events: {
+                click: (e: Event) => {
+                    e.preventDefault();
+                    const inputElem = (<Record<string, unknown>>this.children.input) as Record<string, Record<string, unknown>>;
+                    inputElem._element.value = null;
+
+                    this.setProps({
+                        showSearchResult: false,
+                        searchResult: [],
+                        showClearButton: false
+                    });
+                }
+            }
+        })
+
         const submitButton = new Button('', {
             buttonText: 'Добавить',
             settings: { withInternalID: true },
@@ -197,7 +227,7 @@ export default class AddUserForm extends Block<Record<string, unknown>> {
             }
         });
 
-        super(template, { ...tagName, selectedUsers: [], ...{ input: input }, buttons: [{ submitButton }, { cancelButton }], ...{ events: events } as Record<string, Record<string, ((event: Event) => unknown)>>, ...props });
+        super(template, { ...tagName, selectedUsers: [], ...{ input: input }, buttons: [{ submitButton }, { cancelButton }], clearButton, showClearButton: false, ...{ events: events } as Record<string, Record<string, ((event: Event) => unknown)>>, ...props });
         this.validate = () => {
             const input = this.children.input as Record<string, unknown>;
             const inputElem = input._element as HTMLInputElement;

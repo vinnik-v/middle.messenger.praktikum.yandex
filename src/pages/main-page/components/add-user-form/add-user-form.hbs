@@ -5,6 +5,9 @@
 {{/if}}
 <div class="form__input" >
     {{{ input }}}
+    {{#if showClearButton}}
+    {{{ clearButton }}}
+    {{/if}}
     {{#if showSearchResult}}
     <ul class="search-result">
         {{#if noResult}}
