@@ -1,4 +1,4 @@
-https://github.com/vinnik-v/middle.messenger.praktikum.yandex/pull/7
+https://github.com/vinnik-v/middle.messenger.praktikum.yandex/pull/8
 
 ## Описание
 
