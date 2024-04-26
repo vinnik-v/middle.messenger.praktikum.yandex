@@ -1,6 +1,6 @@
-import EventBus from './EventBus';
+import EventBus from './EventBus.ts';
 import Handlebars from 'handlebars';
-import uuidv4 from '../functions/uuidv4';
+import uuidv4 from '../functions/uuidv4.ts';
 
 type TFunc = (event: Event) => void;
 

@@ -20,5 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "local-server.ts"]
+  "include": ["src/**/*", "local-server.ts"],
+  "exclude": ["./typings"]
 }

@@ -1,6 +1,6 @@
 import './index.scss';
 import dropdownClickListener from './functions/dropdownClickListener';
-import { routerInit } from './classes/Router';
+import { routerInit } from './functions/routerInit';
 
 document.addEventListener('DOMContentLoaded', () => {
   routerInit();
