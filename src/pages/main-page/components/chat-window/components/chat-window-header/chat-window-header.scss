@@ -50,6 +50,7 @@
 
 .chat-window-avatar {
     position: relative;
+
     &:hover::after {
         cursor: pointer;
         position: absolute;

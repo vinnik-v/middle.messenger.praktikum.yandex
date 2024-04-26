@@ -20,14 +20,14 @@ describe('Check ApiRequest init', () => {
 
 describe("Check ApiRequest methods", function () {
     describe("Test get method", function () {
-        let getUserStub: any;
+        let getUserStub: unknown;
 
         beforeEach(function () {
             getUserStub = sinon.stub(request, "get");
         });
 
         afterEach(function () {
-            getUserStub.restore();
+            (<Record<string, (()=> unknown)>>getUserStub).restore();
         });
         it("Should return user data", async function () {
             
@@ -44,7 +44,7 @@ describe("Check ApiRequest methods", function () {
                 }),
             };
     
-            getUserStub.returns(Promise.resolve(pageOfUsers));
+            (<Record<string, (<T extends Promise<{ response: string; }>>(args: T)=> unknown)>>getUserStub).returns(Promise.resolve(pageOfUsers));
 
             const options = {
                 data: null,
@@ -56,18 +56,18 @@ describe("Check ApiRequest methods", function () {
             const userData = JSON.parse(result.response);
             
             assert.equal(userData.id, 7);
-            assert.equal(getUserStub.calledOnce, true);
+            assert.equal((<Record<string, (()=> unknown)>>getUserStub).calledOnce, true);
         });
     });
     describe("Test post method", function () {
-        let getUserStub: any;
+        let getUserStub: unknown;
 
         beforeEach(function () {
             getUserStub = sinon.stub(request, "post");
         });
 
         afterEach(function () {
-            getUserStub.restore();
+            (<Record<string, (()=> unknown)>>getUserStub).restore();
         });
         it("Should return Ok", async function () {
             
@@ -75,7 +75,7 @@ describe("Check ApiRequest methods", function () {
                 response: "OK"
             };
     
-            getUserStub.returns(Promise.resolve(pageOfUsers));
+            (<Record<string, (<T extends Promise<{ response: string; }>>(args: T)=> unknown)>>getUserStub).returns(Promise.resolve(pageOfUsers));
 
             const data = {
                 name: 'Wasa',
@@ -89,18 +89,18 @@ describe("Check ApiRequest methods", function () {
             const result = await request.post('/signin', options);
             
             assert.equal(result.response, "OK");
-            assert.equal(getUserStub.calledOnce, true);
+            assert.equal((<Record<string, (()=> unknown)>>getUserStub).calledOnce, true);
         });
     });
     describe("Test put method", function () {
-        let getUserStub: any;
+        let getUserStub: unknown;
 
         beforeEach(function () {
             getUserStub = sinon.stub(request, "put");
         });
 
         afterEach(function () {
-            getUserStub.restore();
+            (<Record<string, (()=> unknown)>>getUserStub).restore();
         });
         it("Should return Ok", async function () {
             
@@ -108,7 +108,7 @@ describe("Check ApiRequest methods", function () {
                 response: "OK"
             };
     
-            getUserStub.returns(Promise.resolve(pageOfUsers));
+            (<Record<string, (<T extends Promise<{ response: string; }>>(args: T)=> unknown)>>getUserStub).returns(Promise.resolve(pageOfUsers));
 
             const data = {
                 name: 'Wasa',
@@ -122,18 +122,18 @@ describe("Check ApiRequest methods", function () {
             const result = await request.put('/update', options);
             
             assert.equal(result.response, "OK");
-            assert.equal(getUserStub.calledOnce, true);
+            assert.equal((<Record<string, (()=> unknown)>>getUserStub).calledOnce, true);
         });
     });
     describe("Test delete method", function () {
-        let getUserStub: any;
+        let getUserStub: unknown;
 
         beforeEach(function () {
             getUserStub = sinon.stub(request, "delete");
         });
 
         afterEach(function () {
-            getUserStub.restore();
+            (<Record<string, (()=> unknown)>>getUserStub).restore();
         });
         it("Should return Ok", async function () {
             
@@ -141,7 +141,7 @@ describe("Check ApiRequest methods", function () {
                 response: "OK"
             };
     
-            getUserStub.returns(Promise.resolve(pageOfUsers));
+            (<Record<string, (<T extends Promise<{ response: string; }>>(args: T)=> unknown)>>getUserStub).returns(Promise.resolve(pageOfUsers));
 
             const data = {
                 id: 123,
@@ -154,7 +154,7 @@ describe("Check ApiRequest methods", function () {
             const result = await request.delete('/delete', options);
             
             assert.equal(result.response, "OK");
-            assert.equal(getUserStub.calledOnce, true);
+            assert.equal((<Record<string, (()=> unknown)>>getUserStub).calledOnce, true);
         });
     });
 });
