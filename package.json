@@ -10,7 +10,8 @@
     "start": "eslint . && tsc --noEmit && vite build && node --loader ts-node/esm local-server.ts",
     "lint": "eslint . && stylelint --fix **/*.scss",
     "lint:css": "stylelint --fix **/*.scss",
-    "test": "mocha"
+    "test": "mocha",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -19,7 +20,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
+      "npm run lint",
       "npm run test"
     ]
   },
