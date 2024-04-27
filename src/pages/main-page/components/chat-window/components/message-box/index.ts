@@ -7,8 +7,8 @@ import dateToString from '../../../../../../functions/dateToString';
 import { IUser } from '../../../../../../types/types';
 import DateRow from './components/date-row';
 
-export default class MessageBox extends Block {
-  constructor(props: Record<string, string | string[] | Record<string, Block>[] | Record<string, ((event: Event) => unknown) | boolean> | { name: string, value: string }[]>) {
+export default class MessageBox extends Block<Record<string, unknown>> {
+  constructor(props: typeof Block.prototype.props) {
     const template = MessageBoxTemplate as string;
     const className = {
       className: 'message-box'
@@ -36,7 +36,7 @@ export default class MessageBox extends Block {
       inpMessages.sort((a, b) => new Date(a.time as string) > new Date(b.time as string) ? 1 : -1);
 
       let lastDate: string | null = '';
-      const messages: Record<string, Block>[] = [];
+      const messages: Record<string, unknown>[] = [];
 
       inpMessages.forEach(item => {
         const currentDate = dateToString(item.time as string, 'date');
@@ -64,7 +64,7 @@ export default class MessageBox extends Block {
     chatSession.on('MessageIn', (data) => {
       const inpData = data as Record<string, string | number | boolean>[];
       const inpMessage = inpData[0];
-      const prevMessages = this.props.messages? this.props.messages as Record<string, Block>[] : [];
+      const prevMessages = this.props.messages? this.props.messages as Record<string, unknown>[] : [];
       const messages = [...prevMessages];
 
       let lastDate = this.props.lastDate;
@@ -72,7 +72,7 @@ export default class MessageBox extends Block {
       if (!lastDate || currentDate !== lastDate) {
         lastDate = currentDate;
         const dateRow = {
-          [lastDate]: new DateRow({
+          [lastDate as string]: new DateRow({
             settings: { withInternalID: true },
             date: lastDate
           })
@@ -108,7 +108,7 @@ export default class MessageBox extends Block {
           ...item as Record<string, string | number | Date | boolean | null>,
           classList,
           settings: { withInternalID: true },
-        }) as Block;
+        });
         return { [messageName]: value };
     }
 

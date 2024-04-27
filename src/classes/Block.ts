@@ -1,19 +1,19 @@
-import EventBus from './EventBus';
+import EventBus from './EventBus.ts';
 import Handlebars from 'handlebars';
-import uuidv4 from '../functions/uuidv4';
+import uuidv4 from '../functions/uuidv4.ts';
 
 type TFunc = (event: Event) => void;
 
-type TProps = { [key: string]: Block } | Record<string, number | string | string[] | number[] | File | boolean | null |
-    Record<string, TFunc> |
-    Record<string, boolean> |
-    Record<string, string>[] |
-    Record<string, Block>[] |
-    Record<string, string | number> |
-    Record<string, Record<string, Block>[]> |
-    { name: string, value: string }[]>;
+// type TProps = { [key: string]: Block } | Record<string, number | string | string[] | number[] | File | boolean | null |
+//     Record<string, TFunc> |
+//     Record<string, boolean> |
+//     Record<string, string>[] |
+//     Record<string, Block>[] |
+//     Record<string, string | number> |
+//     Record<string, Record<string, Block>[]> |
+//     { name: string, value: string }[]>;
 
-export default class Block {
+export default abstract class Block<Props extends Record<string, unknown>> {
     // События
     static EVENTS = {
         INIT: "init",
@@ -24,8 +24,8 @@ export default class Block {
 
     _element: HTMLElement;
     _template: string;
-    props: TProps;
-    children: Record<string, Block | Record<string, Block>[]>;
+    props: Props;
+    children: Record<string, unknown | Record<string, unknown>[]>;
     eventBus: () => EventBus;
     _id: string | undefined;
     _classList: string[];
@@ -36,7 +36,7 @@ export default class Block {
        *
        * @returns {void}
        */
-    constructor(template: string, propsAndChildren: TProps = {}) {
+    constructor(template: string, propsAndChildren: Props) {
 
         const { children, props } = this._getChildren(propsAndChildren);
 
@@ -44,8 +44,8 @@ export default class Block {
 
         this._template = template;
         this._id = propsAndChildren.settings && (<Record<string, boolean>>propsAndChildren.settings).withInternalID ? uuidv4() : undefined;
-        const propsObj = this._id ? { ...props, id: this._id } : props as TProps;
-        this.props = this._makePropsProxy(propsObj);
+        const propsObj = this._id ? { ...props, id: this._id } : props;
+        this.props = this._makePropsProxy(propsObj as Props);
 
         this._element = document.createElement(this.props.tagName ? this.props.tagName as string : 'div');
 
@@ -67,7 +67,7 @@ export default class Block {
     }
 
     _getChildren(propsAndChildren: Record<string, unknown>) {
-        const children: Record<string, Block | Record<string, Block>[]> = {};
+        const children: Record<string, unknown | Record<string, unknown>[]> = {};
         const props: Record<string, unknown> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
@@ -81,7 +81,7 @@ export default class Block {
                     }
                 })
                 if (blockValue) {
-                    children[key] = value as Record<string, Block>[];
+                    children[key] = value as Record<string, unknown>[];
                 } else props[key] = value;
             } else {
                 props[key] = value;
@@ -91,27 +91,27 @@ export default class Block {
         return { children, props };
     }
 
-    setProps = (nextProps: TProps) => {
-        if (!nextProps) {
+    setProps = (nexProps: Props) => {
+        if (!nexProps) {
             return;
         }
 
         const oldProps = { ...this.props };
-        const inpPropsEntries = Object.entries(nextProps);
+        const inpPropsEntries = Object.entries(nexProps);
         inpPropsEntries.forEach(item => {
-            this.props[item[0]] = item[1];
+            (<Record<string, unknown>>this.props)[item[0]] = item[1];
         });
 
         const { children } = this._getChildren(this.props);
 
         this.children = {...this.children, ...children};
 
-        this.componentDidUpdate(oldProps, nextProps);
+        this.componentDidUpdate(oldProps, nexProps);
     };
 
-    _makePropsProxy(inpProps: TProps) {
-        const props = new Proxy({}, {
-            get(target: TProps, prop: string) {
+    _makePropsProxy(inpProps: Props) {
+        const props = new Proxy({} as Props, {
+            get(target: Props, prop: string) {
                 if (prop.indexOf('_') === 0) {
                     throw new Error('Отказано в доступе');
                 }
@@ -119,8 +119,8 @@ export default class Block {
                 const value = target[prop];
                 return typeof value === "function" ? (<TFunc>value).bind(target) : value;
             },
-            set(target: TProps, prop: string, value) {
-                target[prop] = value;
+            set(target: Props, prop: string, value) {
+                (<Record<string, unknown>>target)[prop] = value;
                 return true;
             },
             deleteProperty() {
@@ -128,7 +128,7 @@ export default class Block {
             }
         });
         const inpPropsEntries = Object.entries(inpProps);
-        inpPropsEntries.forEach(item => props[item[0]] = item[1]);
+        inpPropsEntries.forEach(item => (<Record<string, unknown>>props)[item[0]] = item[1]);
         return props;
     }
 
@@ -161,7 +161,7 @@ export default class Block {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
     // Может переопределять пользователь, необязательно трогать
-    componentDidUpdate(inpOldProps: TProps, newProps: TProps) {
+    componentDidUpdate(inpOldProps: Props, newProps: Props) {
         let componentDidUpdate = false;
         const oldPropsKeys = Object.keys(inpOldProps);
 
@@ -194,18 +194,18 @@ export default class Block {
 
     }
 
-    compile(template: string, props: TProps) {
+    compile(template: string, props: Props) {
 
-        const childEntries: TProps = { ...props };
+        const childEntries: Props = { ...props };
         
         Object.entries(this.children).forEach(([key, child]) => {
             if (Array.isArray(child)) {
                 const childs = child.map(item => {
-                    const itemValue = Object.values(item);
+                    const itemValue = Object.values(item) as Record<string, Record<string, unknown>>[];
                     return `<div data-id="${itemValue[0].props.id}"></div>`
                 }).join('');
-                childEntries[key] = childs;
-            } else childEntries[key] = `<div data-id="${child.props.id}"></div>`;
+                (<Record<string, unknown>>childEntries)[key] = childs;
+            } else (<Record<string, unknown>>childEntries)[key] = `<div data-id="${(<Record<string, Record<string, unknown>>>child).props.id}"></div>`;
         });
 
         const fragment = document.createElement('template');
@@ -216,13 +216,15 @@ export default class Block {
         Object.values(this.children).forEach(child => {
             if (Array.isArray(child)) {
                 child.forEach(item => {
-                    const itemValue = Object.values(item);
-                    const elem = fragment.content.querySelector(`[data-id="${itemValue[0].props.id}"]`);
-                    if (elem) elem.replaceWith(itemValue[0].getContent());
+                    const itemValue = Object.values(item) as Record<string, Record<string, unknown>>[] | Record<string, (()=> unknown)>[];
+                    const elem = fragment.content.querySelector(`[data-id="${(<Record<string, Record<string, unknown>>>itemValue[0]).props.id}"]`);
+                    const content = (<Record<string, (()=> unknown)>>itemValue[0]).getContent() as Node;
+                    if (elem) elem.replaceWith(content);
                 });
             } else {
-                const elem = fragment.content.querySelector(`[data-id="${child.props.id}"]`);
-                if (elem) elem.replaceWith(child.getContent());
+                const elem = fragment.content.querySelector(`[data-id="${(<Record<string, Record<string, unknown>>>child).props.id}"]`);
+                const content = (<Record<string, (()=> unknown)>>child).getContent() as Node;
+                if (elem) elem.replaceWith(content);
             }
         });
 

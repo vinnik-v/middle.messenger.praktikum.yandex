@@ -10,7 +10,7 @@ import ChatSession from '../../../../classes/ChatSession';
 import GetChatUsers from '../../main-page-api/GetChatUsers';
 import { IUser } from '../../../../types/types';
 
-export default class ChatWindow extends Block {
+export default class ChatWindow extends Block<Record<string, unknown>> {
   constructor(props: typeof Block.prototype.props) {
     const template = ChatWindowTemplate as string;
     const className = {
@@ -63,7 +63,7 @@ export default class ChatWindow extends Block {
         chatWindowHeader: new ChatWindowHeader({chatId, title, avatar, settings: { withInternalID: true } }),
         messageBox: new MessageBox({ settings: { withInternalID: true } }),
         chatWindowFooter: new ChatWindowFooter({ settings: { withInternalID: true } })
-      } as Record<string, Block>
+      }
 
       this.setProps({
         ...children, chatSelected: true

@@ -3,7 +3,7 @@ import LoginPageTemplate from './login-page.hbs?raw';
 import Block from '../../classes/Block';
 import LoginPageForm from './login-page-form';
 
-export default class LoginPage extends Block {
+export default class LoginPage extends Block<Record<string, unknown>> {
     
     constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
         const template = LoginPageTemplate as string;
@@ -19,7 +19,7 @@ export default class LoginPage extends Block {
             }, 
             'login'
             )
-        } as Record<string, Block>
+        }
         const tagName = {
             tagName: 'main'
         }

@@ -1,7 +1,6 @@
-import Block from "../../../classes/Block";
 import FormButton from "../../form-button";
 
-export default function prepareButtons(buttonsProps: Record<string, string>[]): Record<string, Block>[] {
+export default function prepareButtons(buttonsProps: Record<string, string>[]): Record<string, unknown>[] {
     return buttonsProps.map((item, index) => {
         const buttonName: string = 'form-button_'+(index+1);
         const tagName = item.buttonType === 'submit' ? 'input' : 'button';
@@ -17,7 +16,7 @@ export default function prepareButtons(buttonsProps: Record<string, string>[]): 
             elemProps, 
             redirectPage,
             settings: { withInternalID: true },
-        }) as Block;
+        });
         return { [buttonName]: value };
-    }) as Record<string, Block>[];
+    });
 }

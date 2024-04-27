@@ -10,7 +10,7 @@ import SearchResultRow from "./components/search-result-row";
 import SelectedElement from "./components/selected-element";
 import store from "../../../../classes/Store";
 import EventBus from "../../../../classes/EventBus";
-export default class AddUserForm extends Block {
+export default class AddUserForm extends Block<Record<string, unknown>> {
     constructor(
         props: typeof Block.prototype.props
     ) {
@@ -34,21 +34,21 @@ export default class AddUserForm extends Block {
         })
 
         eventBus.on('usersChanged', () => {
-            const submitButton = (<Record<string, Block>[]>this.children.buttons).find(item => item.submitButton);
-            const selectedUsers = this.props.selectedUsers as Record<string, Block>[];
+            const submitButton = (<Record<string, Record<string, unknown>>[]>this.children.buttons).find(item => item.submitButton);
+            const selectedUsers = this.props.selectedUsers as Record<string, unknown>[];
             if (submitButton) {
                 if (!this.props.isValid || !selectedUsers || selectedUsers.length === 0) {
-                    submitButton.submitButton._element.classList.add('form-button_main-disabled');
+                    (<HTMLElement>submitButton.submitButton._element).classList.add('form-button_main-disabled');
                 } else if (this.props.isValid && selectedUsers && selectedUsers.length > 0) {
-                    submitButton.submitButton._element.classList.remove('form-button_main-disabled');
+                    (<HTMLElement>submitButton.submitButton._element).classList.remove('form-button_main-disabled');
                 }
             }
         })
 
         eventBus.on('submit', async () => {
-            if (this.props.isValid && this.children.selectedUsers && (<Record<string, Block>[]>this.children.selectedUsers).length > 0) {
+            if (this.props.isValid && this.children.selectedUsers && (<Record<string, unknown>[]>this.children.selectedUsers).length > 0) {
                 
-                const userIds = (<Record<string, Block>[]>this.children.selectedUsers).map(item => {
+                const userIds = (<Record<string, Record<string, Record<string, unknown>>>[]>this.children.selectedUsers).map(item => {
                     const value = Object.values(item)[0];
                     return value.props.elemId;
                 });
@@ -82,6 +82,18 @@ export default class AddUserForm extends Block {
                 input: async (e: Event) => {
                     e.preventDefault();
                     const value = (<HTMLInputElement>e.target).value;
+                    if (!value) {
+                        this.setProps({
+                            showClearButton: false
+                        });
+                        (<HTMLElement>e.target).focus();
+                    }
+                    if (value && !this.props.showClearButton) {
+                        this.setProps({
+                            showClearButton: true
+                        });
+                        (<HTMLElement>e.target).focus();
+                    }
                     eventBus.emit('inputChanged');
                     if (value && this.props.isValid) {
                         (<HTMLElement>e.target).focus();
@@ -104,19 +116,19 @@ export default class AddUserForm extends Block {
                                     elemProps: [{ name: 'id', value: String(item.id) }],
                                     elemId: item.id,
                                     events: {
-                                        click: (e) => {
+                                        click: (e: Event) => {
                                             e.preventDefault();
-                                            const selectedUsers = this.props.selectedUsers ? this.props.selectedUsers as Record<string, Block>[] : [];
+                                            const selectedUsers = this.props.selectedUsers ? this.props.selectedUsers as Record<string, unknown>[] : [];
 
                                             const userSelected = selectedUsers.find(userItem => {
-                                                const value = Object.values(userItem)[0];
+                                                const value = Object.values(userItem)[0] as Record<string, Record<string, unknown>>;
                                                 return value.props.elemId === item.id;
                                             })
                                             if (!userSelected) {
                                                 const deleteButton = new Button('', {
                                                     settings: { withInternalID: true },
                                                     events: {
-                                                        click: (e) => {
+                                                        click: (e: Event) => {
                                                             e.preventDefault();
                                                             deleteSelectedItem(item.id as number);
                                                         }
@@ -127,8 +139,8 @@ export default class AddUserForm extends Block {
                                                         settings: { withInternalID: true },
                                                         selectedUser: userName,
                                                         elemId: item.id,
-                                                        button: [{ deleteButton }] as Record<string, Block>[],
-                                                    })
+                                                        button: [{ deleteButton }] as Record<string, unknown>[],
+                                                    }) as unknown
                                                 }
                                                 selectedUsers.push(selectedUser);
                                                 const showSelectedUsers = selectedUsers.length > 0;
@@ -140,9 +152,9 @@ export default class AddUserForm extends Block {
                                             eventBus.emit('usersChanged');
                                         }
                                     }
-                                }) as Block;
+                                });
                                 return { [userLogin]: value };
-                            }) as Record<string, Block>[];
+                            }) as Record<string, unknown>[];
 
                             this.setProps({
                                 noResult,
@@ -165,7 +177,25 @@ export default class AddUserForm extends Block {
 
                 }
             }
-        }) as Block;
+        });
+
+        const clearButton = new Button('', {
+            settings: { withInternalID: true },
+            classList: ['delete-button', 'button'],
+            events: {
+                click: (e: Event) => {
+                    e.preventDefault();
+                    const inputElem = (<Record<string, unknown>>this.children.input) as Record<string, Record<string, unknown>>;
+                    inputElem._element.value = null;
+
+                    this.setProps({
+                        showSearchResult: false,
+                        searchResult: [],
+                        showClearButton: false
+                    });
+                }
+            }
+        })
 
         const submitButton = new Button('', {
             buttonText: 'Добавить',
@@ -173,20 +203,20 @@ export default class AddUserForm extends Block {
             classList: ['form-button', 'form-button_main', 'form-button_main-disabled'],
             disabled: true,
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     eventBus.emit('submit');
                 }
             }
 
-        }) as Block
+        })
 
         const cancelButton = new Button('', {
             buttonText: 'Отмена',
             settings: { withInternalID: true },
             classList: ['form-button'],
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     const dropdown = document.getElementById('add-user-modal');
                     if (dropdown) {
@@ -195,11 +225,11 @@ export default class AddUserForm extends Block {
                     }
                 }
             }
-        }) as Block;
+        });
 
-        super(template, { ...tagName, selectedUsers: [], ...{ input: input } as Record<string, Block>, buttons: [{ submitButton }, { cancelButton }], ...{ events: events } as Record<string, Record<string, ((event: Event) => unknown)>>, ...props });
+        super(template, { ...tagName, selectedUsers: [], ...{ input: input }, buttons: [{ submitButton }, { cancelButton }], clearButton, showClearButton: false, ...{ events: events } as Record<string, Record<string, ((event: Event) => unknown)>>, ...props });
         this.validate = () => {
-            const input = this.children.input as Block;
+            const input = this.children.input as Record<string, unknown>;
             const inputElem = input._element as HTMLInputElement;
             const validationResult = fieldValidation('login', inputElem.value);
             if (!inputElem.value) {
@@ -224,7 +254,7 @@ export default class AddUserForm extends Block {
         }
 
         const deleteSelectedItem = (elemId: number) => {
-            const selectedUsers = this.props.selectedUsers as Record<string, Block>[];
+            const selectedUsers = this.props.selectedUsers as Record<string, Record<string, Record<string, unknown>>>[];
 
             if (selectedUsers) {
                 const filteredItems = selectedUsers.filter(userItem => {

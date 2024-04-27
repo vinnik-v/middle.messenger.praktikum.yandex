@@ -71,3 +71,13 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
+.delete-button {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    background: url('data:image/svg+xml,<svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 0C3.98571 0 0 3.98571 0 9C0 14.0143 3.98571 18 9 18C14.0143 18 18 14.0143 18 9C18 3.98571 14.0143 0 9 0ZM12.4714 13.5L9 10.0286L5.52857 13.5L4.5 12.4714L7.97143 9L4.5 5.52857L5.52857 4.5L9 7.97143L12.4714 4.5L13.5 5.52857L10.0286 9L13.5 12.4714L12.4714 13.5Z" fill="%23FF0032"/></svg>');
+}

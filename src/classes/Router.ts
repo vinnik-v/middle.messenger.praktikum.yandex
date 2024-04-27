@@ -1,16 +1,13 @@
-import Block from "./Block";
-import LoginPage from '../pages/login-page/index';
-import RegisterPage from '../pages/register-page';
-import MainPage from '../pages/main-page';
-import ErrorPage from '../pages/error-page';
-import NotFoundPage from '../pages/not-found-page';
-import ProfilePage from '../pages/profile-page';
-import checkUserLogged from "../functions/checkUserLogged";
-import store, { StoreEvents } from "./Store";
 
-type TBlock = typeof LoginPage | typeof RegisterPage | typeof MainPage | typeof ErrorPage | typeof NotFoundPage | typeof ProfilePage
+import Block from "./Block.ts";
 
-function render(query: string, block: Block) {
+class IBlock extends Block<Record<string, unknown>> {
+    constructor(props: Record<string, unknown>) {
+        super('', props)
+    }
+}
+
+function render(query: string, block: IBlock) {
     const root = document.querySelector(query);
     (<HTMLElement>root).innerHTML = '';
     (<HTMLElement>root).appendChild(block.getContent());
@@ -19,11 +16,11 @@ function render(query: string, block: Block) {
 
 class Route {
     _pathname: string;
-    _blockClass: TBlock;
-    _block: null | Block;
+    _blockClass: typeof IBlock;
+    _block: null | IBlock;
     _props: Record<string, string>;
 
-    constructor(pathname: string, view: TBlock, props: Record<string, string>) {
+    constructor(pathname: string, view: typeof IBlock, props: Record<string, string>) {
         this._pathname = pathname;
         this._blockClass = view;
         this._block = null;
@@ -80,7 +77,7 @@ export default class Router {
         Router.__instance = this;
     }
 
-    use(pathname: string, block: TBlock) {
+    use(pathname: string, block: typeof IBlock) {
         const route = new Route(pathname, block, {rootQuery: this._rootQuery});
 
         this.routes.push(route);
@@ -95,6 +92,9 @@ export default class Router {
         }).bind(this);
 
         this._onRoute(window.location.pathname);
+    }
+    end() {
+        Router.__instance = null;
     }
 
     _onRoute(pathname: string) {
@@ -131,36 +131,4 @@ export default class Router {
     getRoute(pathname: string) {
         return this.routes.find(route => route.match(pathname));
     }
-}
-
-export async function routerInit() {
-    const router = new Router(".app");
-    
-    let pathname = window.location.pathname;
-    router
-        .use("/", LoginPage)
-        .use("/sign-up", RegisterPage)
-        .use("/settings", ProfilePage)
-        .use("/messenger", MainPage)
-        .use("/404", NotFoundPage)
-        .use("/error", ErrorPage)
-        .start();
-    
-    try {
-        const userResp = await checkUserLogged();
-        
-        try {
-            const currentUser = JSON.parse(userResp.response);
-            store.set('currentUser', currentUser, StoreEvents.UserLogged);
-        } catch {
-            //
-        }
-
-        if (["/", "/sign-up"].includes(pathname)) {
-            pathname = "/messenger";
-        }
-    } catch {
-        pathname = pathname === "/sign-up"? pathname : "/";
-    }
-    router.go(pathname);
 }

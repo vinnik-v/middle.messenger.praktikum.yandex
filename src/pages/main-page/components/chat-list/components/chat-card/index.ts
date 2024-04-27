@@ -3,7 +3,7 @@ import ChatCardTemplate from './chat-card.hbs?raw';
 import Block from '../../../../../../classes/Block';
 import ChatAvatar from '../../../../../../components/contact-avatar';
 
-export default class ChatCard extends Block {
+export default class ChatCard extends Block<Record<string, unknown>> {
     constructor(props: typeof Block.prototype.props) {
         const template = ChatCardTemplate as string;
         const classList = {
@@ -20,7 +20,7 @@ export default class ChatCard extends Block {
                 settings: { withInternalID: true },
                 avatar
             }),
-          } as Record<string, Block>
+          }
 
         super(template, {...tagName, ...children, ...classList, ...props});
         

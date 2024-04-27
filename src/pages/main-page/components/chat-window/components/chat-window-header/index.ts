@@ -12,7 +12,7 @@ import store, { StoreEvents } from '../../../../../../classes/Store';
 import Button from '../../../../../../components/button';
 import * as types from '../../../../../../types/types';
 
-export default class ChatWindowHeader extends Block {
+export default class ChatWindowHeader extends Block<Record<string, unknown>> {
   constructor(props: typeof Block.prototype.props) {
     const template = ChatWindowHeaderTemplate as string;
     const className = {
@@ -30,14 +30,16 @@ export default class ChatWindowHeader extends Block {
       classList: ['button', 'delete-chat-button', 'list-item__button'],
       elemProps: [{ name: 'id', value: 'delete-chat-button' }],
       settings: { withInternalID: true },
-    }) as Block
+    })
 
     const avatar = props.avatar as string;
 
     const children = {
       chatAvatar: new ChatAvatar({
         settings: { withInternalID: true },
-        avatar
+        avatar,
+        classList: ['chat-window-avatar'],
+        elemProps: [{ name: 'id', value: 'chat-photo' }],
       }),
       dropdown: new Dropdown({
         settings: { withInternalID: true },
@@ -47,10 +49,10 @@ export default class ChatWindowHeader extends Block {
           addButtonIcon,
           deleteButtonIcon,
           deleteChatButton: [{ deleteChatButton }]
-        }) as Block
+        })
       }),
 
-    } as Record<string, Block>
+    }
 
     const membersCount = 1;
     const membersCountText = membersCount === 1 ? 'member' : 'members';
@@ -65,11 +67,17 @@ export default class ChatWindowHeader extends Block {
       const chats = store.getState('chats') as types.IChatItem[];
       if (chats && this.props.chatId) {
         const currentChat = chats.filter(item => item.id === this.props.chatId)[0];
+        
         const membersCount = currentChat.users ? currentChat.users.length : 1;
         const membersCountText = membersCount === 1 ? 'member' : 'members';
 
+        const avatar = currentChat.avatar;
+        const avatarElem = this.children.chatAvatar as Record<string, (<T extends Record<string, unknown>>(arg: T)=> unknown)>
+        avatarElem.setProps({
+          avatar
+        })
         this.setProps({
-          membersCount, membersCountText
+          membersCount, membersCountText, avatar
         })
       }
     }

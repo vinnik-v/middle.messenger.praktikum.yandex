@@ -3,7 +3,7 @@ import RegisterPageTemplate from './register-page.hbs?raw';
 import Block from '../../classes/Block';
 import RegisterPageForm from './register-page-form/RegisterPageForm';
 
-export default class RegisterPage extends Block {
+export default class RegisterPage extends Block<Record<string, unknown>> {
     
     constructor(props: Record<string, string | string[] | Record<string, ((event: Event)=>unknown) | boolean> | { name: string, value: string}[]>) {
         const template = RegisterPageTemplate as string;
@@ -18,7 +18,7 @@ export default class RegisterPage extends Block {
             }, 
             'register'
             )
-        } as Record<string, Block>
+        } as Record<string, unknown>
         const tagName = {
             tagName: 'main'
         }

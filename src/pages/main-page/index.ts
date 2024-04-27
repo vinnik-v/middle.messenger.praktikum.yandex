@@ -11,8 +11,9 @@ import AddChatForm from './components/add-chat-form';
 import AddUserForm from './components/add-user-form';
 import DeleteUserForm from './components/delete-user-form';
 import DeleteChatForm from './components/delete-chat-form';
+import ChangePhotoModalContent from './components/change-photo-modal-content/ChangePhotoModalContent';
 
-export default class MainPage extends Block {
+export default class MainPage extends Block<Record<string, unknown>> {
   constructor(props: typeof Block.prototype.props) {
     const template = MainPageTemplate as string;
     const classList = {
@@ -69,7 +70,7 @@ export default class MainPage extends Block {
               settings: { withInternalID: true }
             }
             )
-          }) as Block
+          })
         }),
         deleteUserModal: new Modal({
           settings: { withInternalID: true },
@@ -82,7 +83,7 @@ export default class MainPage extends Block {
               settings: { withInternalID: true }
             }
             )
-          }) as Block
+          })
         }),
         addChatModal: new Modal({
           settings: { withInternalID: true },
@@ -96,7 +97,7 @@ export default class MainPage extends Block {
             },
               'addChat'
             )
-          }) as Block
+          })
         }),
         chatDeleteConfirmModal: new Modal({
           settings: { withInternalID: true },
@@ -108,9 +109,20 @@ export default class MainPage extends Block {
               formTitle: 'Подтвердите удаление чата',
               settings: { withInternalID: true }
             })
-          }) as Block
+          })
         }),
-      } as Record<string, Block>;
+        changeChatPhotoModal: new Modal({
+          settings: { withInternalID: true },
+          elemProps: [{ name: 'id', value: 'change-chat-photo-modal' }],
+          modalContent: new ModalContent('{{{ profileModal }}}', {
+            classList: ['change-profile-photo-modal'],
+            settings: { withInternalID: true },
+            profileModal: new ChangePhotoModalContent({
+              settings: { withInternalID: true },
+            })
+          })
+        }),
+      }
 
       this.setProps({
         dataLoaded: true, ...children

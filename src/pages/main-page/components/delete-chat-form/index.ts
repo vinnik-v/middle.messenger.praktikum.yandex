@@ -5,7 +5,7 @@ import DeleteChat from "../../main-page-api/DeleteChat";
 import store from "../../../../classes/Store";
 import EventBus from "../../../../classes/EventBus";
 
-export default class DeleteChatForm extends Block {
+export default class DeleteChatForm extends Block<Record<string, unknown>> {
     constructor(
         props: typeof Block.prototype.props
     ) {
@@ -46,20 +46,20 @@ export default class DeleteChatForm extends Block {
             classList: ['form-button', 'form-button_main'],
             disabled: true,
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     eventBus.emit('submit');
                 }
             }
 
-        }) as Block
+        })
 
         const cancelButton = new Button('', {
             buttonText: 'Отмена',
             settings: { withInternalID: true },
             classList: ['form-button'],
             events: {
-                click: (e) => {
+                click: (e: Event) => {
                     e.preventDefault();
                     const dropdown = document.getElementById('delete-chat-modal');
                     if (dropdown) {
@@ -68,7 +68,7 @@ export default class DeleteChatForm extends Block {
                     }
                 }
             }
-        }) as Block;
+        });
 
         super(template, { ...tagName, buttons: [{ submitButton }, { cancelButton }], ...{ events: events } as Record<string, Record<string, ((event: Event) => unknown)>>, ...props });
 
